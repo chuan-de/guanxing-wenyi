@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail" data-bg-color="#232D45">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#232D45"/>
+    <circle cx="600" cy="300" r="120" fill="none" stroke="rgba(243,239,231,0.18)" stroke-width="2"/>
+    <circle cx="600" cy="300" r="120" fill="url(#m)"/>
+    <circle cx="820" cy="210" r="7" fill="#D8BE86"/>
+    <circle cx="380" cy="250" r="4" fill="rgba(243,239,231,0.7)"/>
+    <circle cx="840" cy="430" r="4" fill="rgba(243,239,231,0.5)"/>
+    <line x1="470" y1="180" x2="600" y2="300" stroke="rgba(243,239,231,0.22)" stroke-width="2"/>
+    <line x1="600" y1="300" x2="820" y2="210" stroke="rgba(243,239,231,0.18)" stroke-width="2"/>
+    <g stroke="#F3EFE7" stroke-width="14" stroke-linecap="round">
+      <line x1="520" y1="540" x2="680" y2="540"/>
+      <line x1="520" y1="590" x2="588" y2="590"/><line x1="612" y1="590" x2="680" y2="590"/>
+      <line x1="520" y1="640" x2="680" y2="640"/>
+    </g>
+    <defs>
+      <radialGradient id="m" cx="40%" cy="36%" r="70%">
+        <stop offset="0%" stop-color="#F6F2E9"/>
+        <stop offset="60%" stop-color="#DDD7C9"/>
+        <stop offset="100%" stop-color="#3C4A66"/>
+      </radialGradient>
+    </defs>
+  </svg>
+</template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  html, body { margin: 0; padding: 0; }
+  ::-webkit-scrollbar { width: 0; height: 0; }
+  .gx-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+  textarea::placeholder, input::placeholder { color: #B7B0A2; font-weight: 300; }
+  input[type="range"] { -webkit-appearance: none; appearance: none; height: 3px; border-radius: 3px; background: linear-gradient(90deg, #93A1AE, #C9B89A); outline: none; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #F7F4ED; border: 1.5px solid #3C4A66; box-shadow: 0 2px 7px rgba(43,53,74,0.28); cursor: pointer; }
+  @keyframes gxFade { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes gxBreathe { 0%, 100% { transform: scale(1); opacity: .55; } 50% { transform: scale(1.13); opacity: .92; } }
+  @keyframes gxTwinkle { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+  @keyframes gxRing { 0% { transform: scale(.85); opacity: .65; } 80% { opacity: 0; } 100% { transform: scale(1.35); opacity: 0; } }
+  @keyframes gxDrift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  @keyframes gxShakeSoft { 0%, 100% { transform: rotate(-1.3deg) translateY(0); } 50% { transform: rotate(1.3deg) translateY(-1.5px); } }
+  @keyframes gxStickFall { 0% { opacity: 0; transform: translateX(-50%) translateY(-26px); } 55% { opacity: 1; } 100% { opacity: 1; transform: translateX(-50%) translateY(0); } }
+  @keyframes gxScatter { 0% { opacity: 0; transform: scale(.5); } 45% { opacity: .9; } 100% { opacity: 0; transform: scale(1.7); } }
+  @keyframes gxLineIn { 0% { opacity: 0; transform: translateX(7px); } 100% { opacity: 1; transform: none; } }
+  @keyframes gxGlowPulse { 0%, 100% { opacity: .35; } 50% { opacity: .8; } }
+  @keyframes gxWave { 0%, 100% { transform: scaleY(0.32); } 50% { transform: scaleY(1); } }
+  @keyframes gxHalo { 0%, 100% { transform: scale(1); opacity: .45; } 50% { transform: scale(1.16); opacity: .85; } }
+</style>
+</helmet>
+
+<div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:40px 20px; background:radial-gradient(120% 90% at 50% 0%, #EDE8DF 0%, #E3DDD3 55%, #D9D2C6 100%); font-family:'Noto Sans SC',sans-serif;">
+
+  <!-- ============ DEVICE ============ -->
+  <div style="width:390px; height:844px; border-radius:54px; background:#15140F; padding:5px; box-shadow:0 50px 90px -22px rgba(28,26,20,0.5), 0 0 0 1px rgba(0,0,0,0.22), inset 0 0 0 2px rgba(255,255,255,0.04);">
+    <div style="position:relative; width:100%; height:100%; border-radius:49px; overflow:hidden; background:#F3EFE7;">
+
+      <!-- dynamic island -->
+      <div style="position:absolute; top:11px; left:50%; transform:translateX(-50%); width:108px; height:31px; border-radius:18px; background:#15140F; z-index:30;"></div>
+      <!-- status bar -->
+      <div style="position:absolute; top:0; left:0; right:0; height:52px; z-index:25; display:flex; align-items:center; justify-content:space-between; padding:8px 28px 0;">
+        <div style="font-family:-apple-system,'Noto Sans SC',system-ui; font-weight:600; font-size:15px; color:#2B2A28; letter-spacing:0.4px;">9:41</div>
+        <div style="display:flex; gap:7px; align-items:center; color:#2B2A28;">
+          <svg width="18" height="11" viewBox="0 0 18 11"><rect x="0" y="7" width="3" height="4" rx="0.6" fill="currentColor"/><rect x="4.6" y="4.8" width="3" height="6.2" rx="0.6" fill="currentColor"/><rect x="9.2" y="2.4" width="3" height="8.6" rx="0.6" fill="currentColor"/><rect x="13.8" y="0" width="3" height="11" rx="0.6" fill="currentColor"/></svg>
+          <svg width="16" height="11" viewBox="0 0 16 11"><path d="M8 2.9c2.1 0 4 .8 5.4 2.2l1-1A9 9 0 0 0 8 1.4 9 9 0 0 0 1.6 4.1l1 1A7.6 7.6 0 0 1 8 2.9Z" fill="currentColor"/><path d="M8 6.3c1.2 0 2.3.5 3.1 1.3l1-1A6 6 0 0 0 8 4.8a6 6 0 0 0-4.1 1.8l1 1A4.4 4.4 0 0 1 8 6.3Z" fill="currentColor"/><circle cx="8" cy="9.6" r="1.3" fill="currentColor"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12"><rect x="0.5" y="0.5" width="21" height="11" rx="3" stroke="currentColor" stroke-opacity="0.4" fill="none"/><rect x="2" y="2" width="16" height="8" rx="1.6" fill="currentColor"/><path d="M23 4v4c.7-.3 1.2-1 1.2-2S23.7 4.3 23 4Z" fill="currentColor" fill-opacity="0.45"/></svg>
+        </div>
+      </div>
+      <!-- home indicator -->
+      <div style="position:absolute; bottom:7px; left:50%; transform:translateX(-50%); width:132px; height:5px; border-radius:5px; background:rgba(43,42,40,0.26); z-index:45; pointer-events:none;"></div>
+
+      <!-- ============ APP COLUMN ============ -->
+      <div style="position:relative; height:100%; display:flex; flex-direction:column;">
+
+        <sc-if value="{{ grain }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute; inset:0; z-index:5; pointer-events:none; opacity:0.05; mix-blend-mode:multiply; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+        </sc-if>
+
+        <!-- SCROLL REGION -->
+        <div class="gx-scroll" ref="{{ scrollRef }}" style="flex:1; overflow-y:auto; padding-top:54px; padding-bottom:26px; position:relative; z-index:10;">
+
+          <!-- ===================== 今日 ===================== -->
+          <sc-if value="{{ isToday }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:0 22px; animation:gxFade .55s ease both;">
+            <div style="padding:10px 2px 18px; display:flex; justify-content:space-between; align-items:flex-end;">
+              <div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:25px; color:#2B2A28; font-weight:500;">晚上好</div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:12px; color:#938D82; margin-top:8px; letter-spacing:1.5px;">三月二十 · 春分 · 盈凸月</div>
+              </div>
+              <div style="width:32px; height:32px; border-radius:50%; background:radial-gradient(circle at 64% 38%, #F2EEE4, #D6D0C2); box-shadow:inset -6px 0 9px -4px rgba(20,25,40,0.22), inset 7px 0 9px -6px rgba(20,25,40,0.5);"></div>
+            </div>
+
+            <!-- 小易 · 温和提醒 -->
+            <div onClick="{{ goChat }}" style="margin-bottom:16px; padding:14px 16px; display:flex; align-items:center; gap:13px; background:rgba(60,74,102,0.055); border:1px solid rgba(60,74,102,0.1); border-radius:16px; cursor:pointer;">
+              <div style="position:relative; width:34px; height:34px; flex-shrink:0;">
+                <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #C8CED7 44%, #3C4A66 100%); box-shadow:inset -4px -4px 8px -4px rgba(20,25,40,0.55), 0 3px 9px -4px rgba(60,74,102,0.5);"></div>
+                <div style="position:absolute; top:7px; right:7px; width:2.6px; height:2.6px; border-radius:50%; background:#D8BE86; box-shadow:0 0 5px rgba(216,190,134,0.9);"></div>
+              </div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:10.5px; letter-spacing:2px; color:#8A93A2;">小 易</div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:13px; color:#54514A; line-height:1.6; margin-top:3px;">今天不用急着想清楚全部，先照顾好自己就好。</div>
+              </div>
+              <span style="color:#B0A99D; font-size:17px; flex-shrink:0;">›</span>
+            </div>
+
+            <!-- NIGHT HERO -->
+            <div style="position:relative; border-radius:24px; overflow:hidden; padding:24px 22px 22px; background:linear-gradient(157deg, #28324B 0%, #1C2336 58%, #181D2C 100%); box-shadow:0 22px 44px -20px rgba(22,27,42,0.65);">
+              <div style="position:absolute; top:-30px; right:-10px; width:160px; height:160px; border-radius:50%; background:radial-gradient(circle, rgba(231,207,149,0.16), transparent 70%); animation:gxDrift 9s ease-in-out infinite;"></div>
+              <sc-if value="{{ starfield }}" hint-placeholder-val="{{ true }}">
+              <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0; width:100%; height:100%;">
+                <line x1="46" y1="40" x2="104" y2="66" stroke="rgba(255,255,255,0.16)" stroke-width="0.7"/>
+                <line x1="104" y1="66" x2="158" y2="44" stroke="rgba(255,255,255,0.16)" stroke-width="0.7"/>
+                <line x1="158" y1="44" x2="226" y2="74" stroke="rgba(255,255,255,0.12)" stroke-width="0.7"/>
+                <line x1="226" y1="74" x2="284" y2="50" stroke="rgba(255,255,255,0.1)" stroke-width="0.7"/>
+                <line x1="104" y1="66" x2="120" y2="120" stroke="rgba(255,255,255,0.1)" stroke-width="0.7"/>
+                <circle cx="46" cy="40" r="1.7" fill="rgba(255,255,255,0.85)" style="animation:gxTwinkle 4s ease-in-out infinite;"/>
+                <circle cx="104" cy="66" r="2.2" fill="rgba(255,255,255,0.9)"/>
+                <circle cx="158" cy="44" r="1.5" fill="rgba(255,255,255,0.7)" style="animation:gxTwinkle 5.5s ease-in-out .8s infinite;"/>
+                <circle cx="226" cy="74" r="1.8" fill="rgba(255,255,255,0.75)"/>
+                <circle cx="284" cy="50" r="1.4" fill="rgba(255,255,255,0.6)" style="animation:gxTwinkle 4.5s ease-in-out 1.2s infinite;"/>
+                <circle cx="120" cy="120" r="1.5" fill="rgba(255,255,255,0.55)"/>
+                <circle cx="252" cy="116" r="2.3" fill="#E7CF95" style="animation:gxTwinkle 6s ease-in-out .4s infinite;"/>
+                <circle cx="74" cy="150" r="1.2" fill="rgba(255,255,255,0.4)"/>
+                <circle cx="300" cy="150" r="1.3" fill="rgba(255,255,255,0.45)"/>
+                <circle cx="20" cy="96" r="1.2" fill="rgba(255,255,255,0.4)"/>
+              </svg>
+              </sc-if>
+              <div style="position:relative; z-index:1;">
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:rgba(221,224,238,0.5); font-weight:500;">今 日 天 象</div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:18.5px; line-height:1.85; color:#EFEBE2; margin-top:15px; font-weight:400;">月在巨蟹，水象当令。<br>情绪偏柔软，宜慢，也宜先照顾自己。</div>
+                <div style="display:flex; gap:15px; align-items:center; margin-top:20px; padding-top:18px; border-top:1px solid rgba(255,255,255,0.1);">
+                  <div style="width:34px; height:34px; flex-shrink:0; border-radius:50%; background:radial-gradient(circle at 66% 38%, #F4F0E6, #C9C3B4); box-shadow:inset -8px 0 11px -5px rgba(12,16,28,0.5);"></div>
+                  <div style="font-family:'Noto Sans SC',sans-serif; font-size:11.5px; color:rgba(226,222,236,0.62); line-height:1.7;">盈凸月，接近圆满。<br>适合把心里的事，慢慢收束。</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 今日一卦 -->
+            <div style="margin-top:16px; padding:22px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; box-shadow:0 8px 22px -16px rgba(43,42,40,0.3); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div>
+                  <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500;">今 日 一 卦</div>
+                  <div style="font-family:'Noto Serif SC',serif; font-size:30px; color:#2B2A28; font-weight:500; margin-top:13px; letter-spacing:5px;">水雷屯</div>
+                  <div style="font-family:'Spectral',serif; font-style:italic; font-size:13px; color:#938D82; margin-top:5px;">Tún · 起步维艰</div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:9px; width:76px; padding-top:6px;">
+                  <div style="height:8px; display:flex; gap:13px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+                  <div style="height:8px; background:#2B2A28; border-radius:1.5px;"></div>
+                  <div style="height:8px; display:flex; gap:13px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+                  <div style="height:8px; display:flex; gap:13px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+                  <div style="height:8px; display:flex; gap:13px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+                  <div style="height:8px; background:#2B2A28; border-radius:1.5px;"></div>
+                </div>
+              </div>
+              <div style="height:1px; background:rgba(43,42,40,0.08); margin:18px 0;"></div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:14.5px; line-height:1.95; color:#46433C;">起步总是最难的。今天不必急着突破——先扎下一点点根，就已经够了。</div>
+            </div>
+
+            <!-- check-in -->
+            <div style="margin-top:14px; padding:24px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:flex; flex-direction:column; align-items:center; text-align:center;">
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500;">给 自 己 一 个 停 顿</div>
+              <div onClick="{{ breathe }}" style="position:relative; width:104px; height:104px; margin:20px 0 10px; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                <div style="position:absolute; inset:0; border-radius:50%; border:1px solid rgba(60,74,102,0.2); animation:gxRing 3.4s ease-out infinite;"></div>
+                <div style="position:absolute; inset:14px; border-radius:50%; background:radial-gradient(circle at 50% 42%, rgba(60,74,102,0.16), rgba(60,74,102,0.04)); animation:gxBreathe 5.5s ease-in-out infinite;"></div>
+                <div style="position:relative; font-family:'Noto Serif SC',serif; font-size:14px; color:#3C4A66; letter-spacing:2px;">深呼吸</div>
+              </div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:#938D82; margin-top:4px;">{{ breathLabel }}</div>
+            </div>
+
+            <!-- 今日意图 -->
+            <div style="margin-top:14px; padding:20px 22px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500;">今 天 ， 我 想</div>
+              <div style="display:flex; align-items:center; gap:12px; margin-top:13px;">
+                <input value="{{ intention }}" onChange="{{ onIntention }}" style="flex:1; min-width:0; border:none; background:transparent; outline:none; font-family:'Noto Serif SC',serif; font-size:16px; color:#2B2A28; caret-color:#3C4A66;"/>
+                <button onClick="{{ openVoiceIntention }}" style="width:36px; height:36px; flex-shrink:0; border:1px solid rgba(60,74,102,0.2); background:rgba(60,74,102,0.06); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#3C4A66;">
+                  <svg width="15" height="15" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- 一件小事 -->
+            <div style="margin-top:14px; padding:20px 22px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:flex; gap:13px; align-items:flex-start;">
+              <svg width="22" height="22" viewBox="0 0 22 22" style="flex-shrink:0; margin-top:14px;"><circle cx="11" cy="11" r="9.3" fill="none" stroke="#3C4A66" stroke-opacity="0.35" stroke-width="1.2"/><path d="M7 11.2l2.6 2.6L15 8.4" fill="none" stroke="#3C4A66" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500;">今 天 的 一 件 小 事</div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:14.5px; line-height:1.9; color:#46433C; margin-top:10px;">把那条拖了三天的消息，写下第一句话就好。</div>
+              </div>
+            </div>
+
+            <!-- reflection -->
+            <div style="margin:22px 6px 6px; text-align:center;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:16px; color:#6B665D; line-height:1.95;">「 此刻，你最想被理解的，<br>是哪一部分？ 」</div>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- ===================== 问卦 ===================== -->
+          <sc-if value="{{ isAsk }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:0 22px; animation:gxFade .55s ease both;">
+            <div style="padding:6px 2px 18px;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:25px; color:#2B2A28; font-weight:500; letter-spacing:1px;">问卦</div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:#928C81; margin-top:8px; line-height:1.8;">把心里盘旋的事，轻轻写下来。<br>卦象不预测结果，只帮你看清此刻的位置。</div>
+            </div>
+
+            <div style="padding:20px; background:rgba(255,255,255,0.55); border:1px solid rgba(43,42,40,0.08); border-radius:20px; min-height:158px; display:flex; flex-direction:column; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500;">我 想 问</div>
+              <textarea value="{{ q }}" onChange="{{ onQ }}" placeholder="试着从『我可以如何……』开始" style="margin-top:14px; flex:1; min-height:96px; border:none; background:transparent; resize:none; outline:none; font-family:'Noto Serif SC',serif; font-size:16.5px; line-height:1.9; color:#2B2A28; caret-color:#3C4A66;"></textarea>
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px; padding-top:13px; border-top:1px solid rgba(43,42,40,0.06);">
+                <span style="font-size:11.5px; color:#A39C8F;">不想打字？说给小易听</span>
+                <button onClick="{{ openVoiceAsk }}" style="width:40px; height:40px; flex-shrink:0; border:1px solid rgba(60,74,102,0.2); background:rgba(60,74,102,0.06); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#3C4A66;">
+                  <svg width="16" height="16" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:9px; align-items:flex-start; margin:14px 4px 0; color:#928C81; font-size:12px; line-height:1.7;">
+              <svg width="15" height="15" viewBox="0 0 15 15" style="flex-shrink:0; margin-top:2px;"><circle cx="7.5" cy="7.5" r="6.6" fill="none" stroke="#B49A66" stroke-width="1.1"/><path d="M7.5 4.4v3.6M7.5 10.4v.1" stroke="#B49A66" stroke-width="1.2" stroke-linecap="round"/></svg>
+              <div>试着问『我可以如何』，而不是『会不会』。卦象照见的是位置，不是结局。</div>
+            </div>
+
+            <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500; margin:24px 4px 12px;">也 许 你 想 说</div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <button onClick="{{ fillWork }}" style="text-align:left; width:100%; padding:15px 18px; border:1px solid rgba(43,42,40,0.08); background:rgba(255,255,255,0.4); border-radius:14px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; font-size:14px; color:#54514A; display:flex; justify-content:space-between; align-items:center;">最近工作让我很累 <span style="color:#C2BBAE; font-size:18px;">＋</span></button>
+              <button onClick="{{ fillFamily }}" style="text-align:left; width:100%; padding:15px 18px; border:1px solid rgba(43,42,40,0.08); background:rgba(255,255,255,0.4); border-radius:14px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; font-size:14px; color:#54514A; display:flex; justify-content:space-between; align-items:center;">和家人的关系有点紧 <span style="color:#C2BBAE; font-size:18px;">＋</span></button>
+              <button onClick="{{ fillChange }}" style="text-align:left; width:100%; padding:15px 18px; border:1px solid rgba(43,42,40,0.08); background:rgba(255,255,255,0.4); border-radius:14px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; font-size:14px; color:#54514A; display:flex; justify-content:space-between; align-items:center;">要不要换一个方向 <span style="color:#C2BBAE; font-size:18px;">＋</span></button>
+            </div>
+
+            <div style="margin-top:28px;">
+              <button onClick="{{ askXiaoyi }}" style="width:100%; padding:18px; border:none; border-radius:16px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:16px; letter-spacing:5px; cursor:pointer; box-shadow:0 14px 28px -12px rgba(43,53,74,0.6);">请 小 易 看 看</button>
+              <div style="text-align:center; font-size:11.5px; color:#A39C8F; margin-top:13px;">小易会先陪你，把问题问得更清楚一点。</div>
+            </div>
+
+            <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500; margin:32px 4px 12px;">最 近 问 过</div>
+            <div style="background:rgba(255,255,255,0.4); border:1px solid rgba(43,42,40,0.07); border-radius:16px; overflow:hidden;">
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 18px; border-bottom:1px solid rgba(43,42,40,0.06);">
+                <div><div style="font-size:14px; color:#46433C;">关于那次面试</div><div style="font-size:11px; color:#A39C8F; margin-top:4px;">3 天前</div></div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:13px; color:#7C766B; letter-spacing:2px;">火天大有</div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 18px;">
+                <div><div style="font-size:14px; color:#46433C;">要不要搬去另一座城</div><div style="font-size:11px; color:#A39C8F; margin-top:4px;">上周</div></div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:13px; color:#7C766B; letter-spacing:2px;">风泽中孚</div>
+              </div>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- ===================== 小易 · 问题改写 ===================== -->
+          <sc-if value="{{ isRewrite }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="问题改写" style="padding:0 22px; animation:gxFade .55s ease both;">
+            <button onClick="{{ goAsk }}" style="display:flex; align-items:center; gap:6px; border:none; background:transparent; cursor:pointer; padding:4px 2px; margin:2px 0 10px; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px;">
+              <svg width="8" height="14" viewBox="0 0 8 14"><path d="M7 1L1 7l6 6" fill="none" stroke="#928C81" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 返回
+            </button>
+
+            <div style="display:flex; align-items:center; gap:13px; padding:2px 2px 4px;">
+              <div style="position:relative; width:42px; height:42px; flex-shrink:0;">
+                <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #C8CED7 44%, #3C4A66 100%); box-shadow:inset -5px -5px 10px -5px rgba(20,25,40,0.55), 0 4px 12px -4px rgba(60,74,102,0.5); animation:gxBreathe 6s ease-in-out infinite;"></div>
+                <div style="position:absolute; top:9px; right:8px; width:3px; height:3px; border-radius:50%; background:#D8BE86; box-shadow:0 0 6px rgba(216,190,134,0.9);"></div>
+              </div>
+              <div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:18px; color:#2B2A28;">小易</div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:11.5px; color:#928C81; margin-top:3px;">陪你把问题，问得更清楚一点</div>
+              </div>
+            </div>
+
+            <div style="margin-top:18px; display:flex; gap:11px; align-items:flex-start;">
+              <div style="width:6px; height:6px; border-radius:50%; background:#3C4A66; margin-top:9px; flex-shrink:0;"></div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:14.5px; line-height:1.95; color:#54514A;">我们先不急着问结果，先看看你真正想确认的，是什么。</div>
+            </div>
+
+            <div style="margin-top:20px; padding:16px 18px; background:rgba(43,42,40,0.03); border:1px solid rgba(43,42,40,0.07); border-radius:14px;">
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F;">你 原 本 想 问</div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:15px; color:#7C766B; line-height:1.85; margin-top:10px;">「 {{ q }} 」</div>
+            </div>
+
+            <div style="margin-top:14px; padding:20px; background:linear-gradient(165deg, rgba(60,74,102,0.07), rgba(176,142,84,0.05)); border:1px solid rgba(60,74,102,0.14); border-radius:18px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#7E869A;">也 许 ， 可 以 这 样 问</div>
+                <button onClick="{{ reRewrite }}" style="display:flex; align-items:center; gap:5px; border:none; background:transparent; cursor:pointer; color:#8A7B57; font-size:11.5px; font-family:'Noto Sans SC',sans-serif;">
+                  <svg width="13" height="13" viewBox="0 0 14 14"><path d="M11.5 6.5A4.5 4.5 0 1 1 10 3.2M11.5 1.5v2.6H8.9" fill="none" stroke="#8A7B57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> 换一种
+                </button>
+              </div>
+              <textarea value="{{ rewriteQ }}" onChange="{{ onRewrite }}" style="width:100%; margin-top:14px; min-height:78px; border:none; background:transparent; resize:none; outline:none; font-family:'Noto Serif SC',serif; font-size:17px; line-height:1.85; color:#2B2A28; caret-color:#3C4A66;"></textarea>
+            </div>
+
+            <div style="display:flex; gap:9px; align-items:flex-start; margin:14px 4px 0; color:#928C81; font-size:11.5px; line-height:1.7;">
+              <svg width="14" height="14" viewBox="0 0 15 15" style="flex-shrink:0; margin-top:2px;"><circle cx="7.5" cy="7.5" r="6.6" fill="none" stroke="#B49A66" stroke-width="1.1"/><path d="M7.5 4.4v3.6M7.5 10.4v.1" stroke="#B49A66" stroke-width="1.2" stroke-linecap="round"/></svg>
+              <div>你也可以直接修改上面的句子，让它更像你心里的声音。</div>
+            </div>
+
+            <div style="margin-top:26px;">
+              <button onClick="{{ confirmRewrite }}" style="width:100%; padding:18px; border:none; border-radius:16px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:16px; letter-spacing:4px; cursor:pointer; box-shadow:0 14px 28px -12px rgba(43,53,74,0.6);">就 用 这 个 问 法</button>
+              <div style="text-align:center; font-size:11.5px; color:#A39C8F; margin-top:13px;">接下来，我们一起静心摇签。</div>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- ===================== 卦象解读 ===================== -->
+          <sc-if value="{{ isReading }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:0 22px; animation:gxFade .55s ease both;">
+            <button onClick="{{ backToAsk }}" style="display:flex; align-items:center; gap:6px; border:none; background:transparent; cursor:pointer; padding:4px 2px; margin-bottom:6px; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px;">
+              <svg width="8" height="14" viewBox="0 0 8 14"><path d="M7 1L1 7l6 6" fill="none" stroke="#928C81" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 返回
+            </button>
+
+            <div style="text-align:center; padding:8px 12px 2px;">
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500;">你 问</div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:15.5px; color:#6B665D; line-height:1.9; margin-top:12px;">「 {{ q }} 」</div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; align-items:center; margin:24px 0 4px;">
+              <div style="display:flex; flex-direction:column; gap:10px; width:92px;">
+                <div style="height:9px; background:#2B2A28; border-radius:1.5px;"></div>
+                <div style="height:9px; background:#2B2A28; border-radius:1.5px;"></div>
+                <div style="height:9px; display:flex; gap:15px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+                <div style="height:9px; background:#B08E54; border-radius:1.5px; box-shadow:0 0 0 4px rgba(176,142,84,0.13);"></div>
+                <div style="height:9px; display:flex; gap:15px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+                <div style="height:9px; display:flex; gap:15px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+              </div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:30px; color:#2B2A28; letter-spacing:6px; margin-top:22px; font-weight:500;">风山渐</div>
+              <div style="font-family:'Spectral',serif; font-style:italic; color:#938D82; font-size:13px; margin-top:6px;">Jiàn · 循序渐进</div>
+              <div style="display:flex; gap:10px; align-items:center; margin-top:14px; font-size:11px;">
+                <span style="color:#B08E54;">九三 · 变爻</span><span style="color:#C9C2B5;">→</span><span style="color:#928C81;">之卦 风地观</span>
+              </div>
+            </div>
+
+            <div style="margin-top:20px; background:rgba(255,255,255,0.55); border:1px solid rgba(43,42,40,0.08); border-radius:20px; overflow:hidden; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="padding:21px 22px; border-bottom:1px solid rgba(43,42,40,0.07);">
+                <div style="display:flex; gap:11px; align-items:baseline;"><span style="font-family:'Noto Serif SC',serif; font-size:21px; color:{{ accent }};">象</span><span style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F; font-weight:500;">卦 之 意 象</span></div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:15px; line-height:2.05; color:#43403A; margin-top:13px;">渐，循序渐进。鸿雁依次而飞，不抢，也不停。山上有木，要慢慢，才长得稳。</div>
+              </div>
+              <div style="padding:21px 22px; border-bottom:1px solid rgba(43,42,40,0.07);">
+                <div style="display:flex; gap:11px; align-items:baseline;"><span style="font-family:'Noto Serif SC',serif; font-size:21px; color:{{ accent }};">译</span><span style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F; font-weight:500;">此 刻 的 你</span></div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:14.5px; line-height:2; color:#46433C; margin-top:13px;">你心里其实已经有了答案，只是它需要时间。这段关系，适合慢慢来——而不是用一个决定，去定它的生死。</div>
+              </div>
+              <div style="padding:21px 22px;">
+                <div style="display:flex; gap:11px; align-items:baseline;"><span style="font-family:'Noto Serif SC',serif; font-size:21px; color:{{ accent }};">行</span><span style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F; font-weight:500;">可 以 做 的 一 件 事</span></div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:14.5px; line-height:2; color:#46433C; margin-top:13px;">这一周，先不急着下结论。只观察一件事：和 TA 在一起时，你的肩膀，是松的，还是紧的？</div>
+              </div>
+            </div>
+
+            <div style="margin-top:22px; text-align:center;">
+              <div style="font-size:12.5px; color:#928C81; line-height:1.8;">卦象是一面镜子，不是一个答案。</div>
+              <button onClick="{{ goJournal }}" style="margin-top:14px; border:1px solid rgba(60,74,102,0.25); background:transparent; border-radius:13px; padding:13px 26px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; font-size:13.5px; color:{{ accent }};">把此刻的想法，写进心境 ›</button>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- ===================== 小易 · 解读 ===================== -->
+          <sc-if value="{{ isInterpret }}" hint-placeholder-val="{{ false }}">
+          <div data-screen-label="小易解读" style="padding:0 22px; animation:gxFade .55s ease both;">
+            <div style="display:flex; align-items:center; gap:13px; padding:8px 2px 4px;">
+              <div style="position:relative; width:42px; height:42px; flex-shrink:0;">
+                <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #C8CED7 44%, #3C4A66 100%); box-shadow:inset -5px -5px 10px -5px rgba(20,25,40,0.55), 0 4px 12px -4px rgba(60,74,102,0.5); animation:gxBreathe 6s ease-in-out infinite;"></div>
+                <div style="position:absolute; top:9px; right:8px; width:3px; height:3px; border-radius:50%; background:#D8BE86; box-shadow:0 0 6px rgba(216,190,134,0.9);"></div>
+              </div>
+              <div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:18px; color:#2B2A28;">小易的解读</div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:11.5px; color:#928C81; margin-top:3px;">风山渐 · 九三变 · 之风地观</div>
+              </div>
+            </div>
+
+            <div style="margin-top:16px; padding:18px 19px; background:linear-gradient(165deg, rgba(60,74,102,0.07), rgba(176,142,84,0.05)); border:1px solid rgba(60,74,102,0.13); border-radius:16px;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:15.5px; line-height:1.95; color:#3A4255;">这一签，不是替你决定，<br>而是帮你看见当下的重心。</div>
+            </div>
+
+            <div style="margin-top:14px; padding:21px 22px; background:rgba(255,255,255,0.55); border:1px solid rgba(43,42,40,0.08); border-radius:18px;">
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="font-family:'Noto Serif SC',serif; font-size:20px; color:{{ accent }};">象</span><span style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F;">这 一 卦 在 说 什 么</span></div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:14.5px; line-height:2; color:#43403A; margin-top:13px;">渐，是循序渐进。鸿雁依次而飞，山上的树慢慢生长——它说的不是「快或慢」，而是「按自己的次序来」。</div>
+            </div>
+
+            <div style="margin-top:12px; padding:21px 22px; background:rgba(255,255,255,0.55); border:1px solid rgba(43,42,40,0.08); border-radius:18px;">
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="font-family:'Noto Serif SC',serif; font-size:20px; color:{{ accent }};">情</span><span style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F;">我 想 你 此 刻 的 心 情</span></div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:14.5px; line-height:2; color:#46433C; margin-top:13px;">你心里其实已经有了答案，只是它还需要一点时间长稳。那种「想快点确定」的着急，是很正常的——你只是太想好好对待这件事。</div>
+            </div>
+
+            <div style="margin-top:12px; padding:21px 22px; background:rgba(255,255,255,0.55); border:1px solid rgba(43,42,40,0.08); border-radius:18px;">
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="font-family:'Noto Serif SC',serif; font-size:20px; color:{{ accent }};">行</span><span style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F;">今 天 的 一 件 小 事</span></div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:14.5px; line-height:2; color:#46433C; margin-top:13px;">先不急着下结论。今天只观察一件事：和 TA 在一起时，你的肩膀，是松的，还是紧的？记下来就好，不必马上解释。</div>
+            </div>
+
+            <div style="margin-top:12px; padding:21px 22px; background:rgba(60,74,102,0.05); border:1px solid rgba(60,74,102,0.1); border-radius:18px;">
+              <div style="display:flex; gap:11px; align-items:baseline;"><span style="font-family:'Noto Serif SC',serif; font-size:20px; color:{{ accent }};">问</span><span style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F;">留 给 你 的 一 个 问 题</span></div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:15.5px; line-height:1.95; color:#3A4255; margin-top:13px;">如果不必现在就给出答案，你最想先为自己守住的，是什么？</div>
+            </div>
+
+            <div style="margin-top:22px; display:flex; gap:11px;">
+              <button onClick="{{ goChat }}" style="flex:1; padding:15px; border:1px solid rgba(60,74,102,0.25); background:transparent; border-radius:14px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; font-size:13.5px; color:{{ accent }};">和小易聊聊</button>
+              <button onClick="{{ goJournal }}" style="flex:1; padding:15px; border:none; background:{{ accent }}; border-radius:14px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; font-size:13.5px; color:#F3EFE7;">写进心境</button>
+            </div>
+            <div style="text-align:center; font-size:11.5px; color:#A39C8F; margin:16px 0 4px;">卦象是一面镜子，不是一个答案。</div>
+          </div>
+          </sc-if>
+
+          <!-- ===================== 姻缘 ===================== -->
+          <sc-if value="{{ isLove }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:0 22px; animation:gxFade .55s ease both;">
+            <div style="padding:6px 2px 18px;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:25px; color:#2B2A28; font-weight:500; letter-spacing:1px;">姻缘</div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:#928C81; margin-top:8px; line-height:1.8;">这里不打分，也不预测结局——<br>只帮你们，更懂彼此的节奏。</div>
+            </div>
+
+            <div onClick="{{ openVoiceLove }}" style="margin-bottom:16px; padding:16px 18px; background:linear-gradient(165deg, rgba(60,74,102,0.06), rgba(176,142,84,0.05)); border:1px solid rgba(60,74,102,0.12); border-radius:16px; display:flex; align-items:center; gap:13px; cursor:pointer;">
+              <div style="position:relative; width:40px; height:40px; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+                <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle, rgba(60,74,102,0.15), transparent 70%);"></div>
+                <svg width="18" height="18" viewBox="0 0 24 24" style="color:#3C4A66;"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              </div>
+              <div style="flex:1;">
+                <div style="font-family:'Noto Serif SC',serif; font-size:14.5px; color:#2B2A28;">用语音，补充你们的关系背景</div>
+                <div style="font-size:11.5px; color:#928C81; margin-top:4px; line-height:1.6;">说说近况，小易帮你理出关系状态与想确认的问题。</div>
+              </div>
+              <span style="color:#B0A99D; font-size:16px;">›</span>
+            </div>
+
+            <sc-if value="{{ loveFilled }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-bottom:16px; padding:20px 22px; background:rgba(255,255,255,0.55); border:1px solid rgba(60,74,102,0.14); border-radius:18px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="display:flex; align-items:center; gap:9px;">
+                <div style="position:relative; width:26px; height:26px;">
+                  <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #C8CED7 44%, #3C4A66 100%);"></div>
+                  <div style="position:absolute; top:5px; right:5px; width:2.3px; height:2.3px; border-radius:50%; background:#D8BE86;"></div>
+                </div>
+                <span style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F;">小 易 · 语 音 整 理</span>
+              </div>
+              <div style="margin-top:15px; display:flex; flex-direction:column; gap:13px;">
+                <sc-for list="{{ loveFields }}" as="f" hint-placeholder-count="4">
+                  <div style="display:flex; gap:13px; align-items:flex-start;">
+                    <div style="width:74px; flex-shrink:0; font-family:'Noto Sans SC',sans-serif; font-size:11.5px; color:#8A93A2; padding-top:1px;">{{ f.k }}</div>
+                    <div style="flex:1; font-family:'Noto Sans SC',sans-serif; font-size:13.5px; line-height:1.7; color:#46433C;">{{ f.v }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            </sc-if>
+
+            <div style="padding:22px 20px 20px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:flex; flex-direction:column; align-items:center;">
+              <svg viewBox="0 0 260 150" style="width:210px; height:122px;">
+                <circle cx="92" cy="75" r="58" fill="none" stroke="rgba(43,42,40,0.13)" stroke-width="1" stroke-dasharray="1.5 7"/>
+                <circle cx="168" cy="75" r="58" fill="none" stroke="rgba(43,42,40,0.13)" stroke-width="1" stroke-dasharray="1.5 7"/>
+                <circle cx="92" cy="75" r="33" fill="none" stroke="rgba(60,74,102,0.2)" stroke-width="1"/>
+                <circle cx="168" cy="75" r="33" fill="none" stroke="rgba(176,142,84,0.26)" stroke-width="1"/>
+                <line x1="92" y1="42" x2="168" y2="108" stroke="rgba(43,42,40,0.22)" stroke-width="0.8" stroke-dasharray="2 3"/>
+                <circle cx="92" cy="42" r="3.4" fill="#3C4A66"/>
+                <circle cx="168" cy="108" r="3.4" fill="#B08E54"/>
+                <circle cx="130" cy="75" r="2" fill="rgba(43,42,40,0.4)"/>
+              </svg>
+              <div style="display:flex; gap:48px; margin-top:8px;">
+                <div style="text-align:center;"><div style="font-family:'Noto Serif SC',serif; font-size:15px; color:#2B2A28;">你 · 双鱼</div><div style="font-size:11px; color:#A39C8F; margin-top:5px;">1992 · 春分</div></div>
+                <div style="text-align:center;"><div style="font-family:'Noto Serif SC',serif; font-size:15px; color:#2B2A28;">之珩 · 天蝎</div><div style="font-size:11px; color:#A39C8F; margin-top:5px;">1990 · 立冬</div></div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px; padding:22px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); display:flex; align-items:center; gap:22px;">
+              <div style="display:flex; flex-direction:column; gap:8px; width:62px; flex-shrink:0;">
+                <div style="height:7px; display:flex; gap:11px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+                <div style="height:7px; background:#2B2A28; border-radius:1.5px;"></div>
+                <div style="height:7px; background:#2B2A28; border-radius:1.5px;"></div>
+                <div style="height:7px; background:#2B2A28; border-radius:1.5px;"></div>
+                <div style="height:7px; display:flex; gap:11px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+                <div style="height:7px; display:flex; gap:11px;"><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div><div style="flex:1; background:#2B2A28; border-radius:1.5px;"></div></div>
+              </div>
+              <div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500;">关 系 卦</div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:23px; color:#2B2A28; margin-top:9px; letter-spacing:4px; font-weight:500;">泽山咸</div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:#7C766B; line-height:1.8; margin-top:9px;">无心而感，自然相应。<br>你们之间，有一种不必勉强的呼应。</div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; overflow:hidden; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="padding:20px 22px; border-bottom:1px solid rgba(43,42,40,0.07);">
+                <div style="display:flex; align-items:center; gap:9px;"><span style="width:6px; height:6px; border-radius:50%; background:#3C4A66;"></span><span style="font-family:'Noto Sans SC',sans-serif; font-size:13px; color:#2B2A28; font-weight:500;">吸引点</span></div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:14px; line-height:1.95; color:#54514A; margin-top:11px;">你的金星，与 TA 的火星轻轻相触——你们之间有一种不必刻意的吸引。在一起时，时间总是过得很快。</div>
+              </div>
+              <div style="padding:20px 22px; border-bottom:1px solid rgba(43,42,40,0.07);">
+                <div style="display:flex; align-items:center; gap:9px;"><span style="width:6px; height:6px; border-radius:50%; background:#B08E54;"></span><span style="font-family:'Noto Sans SC',sans-serif; font-size:13px; color:#2B2A28; font-weight:500;">需要照顾的地方</span></div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:14px; line-height:1.95; color:#54514A; margin-top:11px;">你的月亮在水象，需要被靠近；TA 的月亮在风象，需要一点留白。这不是问题，只是两种不同的呼吸。</div>
+              </div>
+              <div style="padding:20px 22px;">
+                <div style="display:flex; align-items:center; gap:9px;"><span style="width:6px; height:6px; border-radius:50%; background:#3C4A66;"></span><span style="font-family:'Noto Sans SC',sans-serif; font-size:13px; color:#2B2A28; font-weight:500;">沟通建议</span></div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:14px; line-height:1.95; color:#54514A; margin-top:11px;">当你想靠近、而 TA 想喘口气时，试着说出来，而不是猜。一句『我现在有点需要你』，胜过十次默默的等待。</div>
+              </div>
+            </div>
+
+            <div style="margin:22px 8px 6px; text-align:center;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:15.5px; color:#6B665D; line-height:1.95;">「 你们这段关系的功课：在亲密<br>与独立之间，各自找到呼吸的位置。 」</div>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- ===================== 心境 ===================== -->
+          <sc-if value="{{ isJournal }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:0 22px; animation:gxFade .55s ease both;">
+            <div style="padding:6px 2px 18px;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:25px; color:#2B2A28; font-weight:500; letter-spacing:1px;">心境</div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:#928C81; margin-top:8px;">三月二十 · 周四 · 把今天，轻轻收好。</div>
+            </div>
+
+            <div onClick="{{ openVoiceJournal }}" style="margin-bottom:14px; padding:18px 20px; background:linear-gradient(165deg, rgba(60,74,102,0.07), rgba(176,142,84,0.05)); border:1px solid rgba(60,74,102,0.13); border-radius:18px; display:flex; align-items:center; gap:15px; cursor:pointer;">
+              <div style="position:relative; width:44px; height:44px; flex-shrink:0; display:flex; align-items:center; justify-content:center;">
+                <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle, rgba(60,74,102,0.16), transparent 70%);"></div>
+                <svg width="20" height="20" viewBox="0 0 24 24" style="color:#3C4A66;"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              </div>
+              <div style="flex:1;">
+                <div style="font-family:'Noto Serif SC',serif; font-size:15.5px; color:#2B2A28;">用一段话，说说今天</div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:12px; color:#928C81; margin-top:5px; line-height:1.6;">说完，小易帮你把情绪、压力、身体和一件小事，轻轻收好。</div>
+              </div>
+              <span style="color:#B0A99D; font-size:17px;">›</span>
+            </div>
+
+            <sc-if value="{{ journalSaved }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-bottom:14px; padding:20px 22px; background:rgba(255,255,255,0.55); border:1px solid rgba(60,74,102,0.14); border-radius:18px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <div style="display:flex; align-items:center; gap:9px;">
+                  <div style="position:relative; width:26px; height:26px;">
+                    <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #C8CED7 44%, #3C4A66 100%);"></div>
+                    <div style="position:absolute; top:5px; right:5px; width:2.3px; height:2.3px; border-radius:50%; background:#D8BE86;"></div>
+                  </div>
+                  <span style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:3px; color:#A39C8F;">小 易 · 语 音 整 理</span>
+                </div>
+                <span style="font-size:10.5px; color:#B0A99D;">刚刚</span>
+              </div>
+              <div style="margin-top:15px; display:flex; flex-direction:column; gap:13px;">
+                <sc-for list="{{ journalFields }}" as="f" hint-placeholder-count="4">
+                  <div style="display:flex; gap:13px; align-items:flex-start;">
+                    <div style="width:66px; flex-shrink:0; font-family:'Noto Sans SC',sans-serif; font-size:11.5px; color:#8A93A2; padding-top:1px;">{{ f.k }}</div>
+                    <div style="flex:1; font-family:'Noto Sans SC',sans-serif; font-size:13.5px; line-height:1.7; color:#46433C;">{{ f.v }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            </sc-if>
+
+            <div style="padding:22px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="font-family:'Noto Serif SC',serif; font-size:16px; color:#2B2A28;">此刻，你的心情更接近——</div>
+              <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px;">
+                <div onClick="{{ setPing }}" style="{{ chipPing }}">平静</div>
+                <div onClick="{{ setPi }}" style="{{ chipPi }}">疲惫</div>
+                <div onClick="{{ setFan }}" style="{{ chipFan }}">烦躁</div>
+                <div onClick="{{ setDi }}" style="{{ chipDi }}">低落</div>
+                <div onClick="{{ setQi }}" style="{{ chipQi }}">期待</div>
+                <div onClick="{{ setJin }}" style="{{ chipJin }}">紧绷</div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px; padding:22px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500;">今 天 的 紧 绷 程 度</div>
+                <div style="font-family:'Spectral',serif; font-size:22px; color:{{ accent }};">{{ stress }}<span style="font-size:12px; color:#A39C8F;"> / 10</span></div>
+              </div>
+              <input type="range" min="0" max="10" value="{{ stress }}" onChange="{{ onStress }}" style="width:100%; margin-top:20px;"/>
+              <div style="display:flex; justify-content:space-between; font-size:11px; color:#A39C8F; margin-top:10px;"><span>松弛</span><span style="color:#7C766B;">{{ stressLabel }}</span><span>紧绷</span></div>
+            </div>
+
+            <div style="margin-top:14px; padding:22px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="font-family:'Noto Serif SC',serif; font-size:16px; color:#2B2A28; line-height:1.7;">今天，有没有哪个瞬间，<br>让你松了一口气？</div>
+              <textarea value="{{ journalText }}" onChange="{{ onJournalText }}" placeholder="写下来，哪怕只有一句。" style="width:100%; margin-top:15px; min-height:84px; border:none; background:transparent; resize:none; outline:none; font-family:'Noto Serif SC',serif; font-size:15px; line-height:1.9; color:#2B2A28; caret-color:#3C4A66;"></textarea>
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-top:4px; padding-top:13px; border-top:1px solid rgba(43,42,40,0.06);">
+                <span style="font-size:11.5px; color:#A39C8F;">也可以，说给小易听</span>
+                <button onClick="{{ openVoiceReflect }}" style="width:38px; height:38px; flex-shrink:0; border:1px solid rgba(60,74,102,0.2); background:rgba(60,74,102,0.06); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#3C4A66;">
+                  <svg width="15" height="15" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500; margin:24px 4px 12px;">过 去 七 天</div>
+            <div style="padding:20px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="display:flex; justify-content:space-between; align-items:flex-end; height:72px;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;"><div style="width:9px; height:30px; border-radius:5px; background:#9FAAB4;"></div><span style="font-size:10px; color:#A39C8F;">一</span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;"><div style="width:9px; height:46px; border-radius:5px; background:#C2A878;"></div><span style="font-size:10px; color:#A39C8F;">二</span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;"><div style="width:9px; height:38px; border-radius:5px; background:#9FAAB4;"></div><span style="font-size:10px; color:#A39C8F;">三</span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;"><div style="width:9px; height:26px; border-radius:5px; background:#A7B0A0;"></div><span style="font-size:10px; color:#A39C8F;">四</span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;"><div style="width:9px; height:52px; border-radius:5px; background:#C29B86;"></div><span style="font-size:10px; color:#A39C8F;">五</span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;"><div style="width:9px; height:34px; border-radius:5px; background:#9FAAB4;"></div><span style="font-size:10px; color:#A39C8F;">六</span></div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;"><div style="width:9px; height:28px; border-radius:5px; background:#9FAAB4;"></div><span style="font-size:10px; color:#A39C8F;">日</span></div>
+              </div>
+              <div style="font-size:12.5px; color:#7C766B; line-height:1.85; margin-top:18px; text-align:center;">过去七天，你大多是『平静』的。<br>偶尔的疲惫，也都好好走过来了。</div>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- ===================== 我的 ===================== -->
+          <sc-if value="{{ isMe }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:0 22px; animation:gxFade .55s ease both;">
+            <div style="padding:6px 2px 18px;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:25px; color:#2B2A28; font-weight:500; letter-spacing:1px;">我的</div>
+            </div>
+
+            <div style="padding:24px 22px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="display:flex; gap:20px; align-items:center;">
+                <svg viewBox="0 0 200 200" style="width:124px; height:124px; flex-shrink:0;">
+                  <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(43,42,40,0.1)" stroke-width="1"/>
+                  <circle cx="100" cy="100" r="86" fill="none" stroke="rgba(43,42,40,0.22)" stroke-width="1" stroke-dasharray="1 14.5"/>
+                  <circle cx="100" cy="100" r="64" fill="none" stroke="rgba(43,42,40,0.08)" stroke-width="1"/>
+                  <circle cx="100" cy="100" r="40" fill="none" stroke="rgba(43,42,40,0.07)" stroke-width="1"/>
+                  <line x1="14" y1="100" x2="186" y2="100" stroke="rgba(43,42,40,0.08)" stroke-width="1"/>
+                  <line x1="100" y1="14" x2="100" y2="186" stroke="rgba(43,42,40,0.08)" stroke-width="1"/>
+                  <line x1="156" y1="70" x2="64" y2="150" stroke="rgba(60,74,102,0.28)" stroke-width="0.8"/>
+                  <line x1="58" y1="64" x2="150" y2="148" stroke="rgba(176,142,84,0.26)" stroke-width="0.8"/>
+                  <circle cx="156" cy="70" r="3.2" fill="#3C4A66"/>
+                  <circle cx="64" cy="150" r="3.2" fill="#3C4A66"/>
+                  <circle cx="150" cy="148" r="2.6" fill="#B08E54"/>
+                  <circle cx="58" cy="64" r="2.6" fill="rgba(43,42,40,0.5)"/>
+                  <circle cx="100" cy="100" r="2" fill="rgba(43,42,40,0.3)"/>
+                </svg>
+                <div>
+                  <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500;">本 命 星 盘</div>
+                  <div style="margin-top:13px; display:flex; flex-direction:column; gap:8px;">
+                    <div style="font-family:'Noto Serif SC',serif; font-size:15px; color:#2B2A28;">太阳 <span style="color:#7C766B;">双鱼</span></div>
+                    <div style="font-family:'Noto Serif SC',serif; font-size:15px; color:#2B2A28;">月亮 <span style="color:#7C766B;">巨蟹</span></div>
+                    <div style="font-family:'Noto Serif SC',serif; font-size:15px; color:#2B2A28;">上升 <span style="color:#7C766B;">天秤</span></div>
+                  </div>
+                </div>
+              </div>
+              <div style="height:1px; background:rgba(43,42,40,0.08); margin:18px 0;"></div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:14.5px; line-height:2; color:#5A574F;">一个温柔而敏感的人，习惯先照顾别人，再回头照顾自己。</div>
+            </div>
+
+            <div style="margin-top:16px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px; overflow:hidden; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);">
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:17px 20px; border-bottom:1px solid rgba(43,42,40,0.06);"><span style="font-size:14.5px; color:#46433C;">历史问卦</span><span style="font-size:13px; color:#A39C8F;">12 ›</span></div>
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:17px 20px; border-bottom:1px solid rgba(43,42,40,0.06);"><span style="font-size:14.5px; color:#46433C;">关系档案</span><span style="font-size:13px; color:#A39C8F;">2 ›</span></div>
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:17px 20px; border-bottom:1px solid rgba(43,42,40,0.06);"><span style="font-size:14.5px; color:#46433C;">深度报告</span><span style="font-size:13px; color:#A39C8F;">›</span></div>
+              <div onClick="{{ goDesign }}" style="display:flex; justify-content:space-between; align-items:center; padding:17px 20px; border-bottom:1px solid rgba(43,42,40,0.06); cursor:pointer;"><span style="font-size:14.5px; color:#46433C;">设计语言</span><span style="font-size:13px; color:#A39C8F;">›</span></div>
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:17px 20px;"><span style="font-size:14.5px; color:#46433C;">设置</span><span style="font-size:13px; color:#A39C8F;">›</span></div>
+            </div>
+
+            <div style="margin-top:18px; padding:18px 20px; border-radius:16px; background:rgba(60,74,102,0.05); border:1px solid rgba(60,74,102,0.09);">
+              <div style="font-size:12.5px; line-height:1.95; color:#6B665D;">观星问易是一个情绪陪伴工具，不提供命运预测或医疗诊断。当你真的难过时，也请记得——向身边真实的人，伸出手。</div>
+            </div>
+            <div style="text-align:center; margin:18px 0 4px; font-size:11px; color:#B7B0A4; letter-spacing:1.5px;">观星问易 · 观象 v0.1</div>
+          </div>
+          </sc-if>
+
+          <!-- ===================== 设计语言 ===================== -->
+          <sc-if value="{{ isDesign }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:0 22px; animation:gxFade .55s ease both;">
+            <button onClick="{{ backToMe }}" style="display:flex; align-items:center; gap:6px; border:none; background:transparent; cursor:pointer; padding:4px 2px; margin-bottom:6px; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px;">
+              <svg width="8" height="14" viewBox="0 0 8 14"><path d="M7 1L1 7l6 6" fill="none" stroke="#928C81" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> 我的
+            </button>
+            <div style="padding:4px 2px 16px;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:24px; color:#2B2A28; font-weight:500; letter-spacing:1px;">设计语言</div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:#928C81; margin-top:8px;">安静 · 克制 · 可信赖</div>
+            </div>
+
+            <div style="padding:22px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:20px;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:15px; line-height:2; color:#46433C;">一面映照此刻情绪的镜子。东方的留白，西方的星图，现代心理的温度——它不预测，只陪伴。</div>
+            </div>
+
+            <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500; margin:26px 4px 14px;">颜 色</div>
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+              <div style="display:flex; flex-direction:column; gap:8px;"><div style="height:54px; border-radius:12px; background:#F3EFE7; border:1px solid rgba(43,42,40,0.1);"></div><div style="font-size:12px; color:#46433C;">月白</div><div style="font-family:'Spectral',serif; font-size:10.5px; color:#A39C8F;">#F3EFE7</div></div>
+              <div style="display:flex; flex-direction:column; gap:8px;"><div style="height:54px; border-radius:12px; background:#2B2A28;"></div><div style="font-size:12px; color:#46433C;">墨</div><div style="font-family:'Spectral',serif; font-size:10.5px; color:#A39C8F;">#2B2A28</div></div>
+              <div style="display:flex; flex-direction:column; gap:8px;"><div style="height:54px; border-radius:12px; background:#938D82;"></div><div style="font-size:12px; color:#46433C;">星灰</div><div style="font-family:'Spectral',serif; font-size:10.5px; color:#A39C8F;">#938D82</div></div>
+              <div style="display:flex; flex-direction:column; gap:8px;"><div style="height:54px; border-radius:12px; background:#3C4A66;"></div><div style="font-size:12px; color:#46433C;">夜空青</div><div style="font-family:'Spectral',serif; font-size:10.5px; color:#A39C8F;">#3C4A66</div></div>
+              <div style="display:flex; flex-direction:column; gap:8px;"><div style="height:54px; border-radius:12px; background:#B08E54;"></div><div style="font-size:12px; color:#46433C;">淡金</div><div style="font-family:'Spectral',serif; font-size:10.5px; color:#A39C8F;">#B08E54</div></div>
+              <div style="display:flex; flex-direction:column; gap:8px;"><div style="height:54px; border-radius:12px; background:#D9C9AC;"></div><div style="font-size:12px; color:#46433C;">沙</div><div style="font-family:'Spectral',serif; font-size:10.5px; color:#A39C8F;">#D9C9AC</div></div>
+            </div>
+
+            <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500; margin:28px 4px 14px;">字 体 · 双 声 部</div>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div style="padding:20px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:16px;">
+                <div style="font-family:'Noto Serif SC',serif; font-size:22px; color:#2B2A28;">山泽损 · 月在巨蟹</div>
+                <div style="font-size:11.5px; color:#928C81; margin-top:10px;">衬线 · 古典之声　Noto Serif SC / Spectral<br>用于卦辞、星象与诗性的句子。</div>
+              </div>
+              <div style="padding:20px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); border-radius:16px;">
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:18px; color:#2B2A28; font-weight:500;">今天，先做一件小事。</div>
+                <div style="font-size:11.5px; color:#928C81; margin-top:10px;">无衬线 · 现代之声　Noto Sans SC<br>用于情绪命名、行动建议与界面。</div>
+              </div>
+            </div>
+
+            <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500; margin:28px 4px 14px;">图 形 母 题</div>
+            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;">
+              <div style="aspect-ratio:1; border-radius:14px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); display:flex; align-items:center; justify-content:center;">
+                <div style="display:flex; flex-direction:column; gap:5px; width:30px;"><div style="height:5px; background:#2B2A28; border-radius:1px;"></div><div style="height:5px; background:#2B2A28; border-radius:1px;"></div><div style="height:5px; display:flex; gap:7px;"><div style="flex:1; background:#2B2A28; border-radius:1px;"></div><div style="flex:1; background:#2B2A28; border-radius:1px;"></div></div></div>
+              </div>
+              <div style="aspect-ratio:1; border-radius:14px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); display:flex; align-items:center; justify-content:center;">
+                <svg width="42" height="42" viewBox="0 0 42 42"><line x1="8" y1="14" x2="20" y2="24" stroke="#3C4A66" stroke-width="0.8" stroke-opacity="0.5"/><line x1="20" y1="24" x2="33" y2="13" stroke="#3C4A66" stroke-width="0.8" stroke-opacity="0.5"/><line x1="20" y1="24" x2="24" y2="35" stroke="#3C4A66" stroke-width="0.8" stroke-opacity="0.5"/><circle cx="8" cy="14" r="1.8" fill="#3C4A66"/><circle cx="20" cy="24" r="2.2" fill="#3C4A66"/><circle cx="33" cy="13" r="1.6" fill="#B08E54"/><circle cx="24" cy="35" r="1.5" fill="#3C4A66"/></svg>
+              </div>
+              <div style="aspect-ratio:1; border-radius:14px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); display:flex; align-items:center; justify-content:center;">
+                <div style="width:32px; height:32px; border-radius:50%; background:radial-gradient(circle at 66% 38%, #EFEAE0, #C7C0B1); box-shadow:inset -8px 0 10px -5px rgba(20,25,40,0.45);"></div>
+              </div>
+              <div style="aspect-ratio:1; border-radius:14px; background:rgba(255,255,255,0.5); border:1px solid rgba(43,42,40,0.07); display:flex; align-items:center; justify-content:center;">
+                <div style="width:34px; height:34px; border-radius:50%; background:radial-gradient(circle at 50% 42%, rgba(60,74,102,0.22), rgba(60,74,102,0.05)); animation:gxBreathe 5s ease-in-out infinite;"></div>
+              </div>
+            </div>
+
+            <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:4px; color:#A39C8F; font-weight:500; margin:28px 4px 14px;">语 气</div>
+            <div style="display:flex; gap:12px; margin-bottom:8px;">
+              <div style="flex:1; padding:18px; border-radius:16px; background:rgba(60,74,102,0.05); border:1px solid rgba(60,74,102,0.1);">
+                <div style="font-size:12px; color:#3C4A66; font-weight:500; margin-bottom:12px;">我们会说</div>
+                <div style="display:flex; flex-direction:column; gap:9px; font-size:12.5px; color:#54514A; line-height:1.4;"><div>适合观察</div><div>可以先整理边界</div><div>今天先做一件小事</div></div>
+              </div>
+              <div style="flex:1; padding:18px; border-radius:16px; background:rgba(43,42,40,0.03); border:1px solid rgba(43,42,40,0.08);">
+                <div style="font-size:12px; color:#A39C8F; font-weight:500; margin-bottom:12px;">我们不说</div>
+                <div style="display:flex; flex-direction:column; gap:9px; font-size:12.5px; color:#B0A99D; line-height:1.4; text-decoration:line-through; text-decoration-color:rgba(176,142,84,0.5);"><div>必然</div><div>注定</div><div>大凶 · 血光之灾</div></div>
+              </div>
+            </div>
+          </div>
+          </sc-if>
+
+        </div>
+
+        <!-- ============ TAB BAR ============ -->
+        <div style="flex-shrink:0; display:flex; padding:12px 14px 22px; background:rgba(243,239,231,0.86); border-top:1px solid rgba(43,42,40,0.07); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); position:relative; z-index:20;">
+          <div onClick="{{ goToday }}" style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; color:{{ tabTodayColor }};">
+            <svg width="23" height="23" viewBox="0 0 24 24"><path d="M12 3l1.4 7.2L21 12l-7.6 1.8L12 21l-1.4-7.2L3 12l7.6-1.8z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            <span style="font-size:10px; letter-spacing:1px;">今日</span>
+          </div>
+          <div onClick="{{ goAsk }}" style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; color:{{ tabAskColor }};">
+            <svg width="23" height="23" viewBox="0 0 24 24"><line x1="5" y1="7" x2="19" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="12" x2="9.5" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="14.5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="5" y1="17" x2="19" y2="17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span style="font-size:10px; letter-spacing:1px;">问卦</span>
+          </div>
+          <div onClick="{{ goLove }}" style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; color:{{ tabLoveColor }};">
+            <svg width="23" height="23" viewBox="0 0 24 24"><circle cx="9.5" cy="12" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="14.5" cy="12" r="5.4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            <span style="font-size:10px; letter-spacing:1px;">姻缘</span>
+          </div>
+          <div onClick="{{ goJournal }}" style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; color:{{ tabJournalColor }};">
+            <svg width="23" height="23" viewBox="0 0 24 24"><path d="M16.5 4.2A8 8 0 1 0 20 13a6.6 6.6 0 0 1-3.5-8.8z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            <span style="font-size:10px; letter-spacing:1px;">心境</span>
+          </div>
+          <div onClick="{{ goMe }}" style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; color:{{ tabMeColor }};">
+            <svg width="23" height="23" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="4" r="1.3" fill="currentColor"/></svg>
+            <span style="font-size:10px; letter-spacing:1px;">我的</span>
+          </div>
+        </div>
+
+        <!-- ============ 小易 CHAT ============ -->
+        <sc-if value="{{ isChat }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="小易聊天" style="position:absolute; inset:0; z-index:55; background:radial-gradient(120% 80% at 50% 0%, #EEE9E0, #E7E1D6); display:flex; flex-direction:column; animation:gxFade .4s ease;">
+          <div style="flex-shrink:0; padding:56px 20px 14px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(43,42,40,0.07); background:rgba(243,239,231,0.7); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);">
+            <button onClick="{{ backFromChat }}" style="border:none; background:transparent; cursor:pointer; padding:4px; display:flex; align-items:center;">
+              <svg width="9" height="15" viewBox="0 0 8 14"><path d="M7 1L1 7l6 6" fill="none" stroke="#6B665D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div style="position:relative; width:36px; height:36px;">
+              <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #C8CED7 44%, #3C4A66 100%); box-shadow:inset -4px -4px 8px -4px rgba(20,25,40,0.55), 0 3px 9px -4px rgba(60,74,102,0.5); animation:gxBreathe 6s ease-in-out infinite;"></div>
+              <div style="position:absolute; top:8px; right:7px; width:2.8px; height:2.8px; border-radius:50%; background:#D8BE86; box-shadow:0 0 5px rgba(216,190,134,0.9);"></div>
+            </div>
+            <div style="flex:1;">
+              <div style="font-family:'Noto Serif SC',serif; font-size:16px; color:#2B2A28;">小易</div>
+              <div style="font-size:10.5px; color:#8A93A2; margin-top:2px; display:flex; align-items:center; gap:5px;"><span style="width:5px; height:5px; border-radius:50%; background:#7C9A7E;"></span>安静地陪着你</div>
+            </div>
+          </div>
+
+          <div class="gx-scroll" ref="{{ chatScrollRef }}" style="flex:1; overflow-y:auto; padding:20px 18px 8px;">
+            <div style="text-align:center; font-size:10.5px; color:#B0A99D; margin-bottom:18px; letter-spacing:1px;">三月二十 · 晚上好</div>
+            <sc-for list="{{ chatRows }}" as="m" hint-placeholder-count="5">
+              <sc-if value="{{ m.isXy }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex; gap:9px; align-items:flex-start; margin-bottom:15px;">
+                  <div style="position:relative; width:30px; height:30px; flex-shrink:0; margin-top:2px;">
+                    <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #C8CED7 44%, #3C4A66 100%); box-shadow:inset -3px -3px 6px -3px rgba(20,25,40,0.55);"></div>
+                    <div style="position:absolute; top:6px; right:6px; width:2.3px; height:2.3px; border-radius:50%; background:#D8BE86;"></div>
+                  </div>
+                  <div style="max-width:76%; padding:12px 15px; background:rgba(255,255,255,0.66); border:1px solid rgba(43,42,40,0.07); border-radius:4px 16px 16px 16px; font-family:'Noto Sans SC',sans-serif; font-size:14px; line-height:1.85; color:#46433C;">{{ m.text }}</div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ m.isMe }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; justify-content:flex-end; margin-bottom:15px;">
+                  <div style="max-width:76%; padding:12px 15px; background:rgba(60,74,102,0.1); border:1px solid rgba(60,74,102,0.14); border-radius:16px 4px 16px 16px; font-family:'Noto Sans SC',sans-serif; font-size:14px; line-height:1.85; color:#3A4255;">{{ m.text }}</div>
+                </div>
+              </sc-if>
+            </sc-for>
+            <div style="margin-top:4px; display:flex; gap:8px; flex-wrap:wrap; padding-left:39px;">
+              <div style="font-size:11px; color:#A39C8F; padding:7px 13px; border:1px solid rgba(43,42,40,0.1); border-radius:20px; background:rgba(255,255,255,0.4);">给这种感觉起个名字</div>
+              <div style="font-size:11px; color:#A39C8F; padding:7px 13px; border:1px solid rgba(43,42,40,0.1); border-radius:20px; background:rgba(255,255,255,0.4);">只是想有人听我说</div>
+            </div>
+          </div>
+
+          <div style="flex-shrink:0; padding:10px 16px 24px; border-top:1px solid rgba(43,42,40,0.07); background:rgba(243,239,231,0.8); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);">
+            <div style="text-align:center; font-size:10.5px; color:#A39C8F; margin:2px 0 10px; letter-spacing:0.5px;">按住麦克风，说给小易听　·　松开发送，上滑取消</div>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <button onPointerDown="{{ onChatMicDown }}" onPointerUp="{{ onChatMicUp }}" onPointerMove="{{ onChatMicMove }}" onPointerLeave="{{ onChatMicUp }}" style="width:44px; height:44px; flex-shrink:0; border:1px solid rgba(60,74,102,0.22); background:rgba(60,74,102,0.06); border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#3C4A66; touch-action:none; user-select:none; -webkit-user-select:none;">
+                <svg width="18" height="18" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              </button>
+              <input value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="想说点什么，都可以……" style="flex:1; min-width:0; border:1px solid rgba(43,42,40,0.12); background:rgba(255,255,255,0.6); border-radius:22px; padding:12px 17px; outline:none; font-family:'Noto Sans SC',sans-serif; font-size:14px; color:#2B2A28; caret-color:#3C4A66;"/>
+              <button onClick="{{ sendChat }}" style="width:44px; height:44px; flex-shrink:0; border:none; border-radius:50%; background:{{ accent }}; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                <svg width="18" height="18" viewBox="0 0 20 20"><path d="M3 10l14-6-6 14-2-6z" fill="none" stroke="#F3EFE7" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- ============ 摇签桶 仪式 ============ -->
+        <sc-if value="{{ isShake }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="摇签仪式" style="position:absolute; inset:0; z-index:58; background:linear-gradient(168deg, #232D45 0%, #1A2034 55%, #161B29 100%); overflow:hidden; animation:gxFade .45s ease;">
+          <svg viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0; width:100%; height:100%; opacity:0.75;">
+            <line x1="54" y1="150" x2="130" y2="196" stroke="rgba(255,255,255,0.12)" stroke-width="0.7"/>
+            <line x1="130" y1="196" x2="206" y2="158" stroke="rgba(255,255,255,0.1)" stroke-width="0.7"/>
+            <line x1="260" y1="640" x2="320" y2="690" stroke="rgba(255,255,255,0.09)" stroke-width="0.7"/>
+            <circle cx="54" cy="150" r="1.5" fill="rgba(255,255,255,0.7)" style="animation:gxTwinkle 5s ease-in-out infinite;"/>
+            <circle cx="130" cy="196" r="1.9" fill="rgba(255,255,255,0.8)"/>
+            <circle cx="206" cy="158" r="1.4" fill="rgba(255,255,255,0.6)" style="animation:gxTwinkle 6s ease-in-out 1s infinite;"/>
+            <circle cx="320" cy="120" r="1.6" fill="#E7CF95" style="animation:gxTwinkle 5.5s ease-in-out .5s infinite;"/>
+            <circle cx="60" cy="560" r="1.3" fill="rgba(255,255,255,0.45)"/>
+            <circle cx="300" cy="700" r="1.7" fill="rgba(255,255,255,0.55)"/>
+            <circle cx="340" cy="500" r="1.2" fill="rgba(255,255,255,0.4)" style="animation:gxTwinkle 4.5s ease-in-out 1.4s infinite;"/>
+            <circle cx="40" cy="360" r="1.3" fill="rgba(255,255,255,0.4)"/>
+          </svg>
+
+          <button onClick="{{ closeRitual }}" style="position:absolute; top:54px; right:20px; z-index:5; width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,0.16); background:rgba(255,255,255,0.05); cursor:pointer; display:flex; align-items:center; justify-content:center;">
+            <svg width="13" height="13" viewBox="0 0 14 14"><path d="M1 1l12 12M13 1L1 13" stroke="rgba(231,227,240,0.7)" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding:92px 28px 40px;">
+            <div style="display:flex; align-items:center; gap:10px; padding:11px 18px; border-radius:30px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+              <div style="position:relative; width:26px; height:26px; flex-shrink:0;">
+                <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #BFC6D3 44%, #586585 100%); box-shadow:inset -3px -3px 6px -3px rgba(10,14,26,0.6);"></div>
+                <div style="position:absolute; top:5px; right:5px; width:2.3px; height:2.3px; border-radius:50%; background:#E7CF95; box-shadow:0 0 5px rgba(231,207,149,0.9);"></div>
+              </div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:rgba(231,227,240,0.82); line-height:1.5;">先把手机放稳，慢慢呼吸一次。</div>
+            </div>
+
+            <div onPointerDown="{{ onVesselDown }}" onPointerMove="{{ onVesselMove }}" onPointerUp="{{ onVesselUp }}" onPointerLeave="{{ onVesselUp }}" style="flex:1; width:100%; display:flex; align-items:center; justify-content:center; cursor:pointer; touch-action:none; user-select:none; -webkit-user-select:none;">
+              <div style="position:relative; width:240px; height:300px; display:flex; align-items:center; justify-content:center;">
+
+                <div style="position:relative; width:130px; height:190px; animation:{{ vesselAnimCss }};">
+                  <div style="position:absolute; left:50%; top:-14px; transform:translateX(-50%); display:flex; gap:5px; align-items:flex-end; z-index:1;">
+                    <div style="width:4px; height:30px; border-radius:3px; background:linear-gradient(180deg,#F1ECE2,#CFC8BA); transform:rotate(-7deg);"></div>
+                    <div style="width:4px; height:40px; border-radius:3px; background:linear-gradient(180deg,#F3EFE7,#D4CDBF); box-shadow:0 0 0 0.5px rgba(216,190,134,0.3);"></div>
+                    <div style="width:4px; height:34px; border-radius:3px; background:linear-gradient(180deg,#EFEAE0,#CFC8BA); transform:rotate(4deg);"></div>
+                    <div style="width:4px; height:44px; border-radius:3px; background:linear-gradient(180deg,#F3EFE7,#D4CDBF);"></div>
+                    <div style="width:4px; height:31px; border-radius:3px; background:linear-gradient(180deg,#EFEAE0,#CFC8BA); transform:rotate(8deg);"></div>
+                  </div>
+                  <div style="position:absolute; left:0; right:0; top:8px; bottom:0; border-radius:12px 12px 50% 50% / 8px 8px 22px 22px; background:linear-gradient(180deg, rgba(180,192,205,0.14), rgba(60,74,102,0.2)); border:1px solid rgba(200,210,222,0.3); box-shadow:inset 0 4px 16px rgba(243,239,231,0.1), inset 0 -14px 26px rgba(16,20,34,0.4), 0 22px 44px -18px rgba(0,0,0,0.55); overflow:hidden; backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px);">
+                    <svg viewBox="0 0 130 182" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%; opacity:0.55;">
+                      <line x1="28" y1="58" x2="102" y2="58" stroke="rgba(216,224,235,0.35)" stroke-width="1"/>
+                      <line x1="28" y1="78" x2="58" y2="78" stroke="rgba(216,224,235,0.3)" stroke-width="1"/>
+                      <line x1="72" y1="78" x2="102" y2="78" stroke="rgba(216,224,235,0.3)" stroke-width="1"/>
+                      <line x1="28" y1="98" x2="102" y2="98" stroke="rgba(216,224,235,0.28)" stroke-width="1"/>
+                      <line x1="28" y1="118" x2="58" y2="118" stroke="rgba(216,224,235,0.24)" stroke-width="1"/>
+                      <line x1="72" y1="118" x2="102" y2="118" stroke="rgba(216,224,235,0.24)" stroke-width="1"/>
+                      <line x1="28" y1="138" x2="58" y2="138" stroke="rgba(216,224,235,0.2)" stroke-width="1"/>
+                      <line x1="72" y1="138" x2="102" y2="138" stroke="rgba(216,224,235,0.2)" stroke-width="1"/>
+                    </svg>
+                    <div style="position:absolute; left:50%; top:30%; transform:translateX(-50%); width:64px; height:64px; border-radius:50%; background:radial-gradient(circle, rgba(216,190,134,0.2), transparent 70%); animation:gxGlowPulse 4s ease-in-out infinite;"></div>
+                  </div>
+                  <div style="position:absolute; top:4px; left:8px; right:8px; height:16px; border-radius:50%; border:1px solid rgba(200,210,222,0.45); background:rgba(34,42,62,0.5);"></div>
+                </div>
+
+                <sc-if value="{{ forming }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; z-index:3;">
+                    <div style="position:absolute; inset:-24px; background:radial-gradient(circle at 50% 50%, rgba(22,27,41,0.66), rgba(22,27,41,0.18));"></div>
+                    <span style="position:absolute; left:30%; top:34%; width:3px; height:3px; border-radius:50%; background:#E7CF95; animation:gxScatter 1.3s ease-out forwards;"></span>
+                    <span style="position:absolute; left:68%; top:30%; width:2.5px; height:2.5px; border-radius:50%; background:#F3EFE7; animation:gxScatter 1.5s ease-out .1s forwards;"></span>
+                    <span style="position:absolute; left:24%; top:60%; width:2.5px; height:2.5px; border-radius:50%; background:#F3EFE7; animation:gxScatter 1.4s ease-out .18s forwards;"></span>
+                    <span style="position:absolute; left:74%; top:62%; width:3px; height:3px; border-radius:50%; background:#E7CF95; animation:gxScatter 1.5s ease-out .26s forwards;"></span>
+                    <span style="position:absolute; left:48%; top:22%; width:2px; height:2px; border-radius:50%; background:#F3EFE7; animation:gxScatter 1.3s ease-out .32s forwards;"></span>
+                    <span style="position:absolute; left:52%; top:74%; width:2px; height:2px; border-radius:50%; background:#F3EFE7; animation:gxScatter 1.4s ease-out .4s forwards;"></span>
+
+                    <div style="position:relative; display:flex; flex-direction:column; gap:11px; width:84px;">
+                      <div style="height:9px; background:#EFEBE2; border-radius:2px; opacity:0; animation:gxLineIn .5s ease .5s forwards;"></div>
+                      <div style="height:9px; background:#EFEBE2; border-radius:2px; opacity:0; animation:gxLineIn .5s ease .42s forwards;"></div>
+                      <div style="height:9px; display:flex; gap:14px; opacity:0; animation:gxLineIn .5s ease .34s forwards;"><div style="flex:1; background:#EFEBE2; border-radius:2px;"></div><div style="flex:1; background:#EFEBE2; border-radius:2px;"></div></div>
+                      <div style="height:9px; background:#D8BE86; border-radius:2px; box-shadow:0 0 0 4px rgba(216,190,134,0.16); opacity:0; animation:gxLineIn .5s ease .26s forwards;"></div>
+                      <div style="height:9px; display:flex; gap:14px; opacity:0; animation:gxLineIn .5s ease .18s forwards;"><div style="flex:1; background:#EFEBE2; border-radius:2px;"></div><div style="flex:1; background:#EFEBE2; border-radius:2px;"></div></div>
+                      <div style="height:9px; display:flex; gap:14px; opacity:0; animation:gxLineIn .5s ease .1s forwards;"><div style="flex:1; background:#EFEBE2; border-radius:2px;"></div><div style="flex:1; background:#EFEBE2; border-radius:2px;"></div></div>
+                    </div>
+
+                    <div style="position:absolute; left:50%; top:6%; animation:gxStickFall 1.1s ease-out .55s both;">
+                      <div style="width:13px; height:120px; border-radius:7px; background:linear-gradient(180deg,#F3EFE7,#DAD3C5); box-shadow:0 8px 20px -6px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(216,190,134,0.3);"></div>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+
+            <sc-if value="{{ shakeActive }}" hint-placeholder-val="{{ false }}">
+              <div style="width:100%; max-width:248px;">
+                <div style="font-family:'Noto Serif SC',serif; font-size:15px; color:#EFEBE2; text-align:center; letter-spacing:2px;">{{ shakeHint }}</div>
+                <div style="height:3px; border-radius:3px; background:rgba(255,255,255,0.1); margin-top:18px; overflow:hidden;">
+                  <div style="height:100%; width:{{ shakeP }}%; background:linear-gradient(90deg, #93A1AE, #D8BE86); border-radius:3px; transition:width .15s ease;"></div>
+                </div>
+                <div style="text-align:center; font-size:11px; color:rgba(231,227,240,0.5); margin-top:12px; line-height:1.6;">{{ shakeSub }}</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ shakeIdle }}" hint-placeholder-val="{{ true }}">
+              <div style="width:100%; max-width:262px; text-align:center;">
+                <button onClick="{{ startShake }}" style="width:100%; padding:16px; border:1px solid rgba(216,190,134,0.4); border-radius:15px; background:rgba(216,190,134,0.1); color:#EFE7D4; font-family:'Noto Serif SC',serif; font-size:15.5px; letter-spacing:5px; cursor:pointer;">开 始 摇 签</button>
+                <div style="font-size:11px; color:rgba(231,227,240,0.5); margin-top:14px; line-height:1.7;">{{ shakeSub }}</div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- ============ 出签 完成 ============ -->
+        <sc-if value="{{ isDrawn }}" hint-placeholder-val="{{ false }}">
+        <div data-screen-label="出签完成" class="gx-scroll" style="position:absolute; inset:0; z-index:58; background:linear-gradient(168deg, #232D45 0%, #1A2034 55%, #161B29 100%); overflow-y:auto; animation:gxFade .5s ease;">
+          <div style="min-height:100%; display:flex; flex-direction:column; align-items:center; padding:62px 28px 36px;">
+            <div style="font-family:'Noto Sans SC',sans-serif; font-size:10px; letter-spacing:5px; color:rgba(216,190,134,0.72);">已 得 一 签</div>
+
+            <div style="margin-top:24px; position:relative; width:94px; min-height:286px; border-radius:14px; background:linear-gradient(180deg, rgba(243,239,231,0.97), rgba(224,218,205,0.95)); box-shadow:0 26px 50px -18px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(216,190,134,0.35); display:flex; flex-direction:column; align-items:center; padding:20px 0 22px; animation:gxStickFall .9s ease-out both;">
+              <div style="width:30px; height:30px; border-radius:50%; border:1px solid rgba(176,142,84,0.45); display:flex; align-items:center; justify-content:center; font-family:'Noto Serif SC',serif; font-size:15px; color:#A8854C;">渐</div>
+              <div style="writing-mode:vertical-rl; text-orientation:upright; margin-top:18px; font-family:'Noto Serif SC',serif; font-size:18px; letter-spacing:8px; line-height:2.5; color:#7A6233;">水落石出非一夕<br>山木成荫待几春</div>
+              <div style="flex:1;"></div>
+              <div style="width:20px; height:3px; border-radius:2px; background:rgba(176,142,84,0.4);"></div>
+            </div>
+
+            <div style="margin-top:22px; font-family:'Noto Serif SC',serif; font-size:14px; line-height:2; color:rgba(239,235,226,0.78); text-align:center; max-width:248px;">你问的事，急不得——<br>但它，也并没有停下。</div>
+
+            <div style="margin-top:28px; display:flex; align-items:center; gap:26px;">
+              <div style="display:flex; flex-direction:column; align-items:center; gap:13px;">
+                <div style="display:flex; flex-direction:column; gap:8px; width:60px;">
+                  <div style="height:7px; background:#EFEBE2; border-radius:1.5px;"></div>
+                  <div style="height:7px; background:#EFEBE2; border-radius:1.5px;"></div>
+                  <div style="height:7px; display:flex; gap:12px;"><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div></div>
+                  <div style="height:7px; background:#D8BE86; border-radius:1.5px; box-shadow:0 0 0 3px rgba(216,190,134,0.18);"></div>
+                  <div style="height:7px; display:flex; gap:12px;"><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div></div>
+                  <div style="height:7px; display:flex; gap:12px;"><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div></div>
+                </div>
+                <div style="text-align:center;"><div style="font-family:'Noto Serif SC',serif; font-size:16px; color:#EFEBE2; letter-spacing:3px;">风山渐</div><div style="font-size:10px; color:rgba(231,227,240,0.5); margin-top:4px;">本卦</div></div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; align-items:center; gap:6px; color:rgba(216,190,134,0.75); margin-bottom:24px;">
+                <svg width="20" height="20" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="font-size:9px; color:rgba(231,227,240,0.45); letter-spacing:1px;">九三变</span>
+              </div>
+
+              <div style="display:flex; flex-direction:column; align-items:center; gap:13px;">
+                <div style="display:flex; flex-direction:column; gap:8px; width:60px;">
+                  <div style="height:7px; background:#EFEBE2; border-radius:1.5px;"></div>
+                  <div style="height:7px; background:#EFEBE2; border-radius:1.5px;"></div>
+                  <div style="height:7px; display:flex; gap:12px;"><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div></div>
+                  <div style="height:7px; display:flex; gap:12px;"><div style="flex:1; background:#9FA9BC; border-radius:1.5px;"></div><div style="flex:1; background:#9FA9BC; border-radius:1.5px;"></div></div>
+                  <div style="height:7px; display:flex; gap:12px;"><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div></div>
+                  <div style="height:7px; display:flex; gap:12px;"><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div><div style="flex:1; background:#EFEBE2; border-radius:1.5px;"></div></div>
+                </div>
+                <div style="text-align:center;"><div style="font-family:'Noto Serif SC',serif; font-size:16px; color:#EFEBE2; letter-spacing:3px;">风地观</div><div style="font-size:10px; color:rgba(231,227,240,0.5); margin-top:4px;">变卦</div></div>
+              </div>
+            </div>
+
+            <div style="margin-top:30px; display:flex; gap:11px; align-items:flex-start; max-width:288px; padding:15px 17px; border-radius:14px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);">
+              <div style="position:relative; width:30px; height:30px; flex-shrink:0; margin-top:1px;">
+                <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #BFC6D3 44%, #586585 100%); box-shadow:inset -3px -3px 6px -3px rgba(10,14,26,0.6);"></div>
+                <div style="position:absolute; top:6px; right:6px; width:2.3px; height:2.3px; border-radius:50%; background:#E7CF95;"></div>
+              </div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:13px; line-height:1.8; color:rgba(231,227,240,0.82);">这一签，不是替你决定，而是帮你看见此刻的重心。要不要听我，慢慢说一说？</div>
+            </div>
+
+            <button onClick="{{ goInterpret }}" style="margin-top:24px; width:100%; max-width:288px; padding:17px; border:none; border-radius:15px; background:rgba(216,190,134,0.92); color:#2B2A28; font-family:'Noto Serif SC',serif; font-size:15.5px; letter-spacing:4px; cursor:pointer; box-shadow:0 16px 30px -14px rgba(216,190,134,0.5);">听 小 易 解 读</button>
+            <button onClick="{{ closeRitual }}" style="margin-top:14px; border:none; background:transparent; cursor:pointer; color:rgba(231,227,240,0.5); font-family:'Noto Sans SC',sans-serif; font-size:12px;">再问一次</button>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- ============ 语音输入 ============ -->
+        <sc-if value="{{ voiceOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute; inset:0; z-index:80; animation:gxFade .28s ease;">
+
+          <!-- 长按说话（聊天） -->
+          <sc-if value="{{ vPress }}" hint-placeholder-val="{{ false }}">
+          <div onPointerMove="{{ onChatMicMove }}" onPointerUp="{{ onChatMicUp }}" onPointerLeave="{{ onChatMicUp }}" style="position:absolute; inset:0; background:linear-gradient(168deg, #232D45 0%, #1A2034 55%, #161B29 100%); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding:0 28px 130px; touch-action:none; user-select:none; -webkit-user-select:none;">
+            <div style="position:absolute; top:96px; left:0; right:0; display:flex; flex-direction:column; align-items:center; gap:11px;">
+              <sc-if value="{{ pressArmed }}" hint-placeholder-val="{{ false }}">
+                <div style="width:52px; height:52px; border-radius:50%; border:1px solid rgba(216,190,134,0.7); background:rgba(216,190,134,0.14); display:flex; align-items:center; justify-content:center;">
+                  <svg width="16" height="16" viewBox="0 0 14 14"><path d="M1 1l12 12M13 1L1 13" stroke="#E7CF95" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <div style="font-size:12.5px; color:#E7CF95;">松开手指，取消发送</div>
+              </sc-if>
+              <sc-if value="{{ pressNotArmed }}" hint-placeholder-val="{{ true }}">
+                <div style="width:52px; height:52px; border-radius:50%; border:1px solid rgba(255,255,255,0.18); display:flex; align-items:center; justify-content:center;">
+                  <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 19V6M6 12l6-6 6 6" fill="none" stroke="rgba(231,227,240,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div style="font-size:12px; color:rgba(231,227,240,0.55);">上滑，可取消</div>
+              </sc-if>
+            </div>
+
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <div style="font-family:'Spectral',serif; font-size:16px; color:rgba(231,227,240,0.85); letter-spacing:2px;">{{ voiceTime }}</div>
+              <div style="position:relative; width:132px; height:132px; margin-top:18px; display:flex; align-items:center; justify-content:center;">
+                <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle, rgba(216,190,134,0.22), transparent 70%); animation:gxHalo 2.4s ease-in-out infinite;"></div>
+                <div style="display:flex; align-items:center; gap:5px; height:46px;">
+                  <div style="width:3px; height:100%; border-radius:3px; background:#9FB0C4; animation:gxWave 1.1s ease-in-out 0s infinite;"></div>
+                  <div style="width:3px; height:100%; border-radius:3px; background:#B8C2D2; animation:gxWave 1.1s ease-in-out .16s infinite;"></div>
+                  <div style="width:3px; height:100%; border-radius:3px; background:#9FB0C4; animation:gxWave 1.1s ease-in-out .32s infinite;"></div>
+                  <div style="width:3px; height:100%; border-radius:3px; background:#E7CF95; animation:gxWave 1.1s ease-in-out .08s infinite;"></div>
+                  <div style="width:3px; height:100%; border-radius:3px; background:#9FB0C4; animation:gxWave 1.1s ease-in-out .28s infinite;"></div>
+                  <div style="width:3px; height:100%; border-radius:3px; background:#B8C2D2; animation:gxWave 1.1s ease-in-out .12s infinite;"></div>
+                  <div style="width:3px; height:100%; border-radius:3px; background:#9FB0C4; animation:gxWave 1.1s ease-in-out .22s infinite;"></div>
+                </div>
+              </div>
+              <div style="font-size:12.5px; color:rgba(231,227,240,0.7); margin-top:20px;">{{ pressHint }}</div>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- 录音 sheet（点按场景） -->
+          <sc-if value="{{ vSheet }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute; inset:0;">
+            <div onClick="{{ closeVoice }}" style="position:absolute; inset:0; background:rgba(16,20,34,0.52); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px);"></div>
+            <div class="gx-scroll" style="position:absolute; left:0; right:0; bottom:0; background:linear-gradient(180deg, #F6F2EA, #EFEAE0); border-radius:26px 26px 0 0; padding:24px 24px 30px; box-shadow:0 -20px 50px -20px rgba(0,0,0,0.45); max-height:90%; overflow-y:auto;">
+              <div style="width:38px; height:4px; border-radius:4px; background:rgba(43,42,40,0.16); margin:0 auto 18px;"></div>
+
+              <!-- 权限说明 -->
+              <sc-if value="{{ vPerm }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; justify-content:center; margin-top:4px;">
+                <div style="position:relative; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
+                  <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle, rgba(60,74,102,0.13), transparent 70%); animation:gxHalo 3s ease-in-out infinite;"></div>
+                  <svg width="27" height="27" viewBox="0 0 24 24" style="color:#3C4A66;"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </div>
+              </div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:19px; color:#2B2A28; text-align:center; margin-top:16px;">想用声音，轻轻说</div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:13.5px; line-height:1.95; color:#6B665D; text-align:center; margin-top:13px;">只有在你主动点击时，我们才会使用麦克风。<br>录音只用于转成文字，你可以在提交前删除或修改。</div>
+              <button onClick="{{ grantVoice }}" style="width:100%; margin-top:24px; padding:16px; border:none; border-radius:15px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:3px; cursor:pointer;">允 许 使 用 麦 克 风</button>
+              <button onClick="{{ refuseVoice }}" style="width:100%; margin-top:10px; padding:14px; border:none; background:transparent; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px; cursor:pointer;">这次先用文字</button>
+              </sc-if>
+
+              <!-- 权限被拒 -->
+              <sc-if value="{{ vDenied }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; justify-content:center; margin-top:4px;">
+                <div style="position:relative; width:64px; height:64px; display:flex; align-items:center; justify-content:center;">
+                  <svg width="28" height="28" viewBox="0 0 24 24" style="color:#9C9486;"><rect x="9" y="3" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M4 4l16 16" stroke="#B49A66" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </div>
+              </div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:19px; color:#2B2A28; text-align:center; margin-top:16px;">没关系，用文字也很好</div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:13.5px; line-height:1.95; color:#6B665D; text-align:center; margin-top:13px;">麦克风暂时没有开启。你随时可以继续用文字，<br>慢慢写，也一样。</div>
+              <button onClick="{{ reopenVoice }}" style="width:100%; margin-top:24px; padding:16px; border:none; border-radius:15px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:3px; cursor:pointer;">重 新 开 启</button>
+              <button onClick="{{ closeVoice }}" style="width:100%; margin-top:10px; padding:14px; border:none; background:transparent; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px; cursor:pointer;">我知道了</button>
+              </sc-if>
+
+              <!-- 录音中 -->
+              <sc-if value="{{ vRec }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center; font-family:'Noto Sans SC',sans-serif; font-size:10.5px; letter-spacing:3px; color:#A39C8F;">{{ voiceCtxLabel }}</div>
+              <div style="display:flex; flex-direction:column; align-items:center; margin-top:16px;">
+                <div style="font-family:'Spectral',serif; font-size:23px; color:#3C4A66; letter-spacing:1px;">{{ voiceTime }}</div>
+                <div style="position:relative; width:124px; height:124px; margin-top:12px; display:flex; align-items:center; justify-content:center;">
+                  <div style="position:absolute; inset:12px; border-radius:50%; background:radial-gradient(circle, rgba(60,74,102,0.15), transparent 72%); animation:gxHalo 2.6s ease-in-out infinite;"></div>
+                  <div style="position:absolute; inset:0; border-radius:50%; border:1px solid rgba(60,74,102,0.13); animation:gxRing 3.4s ease-out infinite;"></div>
+                  <div style="display:flex; align-items:center; gap:5px; height:44px;">
+                    <div style="width:3px; height:100%; border-radius:3px; background:#3C4A66; animation:gxWave 1.15s ease-in-out 0s infinite;"></div>
+                    <div style="width:3px; height:100%; border-radius:3px; background:#5C6B86; animation:gxWave 1.15s ease-in-out .16s infinite;"></div>
+                    <div style="width:3px; height:100%; border-radius:3px; background:#3C4A66; animation:gxWave 1.15s ease-in-out .32s infinite;"></div>
+                    <div style="width:3px; height:100%; border-radius:3px; background:#B08E54; animation:gxWave 1.15s ease-in-out .08s infinite;"></div>
+                    <div style="width:3px; height:100%; border-radius:3px; background:#3C4A66; animation:gxWave 1.15s ease-in-out .28s infinite;"></div>
+                    <div style="width:3px; height:100%; border-radius:3px; background:#5C6B86; animation:gxWave 1.15s ease-in-out .12s infinite;"></div>
+                    <div style="width:3px; height:100%; border-radius:3px; background:#3C4A66; animation:gxWave 1.15s ease-in-out .22s infinite;"></div>
+                  </div>
+                </div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:#928C81; margin-top:16px;">把想说的，慢慢说出来就好</div>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:center; gap:22px; margin-top:24px;">
+                <button onClick="{{ cancelRecording }}" style="width:52px; height:52px; border-radius:50%; border:1px solid rgba(43,42,40,0.14); background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:12.5px;">取消</button>
+                <button onClick="{{ finishRecording }}" style="width:72px; height:72px; border-radius:50%; border:none; background:{{ accent }}; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 12px 26px -10px rgba(43,53,74,0.55);">
+                  <svg width="26" height="26" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#F3EFE7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+              <div style="text-align:center; font-size:10.5px; color:#BBB4A8; margin-top:16px;">最长 90 秒　·　仅在录音时使用麦克风</div>
+              </sc-if>
+
+              <!-- 转写文字 -->
+              <sc-if value="{{ vTrans }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-family:'Noto Sans SC',sans-serif; font-size:10.5px; letter-spacing:3px; color:#A39C8F;">转 写 文 字</span>
+                <button onClick="{{ deleteVoiceText }}" style="display:flex; align-items:center; gap:5px; border:none; background:transparent; cursor:pointer; color:#A39C8F; font-size:12px; font-family:'Noto Sans SC',sans-serif;">
+                  <svg width="13" height="13" viewBox="0 0 14 14"><path d="M2.5 3.5h9M5.5 3.5V2.2h3v1.3M3.4 3.5l.5 8h6.2l.5-8" fill="none" stroke="#A39C8F" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg> 清空
+                </button>
+              </div>
+              <textarea value="{{ voiceText }}" onChange="{{ editVoiceText }}" style="width:100%; margin-top:12px; min-height:104px; border:1px solid rgba(43,42,40,0.1); background:rgba(255,255,255,0.6); border-radius:14px; padding:15px 16px; resize:none; outline:none; font-family:'Noto Serif SC',serif; font-size:16px; line-height:1.9; color:#2B2A28; caret-color:#3C4A66;"></textarea>
+              <div style="font-size:11.5px; color:#A39C8F; margin:12px 2px 0; line-height:1.7;">可以直接修改这段文字，删掉不想要的部分；也可以交给小易整理。</div>
+              <sc-if value="{{ vIsChat }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ sendVoiceChat }}" style="width:100%; margin-top:20px; padding:16px; border:none; border-radius:15px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:3px; cursor:pointer;">发 送 给 小 易</button>
+              <button onClick="{{ retryVoice }}" style="width:100%; margin-top:10px; padding:14px; border:none; background:transparent; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px; cursor:pointer;">重新说一次</button>
+              </sc-if>
+              <sc-if value="{{ vNotChat }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ organizeVoice }}" style="width:100%; margin-top:20px; padding:16px; border:none; border-radius:15px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:3px; cursor:pointer;">让 小 易 整 理</button>
+              <button onClick="{{ useDirect }}" style="width:100%; margin-top:10px; padding:14px; border:1px solid rgba(60,74,102,0.22); background:transparent; color:{{ accent }}; font-family:'Noto Sans SC',sans-serif; font-size:13.5px; border-radius:13px; cursor:pointer;">直接使用这段文字</button>
+              </sc-if>
+              </sc-if>
+
+              <!-- 小易整理中 -->
+              <sc-if value="{{ vOrg }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; align-items:center; padding:18px 0 10px;">
+                <div style="position:relative; width:48px; height:48px;">
+                  <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #C8CED7 44%, #3C4A66 100%); animation:gxBreathe 4s ease-in-out infinite;"></div>
+                  <div style="position:absolute; top:11px; right:10px; width:3px; height:3px; border-radius:50%; background:#D8BE86;"></div>
+                </div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:16px; color:#2B2A28; margin-top:18px;">小易正在帮你整理……</div>
+                <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:#928C81; margin-top:9px;">把刚才说的，慢慢理清楚</div>
+              </div>
+              </sc-if>
+
+              <!-- 小易整理完成 -->
+              <sc-if value="{{ vOrged }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div style="position:relative; width:32px; height:32px; flex-shrink:0;">
+                  <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 38% 32%, #F4F0E7 0%, #C8CED7 44%, #3C4A66 100%);"></div>
+                  <div style="position:absolute; top:7px; right:6px; width:2.6px; height:2.6px; border-radius:50%; background:#D8BE86;"></div>
+                </div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:16px; color:#2B2A28;">小易帮你理了理</div>
+              </div>
+
+              <sc-if value="{{ vKindQuestions }}" hint-placeholder-val="{{ true }}">
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:12.5px; color:#928C81; line-height:1.8; margin:13px 2px 4px;">这些更适合拿去问卦，挑一个最贴近你此刻的——</div>
+              <div style="display:flex; flex-direction:column; gap:11px; margin-top:12px;">
+                <sc-for list="{{ voiceQuestions }}" as="qq" hint-placeholder-count="3">
+                  <button onClick="{{ qq.pick }}" style="text-align:left; width:100%; padding:16px 18px; border:1px solid rgba(60,74,102,0.16); background:rgba(255,255,255,0.6); border-radius:15px; cursor:pointer; font-family:'Noto Serif SC',serif; font-size:15.5px; line-height:1.8; color:#2B2A28; display:flex; justify-content:space-between; align-items:center; gap:12px;">
+                    <span style="flex:1;">{{ qq.text }}</span>
+                    <span style="color:#B08E54; font-size:17px; flex-shrink:0;">›</span>
+                  </button>
+                </sc-for>
+              </div>
+              <div style="text-align:center; font-size:11px; color:#A39C8F; margin-top:14px;">选一个，进入静心摇签</div>
+              </sc-if>
+
+              <sc-if value="{{ vKindFields }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:14px; padding:18px 20px; background:rgba(255,255,255,0.6); border:1px solid rgba(43,42,40,0.08); border-radius:16px; display:flex; flex-direction:column; gap:14px;">
+                <sc-for list="{{ voiceFields }}" as="f" hint-placeholder-count="4">
+                  <div style="display:flex; gap:13px; align-items:flex-start;">
+                    <div style="width:72px; flex-shrink:0; font-family:'Noto Sans SC',sans-serif; font-size:11.5px; color:#8A93A2; padding-top:1px;">{{ f.k }}</div>
+                    <div style="flex:1; font-family:'Noto Sans SC',sans-serif; font-size:14px; line-height:1.7; color:#46433C;">{{ f.v }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <sc-if value="{{ vCtxJournal }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ saveJournalVoice }}" style="width:100%; margin-top:18px; padding:16px; border:none; border-radius:15px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:3px; cursor:pointer;">保 存 为 今 天 的 日 记</button>
+              </sc-if>
+              <sc-if value="{{ vCtxLove }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ useLoveVoice }}" style="width:100%; margin-top:18px; padding:16px; border:none; border-radius:15px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:3px; cursor:pointer;">用 这 些 补 充 背 景</button>
+              </sc-if>
+              <button onClick="{{ retryVoice }}" style="width:100%; margin-top:10px; padding:14px; border:none; background:transparent; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px; cursor:pointer;">重新说一次</button>
+              </sc-if>
+
+              <sc-if value="{{ vKindLine }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:14px; padding:18px 20px; background:rgba(255,255,255,0.6); border:1px solid rgba(43,42,40,0.08); border-radius:16px; font-family:'Noto Serif SC',serif; font-size:16px; line-height:1.9; color:#2B2A28;">{{ organizedLine }}</div>
+              <button onClick="{{ useLine }}" style="width:100%; margin-top:18px; padding:16px; border:none; border-radius:15px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:3px; cursor:pointer;">用 这 一 句</button>
+              <button onClick="{{ retryVoice }}" style="width:100%; margin-top:10px; padding:14px; border:none; background:transparent; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px; cursor:pointer;">重新说一次</button>
+              </sc-if>
+              </sc-if>
+
+              <!-- 错误状态 -->
+              <sc-if value="{{ vErr }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; justify-content:center; margin-top:4px;">
+                <div style="width:60px; height:60px; border-radius:50%; border:1px solid rgba(176,142,84,0.3); background:rgba(176,142,84,0.07); display:flex; align-items:center; justify-content:center;">
+                  <svg width="26" height="26" viewBox="0 0 24 24"><path d="M5 12h2M11 12h2M17 12h2" stroke="#B08E54" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </div>
+              </div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:18px; color:#2B2A28; text-align:center; margin-top:16px;">{{ verrT }}</div>
+              <div style="font-family:'Noto Sans SC',sans-serif; font-size:13.5px; line-height:1.9; color:#6B665D; text-align:center; margin-top:12px;">{{ verrB }}</div>
+              <button onClick="{{ verrPrimary }}" style="width:100%; margin-top:22px; padding:16px; border:none; border-radius:15px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:3px; cursor:pointer;">{{ verrA }}</button>
+              <button onClick="{{ verrGhost }}" style="width:100%; margin-top:10px; padding:14px; border:none; background:transparent; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px; cursor:pointer;">{{ verrG }}</button>
+              </sc-if>
+
+            </div>
+          </div>
+          </sc-if>
+
+        </div>
+        </sc-if>
+
+        <!-- ============ 动作权限 弹层 ============ -->
+        <sc-if value="{{ permOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute; inset:0; z-index:70; background:rgba(16,20,34,0.72); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:flex-end; animation:gxFade .3s ease;">
+          <div style="width:100%; background:linear-gradient(180deg, #F5F1E9, #EFEAE0); border-radius:26px 26px 0 0; padding:30px 26px; box-shadow:0 -20px 50px -20px rgba(0,0,0,0.5);">
+            <div style="width:38px; height:4px; border-radius:4px; background:rgba(43,42,40,0.16); margin:0 auto 22px;"></div>
+            <div style="display:flex; justify-content:center;">
+              <div style="position:relative; width:58px; height:58px; display:flex; align-items:center; justify-content:center;">
+                <div style="position:absolute; inset:0; border-radius:50%; border:1px solid rgba(60,74,102,0.2); animation:gxRing 3s ease-out infinite;"></div>
+                <svg width="30" height="30" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="#3C4A66" stroke-width="1.4"/><path d="M9.4 6.4C7.9 7.4 7.9 9 9.4 9.8M14.6 6.4C16.1 7.4 16.1 9 14.6 9.8" stroke="#B08E54" stroke-width="1.2" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div style="font-family:'Noto Serif SC',serif; font-size:19px; color:#2B2A28; text-align:center; margin-top:18px;">借用一下手机的动作感应</div>
+            <div style="font-family:'Noto Sans SC',sans-serif; font-size:13.5px; line-height:1.9; color:#6B665D; text-align:center; margin-top:14px;">摇签需要感知你轻轻晃动的动作。<br>只在这一刻读取，不记录，也不上传。</div>
+            <button onClick="{{ grantMotion }}" style="width:100%; margin-top:24px; padding:16px; border:none; border-radius:15px; background:{{ accent }}; color:#F3EFE7; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:3px; cursor:pointer;">允 许 动 作 感 应</button>
+            <button onClick="{{ denyMotion }}" style="width:100%; margin-top:10px; padding:14px; border:none; background:transparent; color:#928C81; font-family:'Noto Sans SC',sans-serif; font-size:13px; cursor:pointer;">这次先不用，改为长按出签</button>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- ============ CASTING OVERLAY ============ -->
+        <sc-if value="{{ casting }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute; inset:0; z-index:60; background:linear-gradient(162deg, #232D45, #161B29); display:flex; flex-direction:column; align-items:center; justify-content:center; animation:gxFade .4s ease;">
+          <div style="position:relative; width:160px; height:160px; display:flex; align-items:center; justify-content:center;">
+            <div style="position:absolute; inset:0; border-radius:50%; border:1px solid rgba(255,255,255,0.16); animation:gxRing 2.4s ease-out infinite;"></div>
+            <div style="position:absolute; inset:24px; border-radius:50%; border:1px solid rgba(255,255,255,0.12); animation:gxRing 2.4s ease-out .5s infinite;"></div>
+            <div style="width:66px; height:66px; border-radius:50%; background:radial-gradient(circle at 50% 40%, rgba(231,207,149,0.85), rgba(60,74,102,0.45)); animation:gxBreathe 2.6s ease-in-out infinite; box-shadow:0 0 34px rgba(231,207,149,0.3);"></div>
+          </div>
+          <div style="font-family:'Noto Serif SC',serif; color:#EFEBE2; font-size:17px; margin-top:34px; letter-spacing:6px;">静 心</div>
+          <div style="font-family:'Noto Sans SC',sans-serif; color:rgba(231,227,240,0.55); font-size:12.5px; margin-top:13px; letter-spacing:1px;">让卦象，慢慢浮现……</div>
+        </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 470, &quot;height&quot;: 924 },
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#3C4A66&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#3C4A66&quot;, &quot;#2A3346&quot;, &quot;#3D5A5E&quot;, &quot;#5A5142&quot;] },
+  &quot;paperGrain&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; },
+  &quot;starfield&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; }
+}">
+class Component extends DCLogic {
+  state = {
+    screen: 'today',
+    q: '这段关系，我该继续投入，还是先退一步？',
+    casting: false,
+    mood: '疲惫',
+    stress: 6,
+    intention: '好好把一件事做完，不被打扰。',
+    breaths: 0,
+    rewriteQ: '',
+    permOpen: false,
+    drawMode: 'press',
+    shaking: false,
+    forming: false,
+    shakeP: 0,
+    reduced: false,
+    chatInput: '',
+    chatMsgs: [
+      { who: 'xy', text: '晚上好。今天这一天，过得还好吗？' },
+      { who: 'me', text: '有点累，说不上来为什么。' },
+      { who: 'xy', text: '嗯，那种说不清的累，最磨人。我们先不急着找原因——是身体累，还是心里有点空？' },
+      { who: 'me', text: '可能是心里。' },
+      { who: 'xy', text: '谢谢你愿意说。心里的累，常常是因为撑了很久，却没被看见。你不用一次想清楚全部，我陪你，先把今天慢慢放下来。' },
+    ],
+    voicePerm: 'unknown',
+    voiceStage: '',
+    voiceCtx: 'ask',
+    voiceMode: 'tap',
+    voiceSeconds: 0,
+    voiceText: '',
+    voiceError: 'short',
+    journalText: '',
+    journalSaved: false,
+    loveFilled: false,
+  };
+
+  nav(s) {
+    if (this._t) { clearTimeout(this._t); this._t = null; }
+    this.cleanupMotion();
+    this.stopVoiceTimer();
+    this.setState({ screen: s, casting: false, permOpen: false, shaking: false, forming: false, shakeP: 0, voiceStage: '' });
+    if (this._scroll) this._scroll.scrollTop = 0;
+  }
+
+  cast() {
+    this.setState({ casting: true });
+    if (this._t) clearTimeout(this._t);
+    this._t = setTimeout(() => {
+      this.setState({ casting: false, screen: 'reading' });
+      if (this._scroll) this._scroll.scrollTop = 0;
+      this._t = null;
+    }, 2000);
+  }
+
+  fillQ(t) { this.setState({ q: t, screen: 'ask' }); }
+
+  componentDidMount() {
+    try {
+      this._reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      this._touch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+      const hasMotion = typeof window.DeviceMotionEvent !== 'undefined';
+      let mode = 'press';
+      if (this._touch && hasMotion) mode = 'motion';
+      else if (!this._touch) mode = 'drag';
+      let vp = 'unknown';
+      try { vp = localStorage.getItem('gx_voice_perm') || 'unknown'; } catch (e2) {}
+      this.setState({ reduced: this._reduced, drawMode: mode, voicePerm: vp });
+    } catch (e) {}
+  }
+
+  rewriteFor(q) {
+    const map = {
+      '这段关系，我该继续投入，还是先退一步？': '在这段关系里，此刻我最想照顾好的，是自己的哪一种感受？',
+      '最近工作让我很累，不知道还要不要继续撑下去。': '先不谈「撑或不撑」——我现在真正需要的，是一段怎样的喘息？',
+      '和家人的关系有点紧，我该怎么靠近他们。': '在靠近家人之前，我自己这一边，最想先被听见的是什么？',
+      '要不要换一个方向，我心里有点犹豫。': '先放下「换或不换」，我此刻最想靠近的，是一种什么样的状态？',
+    };
+    if (map[q]) return map[q];
+    const t = (q || '').trim();
+    if (!t) return '此刻，我最想为自己确认的，是什么？';
+    const short = t.length > 16 ? t.slice(0, 16) + '…' : t;
+    return '先不急着要答案——在「' + short + '」这件事里，我此刻最想看清的，是什么？';
+  }
+
+  askXiaoyi() {
+    this.setState({ screen: 'rewrite', rewriteQ: this.rewriteFor(this.state.q) });
+    if (this._scroll) this._scroll.scrollTop = 0;
+  }
+
+  confirmRewrite() {
+    this.cleanupMotion();
+    this.setState({ screen: 'shake', shakeP: 0, shaking: false, forming: false, permOpen: false });
+    if (this._scroll) this._scroll.scrollTop = 0;
+  }
+
+  startShake() {
+    if (this.state.reduced) { this.setState({ drawMode: 'press', shaking: true, shakeP: 0 }); return; }
+    if (this.state.drawMode === 'drag') { this.setState({ shaking: true, shakeP: 0 }); return; }
+    this.setState({ permOpen: true });
+  }
+
+  grantMotion() {
+    const DM = window.DeviceMotionEvent;
+    const begin = () => {
+      this._lastMag = null;
+      this._onMotion = (ev) => this.onMotion(ev);
+      window.addEventListener('devicemotion', this._onMotion);
+      this.setState({ permOpen: false, drawMode: 'motion', shaking: true, shakeP: 0 });
+    };
+    const fallback = () => this.setState({ permOpen: false, drawMode: 'press', shaking: true, shakeP: 0 });
+    try {
+      if (DM && typeof DM.requestPermission === 'function') {
+        DM.requestPermission().then((r) => { r === 'granted' ? begin() : fallback(); }).catch(fallback);
+      } else if (DM) { begin(); }
+      else { fallback(); }
+    } catch (e) { fallback(); }
+  }
+
+  denyMotion() { this.setState({ permOpen: false, drawMode: 'press', shaking: true, shakeP: 0 }); }
+
+  onMotion(e) {
+    const a = e.accelerationIncludingGravity || e.acceleration;
+    if (!a) return;
+    const mag = Math.abs(a.x || 0) + Math.abs(a.y || 0) + Math.abs(a.z || 0);
+    if (this._lastMag == null) { this._lastMag = mag; return; }
+    const d = Math.abs(mag - this._lastMag);
+    this._lastMag = mag;
+    if (d > 1.6) this.bumpShake(Math.min(14, d * 2.2));
+  }
+
+  onVesselDown(e) {
+    if (this.state.screen !== 'shake' || this._forming) return;
+    this._pressing = true;
+    this._lastX = (e && e.clientX != null) ? e.clientX : null;
+    if (!this.state.shaking && !this.state.forming) this.setState({ shaking: true });
+    if (this.state.drawMode !== 'drag') {
+      if (this._press) clearInterval(this._press);
+      this._press = setInterval(() => this.bumpShake(4.2), 95);
+    }
+  }
+  onVesselMove(e) {
+    if (!this._pressing || this.state.drawMode !== 'drag') return;
+    const x = (e && e.clientX != null) ? e.clientX : 0;
+    const dx = Math.abs(x - (this._lastX == null ? x : this._lastX));
+    this._lastX = x;
+    if (dx > 1) this.bumpShake(Math.min(11, dx * 0.55));
+  }
+  onVesselUp() {
+    this._pressing = false;
+    if (this._press) { clearInterval(this._press); this._press = null; }
+  }
+
+  bumpShake(amount) {
+    if (this._forming) return;
+    this.setState((st) => ({ shakeP: Math.min(100, (st.shakeP || 0) + amount) }),
+      () => { if (this.state.shakeP >= 100) this.triggerDraw(); });
+  }
+
+  triggerDraw() {
+    if (this._forming) return;
+    this._forming = true;
+    this.onVesselUp();
+    if (this._onMotion) { window.removeEventListener('devicemotion', this._onMotion); this._onMotion = null; }
+    this.setState({ forming: true, shaking: false });
+    if (this._t) clearTimeout(this._t);
+    this._t = setTimeout(() => {
+      this.setState({ screen: 'drawn', forming: false });
+      this._forming = false;
+      if (this._scroll) this._scroll.scrollTop = 0;
+    }, this.state.reduced ? 750 : 1750);
+  }
+
+  goInterpret() { this.setState({ screen: 'interpret' }); if (this._scroll) this._scroll.scrollTop = 0; }
+  goChat() { this.setState({ screen: 'chat' }); }
+  backFromChat() { this.setState({ screen: 'today' }); }
+
+  closeRitual() {
+    this.cleanupMotion();
+    this.setState({ screen: 'rewrite', permOpen: false, shaking: false, forming: false, shakeP: 0 });
+  }
+
+  cleanupMotion() {
+    if (this._press) { clearInterval(this._press); this._press = null; }
+    if (this._onMotion) { window.removeEventListener('devicemotion', this._onMotion); this._onMotion = null; }
+    this._pressing = false; this._forming = false; this._lastMag = null;
+  }
+
+  sendChat() {
+    const t = (this.state.chatInput || '').trim();
+    if (!t) return;
+    const replies = [
+      '谢谢你愿意说出来。我们先不急着想清楚全部，把它放在这里，慢慢看就好。',
+      '嗯，我听见了。此刻你不需要表现得很好，能照顾好自己，就已经很好。',
+      '这件事先不急着下结论。今天，能为自己做一件很小的事吗？哪怕只是喝口水、走两步。',
+    ];
+    const reply = replies[this.state.chatMsgs.filter((m) => m.who === 'me').length % replies.length];
+    this.setState((st) => ({ chatMsgs: st.chatMsgs.concat([{ who: 'me', text: t }, { who: 'xy', text: reply }]), chatInput: '' }));
+    setTimeout(() => { if (this._chatScroll) this._chatScroll.scrollTop = this._chatScroll.scrollHeight; }, 40);
+  }
+
+  // ---------- 语音输入 ----------
+  voiceSeed(ctx) {
+    const D = {
+      ask: {
+        transcript: '最近这段关系让我有点累，我一直在想要不要继续，又怕自己只是在逃避，心里挺乱的。',
+        questions: [
+          '在这段关系里，我此刻最需要被照顾的感受是什么？',
+          '如果先不谈去或留，我现在真正想要的是怎样的状态？',
+          '让我一直犹豫的，是在担心失去什么？',
+        ],
+      },
+      chat: { transcript: '今天有点提不起劲，也说不清为什么，就是觉得闷闷的。' },
+      journal: {
+        transcript: '今天开了一整天会，脑子很胀，肩膀特别紧，中午也没顾上好好吃饭。晚上回家路上看到天边有点粉，心里忽然松了一下。',
+        fields: [
+          { k: '当前情绪', v: '疲惫，但夜里有一丝松动' },
+          { k: '压力来源', v: '一整天的会议，以及没顾上照顾自己' },
+          { k: '身体感受', v: '头有点胀，肩膀紧绷' },
+          { k: '今日一件小事', v: '回家路上，看见了天边的一点粉色' },
+        ],
+      },
+      love: {
+        transcript: '我们在一起两年了，最近总为小事吵。他比较慢热，我又比较急，我不太确定我们是不是还合适。',
+        fields: [
+          { k: '关系状态', v: '相处两年，近期因小事摩擦变多' },
+          { k: '主要困扰', v: '节奏不同——你偏急，TA 偏慢热' },
+          { k: '想确认的问题', v: '我们是否还合适，分歧能不能慢慢调和' },
+          { k: '当前情绪', v: '有些不确定，也有点着急' },
+        ],
+      },
+      intention: { transcript: '今天我想把那个拖了很久的方案，至少写出一个开头。', organizedLine: '今天，先把那个拖了很久的方案，写出一个开头就好。' },
+      reflect: { transcript: '今天有个瞬间是松的，午后的光照在桌上，我停下来看了一会儿。', organizedLine: '今天松下来的那一刻：午后的光落在桌上，我停下，看了一会儿。' },
+    };
+    return D[ctx] || D.ask;
+  }
+
+  saveVoicePerm(v) { try { localStorage.setItem('gx_voice_perm', v); } catch (e) {} }
+  stopVoiceTimer() { if (this._recTimer) { clearInterval(this._recTimer); this._recTimer = null; } }
+
+  openVoice(ctx, mode) {
+    mode = mode || 'tap';
+    const perm = this.state.voicePerm;
+    if (perm === 'denied') { this.setState({ voiceStage: 'denied', voiceCtx: ctx, voiceMode: mode }); return; }
+    if (perm !== 'granted') { this.setState({ voiceStage: 'permission', voiceCtx: ctx, voiceMode: mode }); return; }
+    if (mode === 'press') this.startPress(ctx); else this.startRecording(ctx);
+  }
+  grantVoice() {
+    this.saveVoicePerm('granted');
+    const mode = this.state.voiceMode, ctx = this.state.voiceCtx;
+    this.setState({ voicePerm: 'granted' });
+    if (mode === 'press') this.setState({ voiceStage: '' });
+    else this.startRecording(ctx);
+  }
+  refuseVoice() { this.saveVoicePerm('denied'); this.setState({ voicePerm: 'denied', voiceStage: 'denied' }); }
+  reopenVoice() { this.saveVoicePerm('unknown'); this.setState({ voicePerm: 'unknown', voiceStage: 'permission' }); }
+  closeVoice() { this.stopVoiceTimer(); this._cancelArmed = false; this._pressY = null; this.setState({ voiceStage: '' }); }
+
+  startRecording(ctx) {
+    this.stopVoiceTimer();
+    this._recStart = Date.now();
+    this.setState({ voiceStage: 'recording', voiceCtx: ctx, voiceSeconds: 0, voiceText: '' });
+    this._recTimer = setInterval(() => {
+      const sec = Math.floor((Date.now() - this._recStart) / 1000);
+      if (sec >= 90) { this.overtime(); return; }
+      this.setState({ voiceSeconds: sec });
+    }, 250);
+  }
+  finishRecording() {
+    const dur = (Date.now() - (this._recStart || Date.now())) / 1000;
+    this.stopVoiceTimer();
+    if (dur < 1.6) { this.setState({ voiceStage: 'error', voiceError: 'short' }); return; }
+    this.setState({ voiceStage: 'transcribed', voiceText: this.voiceSeed(this.state.voiceCtx).transcript });
+  }
+  cancelRecording() { this.closeVoice(); }
+  overtime() { this.stopVoiceTimer(); this.setState({ voiceStage: 'error', voiceError: 'over' }); }
+  retryVoice() { this.startRecording(this.state.voiceCtx); }
+
+  editVoiceText(e) { this.setState({ voiceText: e.target.value }); }
+  deleteVoiceText() { this.setState({ voiceText: '' }); }
+  applyVoiceText(ctx, t) {
+    if (ctx === 'ask') this.setState({ q: t });
+    else if (ctx === 'intention') this.setState({ intention: t });
+    else if (ctx === 'journal' || ctx === 'reflect') this.setState({ journalText: t });
+  }
+  useDirect() { this.applyVoiceText(this.state.voiceCtx, this.state.voiceText); this.closeVoice(); }
+  useLine() { this.applyVoiceText(this.state.voiceCtx, this.voiceSeed(this.state.voiceCtx).organizedLine); this.closeVoice(); }
+
+  organizeVoice() {
+    this.setState({ voiceStage: 'organizing' });
+    if (this._t2) clearTimeout(this._t2);
+    this._t2 = setTimeout(() => this.setState({ voiceStage: 'organized' }), 1300);
+  }
+  pickQuestion(q) {
+    this.cleanupMotion();
+    this.setState({ q: q, rewriteQ: q, voiceStage: '', screen: 'shake', shakeP: 0, shaking: false, forming: false, permOpen: false });
+    if (this._scroll) this._scroll.scrollTop = 0;
+  }
+  saveJournalVoice() { this.setState({ voiceStage: '', screen: 'journal', mood: '疲惫', journalSaved: true }); if (this._scroll) this._scroll.scrollTop = 0; }
+  useLoveVoice() { this.setState({ voiceStage: '', screen: 'love', loveFilled: true }); if (this._scroll) this._scroll.scrollTop = 0; }
+
+  startPress(ctx) {
+    this.stopVoiceTimer(); this._recStart = Date.now(); this._cancelArmed = false;
+    this.setState({ voiceStage: 'pressing', voiceCtx: ctx || 'chat', voiceSeconds: 0 });
+    this._recTimer = setInterval(() => {
+      const sec = Math.floor((Date.now() - this._recStart) / 1000);
+      if (sec >= 90) { this.overtime(); return; }
+      this.setState({ voiceSeconds: sec });
+    }, 250);
+  }
+  onChatMicDown(e) { this._pressY = (e && e.clientY != null) ? e.clientY : null; this.openVoice('chat', 'press'); }
+  onChatMicMove(e) {
+    if (this.state.voiceStage !== 'pressing') return;
+    const y = (e && e.clientY != null) ? e.clientY : 0;
+    if (this._pressY == null) this._pressY = y;
+    const armed = (this._pressY - y) > 64;
+    if (armed !== this._cancelArmed) { this._cancelArmed = armed; this.forceUpdate(); }
+  }
+  onChatMicUp() {
+    if (this.state.voiceStage !== 'pressing') return;
+    const dur = (Date.now() - (this._recStart || Date.now())) / 1000;
+    this.stopVoiceTimer(); this._pressY = null;
+    if (this._cancelArmed) { this._cancelArmed = false; this.setState({ voiceStage: '' }); return; }
+    if (dur < 0.8) { this.setState({ voiceStage: '' }); return; }
+    this.setState({ voiceStage: 'transcribed', voiceCtx: 'chat', voiceText: this.voiceSeed('chat').transcript });
+  }
+  sendVoiceChat() {
+    const t = (this.state.voiceText || '').trim();
+    if (!t) { this.closeVoice(); return; }
+    const replies = [
+      '谢谢你愿意说出来。我们先不急着想清楚全部，把它放在这里，慢慢看就好。',
+      '嗯，我听见了。此刻你不需要表现得很好，能照顾好自己，就已经很好。',
+      '这件事先不急着下结论。今天，能为自己做一件很小的事吗？哪怕只是喝口水、走两步。',
+    ];
+    const reply = replies[this.state.chatMsgs.filter((m) => m.who === 'me').length % replies.length];
+    this.setState((st) => ({ chatMsgs: st.chatMsgs.concat([{ who: 'me', text: t }, { who: 'xy', text: reply }]), voiceStage: '', screen: 'chat' }));
+    setTimeout(() => { if (this._chatScroll) this._chatScroll.scrollTop = this._chatScroll.scrollHeight; }, 40);
+  }
+
+  componentWillUnmount() { if (this._t) clearTimeout(this._t); if (this._t2) clearTimeout(this._t2); this.stopVoiceTimer(); this.cleanupMotion(); }
+
+  renderVals() {
+    const s = this.state;
+    const accent = this.props.accent || '#3C4A66';
+    const grain = this.props.paperGrain !== false;
+    const starfield = this.props.starfield !== false;
+    const is = (x) => s.screen === x;
+    const G = '#ABA59C';
+
+    const stressLabel = s.stress <= 3 ? '松弛' : (s.stress <= 6 ? '一般' : '偏紧绷');
+    const breathLabel = s.breaths === 0
+      ? '轻触圆点，跟着一起呼吸'
+      : (s.breaths < 3 ? ('吸气…… 呼气…… 第 ' + s.breaths + ' 次') : '很好，你已经慢下来了');
+
+    const dm = s.drawMode;
+    let shakeHint = s.reduced
+      ? '轻轻一触，静态起卦'
+      : (dm === 'drag' ? '按住签桶，缓缓左右拖动'
+      : (dm === 'press' ? '轻轻长按签桶，静静等它' : '把手机稳稳握住，缓缓晃动'));
+    let shakeSub = s.reduced ? '已为你开启静态起卦，无需晃动手机'
+      : (dm === 'press' ? '动作权限未开启，长按也可以起卦' : '不急，让它自己慢慢来');
+    if (s.forming) { shakeHint = '卦象，正在浮现'; shakeSub = '别动，让它慢慢落下来'; }
+    const shakeP = Math.round(s.shakeP || 0);
+    const vesselAnimCss = s.shaking
+      ? 'gxShakeSoft .85s ease-in-out infinite'
+      : (s.forming ? 'none' : 'gxDrift 7s ease-in-out infinite');
+
+    const vstg = s.voiceStage;
+    const voiceOpen = vstg !== '';
+    const vMM = String(Math.floor(s.voiceSeconds / 60)).padStart(2, '0');
+    const vSS = String(s.voiceSeconds % 60).padStart(2, '0');
+    const voiceTime = vMM + ':' + vSS;
+    const vctx = s.voiceCtx;
+    const vSeed = this.voiceSeed(vctx);
+    const vKind = vctx === 'ask' ? 'questions' : ((vctx === 'journal' || vctx === 'love') ? 'fields' : 'line');
+    const ctxLabelMap = { ask: '说说困扰你的事', chat: '说给小易听', journal: '用一段话，说说今天', love: '说说你们的关系', intention: '说说今天想做的', reflect: '说说那个瞬间' };
+    const errMap = {
+      short: { t: '好像还没说完', b: '这段有点短，我没接住。再多说一点点就好。', a: '重新说', g: '改用文字' },
+      cant: { t: '好像没太听清', b: '可能声音轻了些，或周围有点吵。要不要再说一次？', a: '重新说', g: '改用文字' },
+      net: { t: '网络好像在打盹', b: '连接有点不稳，文字暂时没传回来。稍等一下，或先用文字也好。', a: '重新连', g: '改用文字' },
+      over: { t: '先到这里，好吗', b: '说了挺多的——我先把前面这段接住，剩下的可以慢慢再补。', a: '用这一段', g: '重新说' },
+    };
+    const verr = errMap[s.voiceError] || errMap.short;
+    const pressArmed = !!this._cancelArmed;
+
+    const moodBase = {
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: '11px 0', borderRadius: '13px', border: '1px solid',
+      fontFamily: "'Noto Sans SC',sans-serif", fontSize: '14px',
+      cursor: 'pointer', transition: 'all .25s ease', userSelect: 'none',
+    };
+    const moodChip = (on) => Object.assign({}, moodBase, {
+      borderColor: on ? accent : 'rgba(43,42,40,0.13)',
+      color: on ? '#2B2A28' : '#857F74',
+      background: on ? 'rgba(60,74,102,0.06)' : 'rgba(255,255,255,0.4)',
+      fontWeight: on ? 500 : 400,
+    });
+
+    return {
+      accent, grain, starfield,
+      isToday: is('today'), isAsk: is('ask'), isReading: is('reading'),
+      isLove: is('love'), isJournal: is('journal'), isMe: is('me'), isDesign: is('design'),
+      casting: s.casting,
+
+      q: s.q, onQ: (e) => this.setState({ q: e.target.value }),
+      intention: s.intention, onIntention: (e) => this.setState({ intention: e.target.value }),
+      stress: s.stress, onStress: (e) => this.setState({ stress: Number(e.target.value) }), stressLabel,
+      breathLabel, breathe: () => this.setState((st) => ({ breaths: (st.breaths + 1) % 4 })),
+
+      cast: () => this.cast(),
+      goToday: () => this.nav('today'), goAsk: () => this.nav('ask'),
+      goLove: () => this.nav('love'), goJournal: () => this.nav('journal'),
+      goMe: () => this.nav('me'), goDesign: () => this.nav('design'),
+      backToAsk: () => this.nav('ask'), backToMe: () => this.nav('me'),
+
+      fillWork: () => this.fillQ('最近工作让我很累，不知道还要不要继续撑下去。'),
+      fillFamily: () => this.fillQ('和家人的关系有点紧，我该怎么靠近他们。'),
+      fillChange: () => this.fillQ('要不要换一个方向，我心里有点犹豫。'),
+
+      mood: s.mood,
+      setPing: () => this.setState({ mood: '平静' }), setPi: () => this.setState({ mood: '疲惫' }),
+      setFan: () => this.setState({ mood: '烦躁' }), setDi: () => this.setState({ mood: '低落' }),
+      setQi: () => this.setState({ mood: '期待' }), setJin: () => this.setState({ mood: '紧绷' }),
+      chipPing: moodChip(s.mood === '平静'), chipPi: moodChip(s.mood === '疲惫'),
+      chipFan: moodChip(s.mood === '烦躁'), chipDi: moodChip(s.mood === '低落'),
+      chipQi: moodChip(s.mood === '期待'), chipJin: moodChip(s.mood === '紧绷'),
+
+      isRewrite: is('rewrite'), isShake: is('shake'), isDrawn: is('drawn'),
+      isInterpret: is('interpret'), isChat: is('chat'),
+      permOpen: s.permOpen, shaking: s.shaking, forming: s.forming,
+      reduced: s.reduced, drawMode: dm, shakeP, shakeHint, shakeSub,
+      shakeActive: s.shaking || s.forming, shakeIdle: !s.shaking && !s.forming,
+      vesselAnimCss,
+
+      askXiaoyi: () => this.askXiaoyi(),
+      rewriteQ: s.rewriteQ, onRewrite: (e) => this.setState({ rewriteQ: e.target.value }),
+      reRewrite: () => this.setState({ rewriteQ: this.rewriteFor(s.q) }),
+      confirmRewrite: () => this.confirmRewrite(),
+      startShake: () => this.startShake(),
+      grantMotion: () => this.grantMotion(), denyMotion: () => this.denyMotion(),
+      onVesselDown: (e) => this.onVesselDown(e), onVesselMove: (e) => this.onVesselMove(e),
+      onVesselUp: () => this.onVesselUp(),
+      goInterpret: () => this.goInterpret(), closeRitual: () => this.closeRitual(),
+      goChat: () => this.goChat(), backFromChat: () => this.backFromChat(),
+      chatRows: s.chatMsgs.map((m) => ({ text: m.text, isXy: m.who === 'xy', isMe: m.who === 'me' })),
+      chatInput: s.chatInput,
+      onChatInput: (e) => this.setState({ chatInput: e.target.value }),
+      onChatKey: (e) => { if (e.key === 'Enter') { e.preventDefault(); this.sendChat(); } },
+      sendChat: () => this.sendChat(),
+      chatScrollRef: (el) => { this._chatScroll = el; },
+
+      voiceOpen, voiceTime, voiceText: s.voiceText,
+      voiceCtxLabel: ctxLabelMap[vctx] || '说给小易听',
+      vPress: vstg === 'pressing', vSheet: voiceOpen && vstg !== 'pressing',
+      vPerm: vstg === 'permission', vDenied: vstg === 'denied', vRec: vstg === 'recording',
+      vTrans: vstg === 'transcribed', vOrg: vstg === 'organizing', vOrged: vstg === 'organized', vErr: vstg === 'error',
+      vIsChat: vctx === 'chat', vNotChat: vctx !== 'chat',
+      vKindQuestions: vKind === 'questions', vKindFields: vKind === 'fields', vKindLine: vKind === 'line',
+      vCtxJournal: vctx === 'journal', vCtxLove: vctx === 'love',
+      voiceSeedText: vSeed.transcript, organizedLine: vSeed.organizedLine || vSeed.transcript,
+      voiceQuestions: (vSeed.questions || []).map((q) => ({ text: q, pick: () => this.pickQuestion(q) })),
+      voiceFields: (vSeed.fields || []),
+      verrT: verr.t, verrB: verr.b, verrA: verr.a, verrG: verr.g,
+      verrPrimary: s.voiceError === 'over'
+        ? (() => this.setState({ voiceStage: 'transcribed', voiceText: this.voiceSeed(vctx).transcript }))
+        : (() => this.retryVoice()),
+      verrGhost: s.voiceError === 'over' ? (() => this.retryVoice()) : (() => this.closeVoice()),
+      pressArmed, pressNotArmed: !pressArmed,
+      pressCancelLabel: pressArmed ? '松开手指，取消发送' : '上滑，可取消',
+      pressHint: pressArmed ? '松开取消' : '松开发送　·　上滑取消',
+
+      openVoiceAsk: () => this.openVoice('ask', 'tap'),
+      openVoiceIntention: () => this.openVoice('intention', 'tap'),
+      openVoiceReflect: () => this.openVoice('reflect', 'tap'),
+      openVoiceJournal: () => this.openVoice('journal', 'tap'),
+      openVoiceLove: () => this.openVoice('love', 'tap'),
+      grantVoice: () => this.grantVoice(), refuseVoice: () => this.refuseVoice(),
+      reopenVoice: () => this.reopenVoice(), closeVoice: () => this.closeVoice(),
+      finishRecording: () => this.finishRecording(), cancelRecording: () => this.cancelRecording(),
+      editVoiceText: (e) => this.editVoiceText(e), deleteVoiceText: () => this.deleteVoiceText(),
+      useDirect: () => this.useDirect(), useLine: () => this.useLine(),
+      organizeVoice: () => this.organizeVoice(), retryVoice: () => this.retryVoice(),
+      saveJournalVoice: () => this.saveJournalVoice(), useLoveVoice: () => this.useLoveVoice(),
+      sendVoiceChat: () => this.sendVoiceChat(),
+      onChatMicDown: (e) => this.onChatMicDown(e), onChatMicMove: (e) => this.onChatMicMove(e), onChatMicUp: () => this.onChatMicUp(),
+
+      journalText: s.journalText, onJournalText: (e) => this.setState({ journalText: e.target.value }),
+      journalSaved: s.journalSaved, loveFilled: s.loveFilled,
+      journalFields: this.voiceSeed('journal').fields, loveFields: this.voiceSeed('love').fields,
+
+      tabTodayColor: (is('today') || is('chat')) ? accent : G,
+      tabAskColor: (is('ask') || is('rewrite') || is('shake') || is('drawn') || is('interpret') || is('reading')) ? accent : G,
+      tabLoveColor: is('love') ? accent : G,
+      tabJournalColor: is('journal') ? accent : G,
+      tabMeColor: (is('me') || is('design')) ? accent : G,
+
+      scrollRef: (el) => { this._scroll = el; },
+    };
+  }
+}
+</script>
+</body>
+</html>
