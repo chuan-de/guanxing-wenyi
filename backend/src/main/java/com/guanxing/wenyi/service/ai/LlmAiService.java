@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 真实大模型实现（gxwy.ai.provider=llm 时生效）。
  * 只依赖 {@link AiClient} 抽象，不感知具体厂商；厂商由 gxwy.ai.client 选择。
- * 第一批只有 refineQuestion 走真实模型，其余能力仍委托 mock，逐个迁移。
+ * 已接真实模型：refineQuestion、chatReply；其余能力仍委托 mock，逐个迁移。
  * 任何真实调用失败都回退到 {@link MockAiService} 的结果，接口对外永不报错。
  */
 @Service
@@ -23,6 +23,17 @@ import java.util.List;
 public class LlmAiService implements AiService {
 
     private static final Logger log = LoggerFactory.getLogger(LlmAiService.class);
+
+    private static final String CHAT_SYSTEM_PROMPT = """
+            你是「小易」，观星问易 App 里温和克制的情绪陪伴者。用户带着情绪来说话，你的回应要：
+            - 先接住情绪，再轻轻引导；像可靠的朋友，不是客服，也不是心理医生；
+            - 语气温和留白，可以用「先……就好」「不必急着……」这类句式，但别每句都用；
+            - 每次回复 1-3 句、不超过 80 字；不用列表、不用表情符号、不说教；
+            - 不下判断、不预测命运、不制造恐惧、不诱导依赖、不做医疗诊断；
+            - 若用户流露自伤等危机信号，温和地建议 TA 联系身边可信的人或专业帮助。""";
+
+    /** 聊天最多携带的历史条数（含 user/assistant），控 token 与延迟。 */
+    private static final int CHAT_HISTORY_LIMIT = 12;
 
     private static final String REFINE_SYSTEM_PROMPT = """
             你是「小易」，一个温和克制的情绪陪伴者。用户会说出一个困扰，\
@@ -95,6 +106,34 @@ public class LlmAiService implements AiService {
         return questions;
     }
 
+    @Override
+    public String chatReply(List<ChatTurn> history, String userMessage) {
+        long t0 = System.currentTimeMillis();
+        try {
+            List<AiClient.ChatMessage> messages = new ArrayList<>();
+            messages.add(AiClient.ChatMessage.system(CHAT_SYSTEM_PROMPT));
+            List<ChatTurn> h = history == null ? List.of() : history;
+            for (ChatTurn turn : h.subList(Math.max(0, h.size() - CHAT_HISTORY_LIMIT), h.size())) {
+                messages.add(new AiClient.ChatMessage(
+                        "assistant".equals(turn.role()) ? "assistant" : "user", turn.content()));
+            }
+            messages.add(AiClient.ChatMessage.user(userMessage));
+
+            String reply = client.chat(messages).trim();
+            if (reply.isEmpty()) {
+                throw new IllegalStateException("模型回复为空");
+            }
+            aiRequestLogService.record("llm_chat", client.vendor(), client.model(),
+                    userMessage, reply, System.currentTimeMillis() - t0);
+            return reply;
+        } catch (Exception e) {
+            log.warn("chatReply 真实模型调用失败，回退 mock: {}", e.getMessage());
+            aiRequestLogService.recordFailure("llm_chat", client.vendor(), client.model(),
+                    userMessage, e.getMessage(), System.currentTimeMillis() - t0);
+            return fallback.chatReply(history, userMessage);
+        }
+    }
+
     /* ===== 以下能力尚未接真实模型，暂委托 mock，逐个迁移 ===== */
 
     @Override
@@ -105,11 +144,6 @@ public class LlmAiService implements AiService {
     @Override
     public ReadingResult interpret(String hexName, String changingToName) {
         return fallback.interpret(hexName, changingToName);
-    }
-
-    @Override
-    public String chatReply(int priorUserMessages) {
-        return fallback.chatReply(priorUserMessages);
     }
 
     @Override

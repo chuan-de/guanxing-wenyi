@@ -73,7 +73,10 @@ public class MockAiService implements AiService {
     }
 
     @Override
-    public String chatReply(int priorUserMessages) {
+    public String chatReply(List<ChatTurn> history, String userMessage) {
+        // 按此前用户消息条数轮询固定回复（与旧行为一致）
+        int priorUserMessages = history == null ? 0
+                : (int) history.stream().filter(t -> "user".equals(t.role())).count();
         int idx = Math.floorMod(priorUserMessages, CHAT_REPLIES.size());
         return CHAT_REPLIES.get(idx);
     }

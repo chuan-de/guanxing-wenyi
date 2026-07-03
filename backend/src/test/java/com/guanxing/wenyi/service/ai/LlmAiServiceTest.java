@@ -39,21 +39,41 @@ class LlmAiServiceTest {
         }
     }
 
-    /** 手写桩客户端：按需返回固定 JSON 或抛异常。 */
-    private static AiClient stubClient(String json, RuntimeException error) {
-        return new AiClient() {
-            @Override public String vendor() { return "doubao"; }
-            @Override public String model() { return "test-model"; }
-            @Override public String chat(List<ChatMessage> messages) { throw new UnsupportedOperationException(); }
-            @Override public JsonNode structuredJson(List<ChatMessage> messages) {
-                if (error != null) throw error;
-                try {
-                    return MAPPER.readTree(json);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+    /** 手写桩客户端：按需返回固定 JSON/聊天文本或抛异常，并记录最后一次收到的消息。 */
+    static class StubClient implements AiClient {
+        private final String json;
+        private final String chatText;
+        private final RuntimeException error;
+        List<ChatMessage> lastMessages;
+
+        StubClient(String json, String chatText, RuntimeException error) {
+            this.json = json;
+            this.chatText = chatText;
+            this.error = error;
+        }
+
+        @Override public String vendor() { return "doubao"; }
+        @Override public String model() { return "test-model"; }
+
+        @Override public String chat(List<ChatMessage> messages) {
+            lastMessages = messages;
+            if (error != null) throw error;
+            return chatText;
+        }
+
+        @Override public JsonNode structuredJson(List<ChatMessage> messages) {
+            lastMessages = messages;
+            if (error != null) throw error;
+            try {
+                return MAPPER.readTree(json);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-        };
+        }
+    }
+
+    private static AiClient stubClient(String json, RuntimeException error) {
+        return new StubClient(json, null, error);
     }
 
     @Test
@@ -104,6 +124,43 @@ class LlmAiServiceTest {
                 stubClient("{\"questions\":[\"一？\",\"  \",\"二？\",\"三？\",\"四？\"]}", null), logService);
 
         assertEquals(List.of("一？", "二？", "三？"), service.refineQuestion("怎么办"));
+    }
+
+    @Test
+    void chatReplyUsesModelOutputAndTrimsHistory() {
+        RecordingLogService logService = new RecordingLogService();
+        StubClient client = new StubClient(null, "我在的。先坐一会儿，喝口水，就好。", null);
+        LlmAiService service = new LlmAiService(client, logService);
+
+        // 构造 20 条历史，应只带最近 12 条 + system + 本轮 user = 14 条
+        List<AiService.ChatTurn> history = new java.util.ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            history.add(new AiService.ChatTurn("user", "消息" + i));
+            history.add(new AiService.ChatTurn("assistant", "回复" + i));
+        }
+
+        String reply = service.chatReply(history, "今天有点提不起劲");
+
+        assertEquals("我在的。先坐一会儿，喝口水，就好。", reply);
+        assertEquals(14, client.lastMessages.size());
+        assertEquals("system", client.lastMessages.get(0).role());
+        assertEquals("今天有点提不起劲", client.lastMessages.get(13).content());
+        assertEquals(1, logService.succeeded);
+    }
+
+    @Test
+    void chatReplyFallsBackWhenClientFails() {
+        RecordingLogService logService = new RecordingLogService();
+        LlmAiService service = new LlmAiService(
+                new StubClient(null, null, new AiClientException("超时")), logService);
+
+        List<AiService.ChatTurn> history = List.of(
+                new AiService.ChatTurn("user", "你好"),
+                new AiService.ChatTurn("assistant", "我在的"));
+        String reply = service.chatReply(history, "今天有点累");
+
+        assertEquals(new MockAiService().chatReply(history, "今天有点累"), reply);
+        assertEquals(1, logService.failed);
     }
 
     @Test

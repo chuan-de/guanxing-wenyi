@@ -23,8 +23,12 @@ public interface AiService {
     /** 卦象解读：象 / 译 / 行 + 留给你的问题 + 摘要。 */
     ReadingResult interpret(String hexName, String changingToName);
 
-    /** 小易聊天回复（priorUserMessages：本轮之前用户消息条数，用于轮询 mock）。 */
-    String chatReply(int priorUserMessages);
+    /**
+     * 小易聊天回复。
+     * @param history     本轮之前的完整对话（user/assistant，按时间正序）
+     * @param userMessage 本轮用户输入
+     */
+    String chatReply(List<ChatTurn> history, String userMessage);
 
     /** 姻缘分析。 */
     RelationshipResult analyzeRelationship(String selfSign, String partnerSign);
@@ -34,6 +38,9 @@ public interface AiService {
 
     /** 深度报告正文（6 段，key 与前端目录一致：astro/gua/mood/relation/action/reflect）。 */
     ReportContent buildReport(String periodId);
+
+    record ChatTurn(String role, String content) {
+    }
 
     record HexagramData(String name, String pinyin, String meaning, List<Boolean> lines) {
     }

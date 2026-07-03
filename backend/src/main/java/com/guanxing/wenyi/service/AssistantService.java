@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -42,17 +43,19 @@ public class AssistantService {
 
         AssistantConversation conversation = resolveConversation(conversationId, userId, message, now);
 
-        long priorUserMessages = messageMapper.selectCount(new QueryWrapper<AssistantMessage>()
+        List<AssistantMessage> prior = messageMapper.selectList(new QueryWrapper<AssistantMessage>()
                 .eq("conversation_id", conversation.getId())
-                .eq("role", "user"));
-        long base = messageMapper.selectCount(new QueryWrapper<AssistantMessage>()
-                .eq("conversation_id", conversation.getId()));
+                .orderByAsc("seq"));
+        int base = prior.size();
 
-        AssistantMessage userMsg = newMessage(conversation.getId(), userId, "user", message, (int) base + 1, now);
+        AssistantMessage userMsg = newMessage(conversation.getId(), userId, "user", message, base + 1, now);
         messageMapper.insert(userMsg);
 
-        String replyText = aiService.chatReply((int) priorUserMessages);
-        AssistantMessage replyMsg = newMessage(conversation.getId(), userId, "assistant", replyText, (int) base + 2, now);
+        List<AiService.ChatTurn> history = prior.stream()
+                .map(m -> new AiService.ChatTurn(m.getRole(), m.getContent()))
+                .toList();
+        String replyText = aiService.chatReply(history, message);
+        AssistantMessage replyMsg = newMessage(conversation.getId(), userId, "assistant", replyText, base + 2, now);
         messageMapper.insert(replyMsg);
 
         conversation.setLastMessageAt(now);

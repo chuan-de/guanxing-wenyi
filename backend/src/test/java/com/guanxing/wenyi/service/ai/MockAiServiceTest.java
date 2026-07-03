@@ -50,8 +50,12 @@ class MockAiServiceTest {
 
     @Test
     void chatReply_cyclesStably() {
-        assertEquals(ai.chatReply(0), ai.chatReply(4));
-        assertNotNull(ai.chatReply(1));
+        AiService.ChatTurn u = new AiService.ChatTurn("user", "你好");
+        AiService.ChatTurn a = new AiService.ChatTurn("assistant", "我在的");
+        // 0 条与 4 条 user 历史应轮回到同一条固定回复
+        assertEquals(ai.chatReply(List.of(), "今天有点累"),
+                ai.chatReply(List.of(u, a, u, a, u, a, u, a), "今天有点累"));
+        assertNotNull(ai.chatReply(List.of(u, a), "嗯"));
     }
 
     @Test
