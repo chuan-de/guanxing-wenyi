@@ -4,10 +4,21 @@ import { useEffect, useState } from "react";
 import { Card, Label } from "@/components/ui";
 import { HexLines } from "@/components/primitives";
 import { HEXAGRAMS } from "@/lib/hexagrams";
-import { api, type RelationshipAnalyzeResp } from "@/lib/api";
+import { api, type RelationshipAnalyzeResp, type RelationshipPerson } from "@/lib/api";
 
-const SELF = { name: "你", sign: "双鱼", birth: "1992 · 春分 · 月在巨蟹" };
-const PARTNER = { name: "之珩", sign: "天蝎", birth: "1990 · 立冬 · 月在白羊" };
+const SIGNS = ["白羊", "金牛", "双子", "巨蟹", "狮子", "处女", "天秤", "天蝎", "射手", "摩羯", "水瓶", "双鱼"];
+
+interface Pair {
+  self: RelationshipPerson;
+  partner: RelationshipPerson;
+}
+
+const DEFAULT_PAIR: Pair = {
+  self: { name: "你", sign: "双鱼", birth: "1992 · 春分 · 月在巨蟹" },
+  partner: { name: "之珩", sign: "天蝎", birth: "1990 · 立冬 · 月在白羊" },
+};
+
+const PAIR_KEY = "gxwy.lovePair";
 
 const FALLBACK_ANALYSIS = [
   { dot: "#3C4A66", t: "吸引点", d: "你的金星，与 TA 的火星轻轻相触——你们之间有一种不必刻意的吸引。在一起时，时间总是过得很快。" },
@@ -16,16 +27,68 @@ const FALLBACK_ANALYSIS = [
 ];
 const FALLBACK_CLOSING = "你们这段关系的功课：在亲密与独立之间，各自找到呼吸的位置。";
 
+const INPUT_STYLE: React.CSSProperties = {
+  width: "100%", padding: "9px 12px", border: "1px solid rgba(43,42,40,0.12)",
+  background: "rgba(255,255,255,0.65)", borderRadius: 10, fontSize: 13,
+  color: "#2B2A28", outline: "none", caretColor: "#3C4A66",
+};
+
+function PersonFields({ label, value, onChange }: {
+  label: string;
+  value: RelationshipPerson;
+  onChange: (p: RelationshipPerson) => void;
+}) {
+  return (
+    <div className="flex flex-col gap-[8px]" style={{ padding: "10px 0" }}>
+      <div style={{ fontSize: 11, letterSpacing: 2, color: "#A39C8F" }}>{label}</div>
+      <div className="flex gap-[8px]">
+        <input
+          value={value.name}
+          onChange={(e) => onChange({ ...value, name: e.target.value })}
+          placeholder="称呼"
+          style={{ ...INPUT_STYLE, flex: 1 }}
+        />
+        <select
+          value={value.sign}
+          onChange={(e) => onChange({ ...value, sign: e.target.value })}
+          style={{ ...INPUT_STYLE, flex: 1 }}
+        >
+          {SIGNS.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+      </div>
+      <input
+        value={value.birth}
+        onChange={(e) => onChange({ ...value, birth: e.target.value })}
+        placeholder="生辰，如 1992 · 春分 · 月在巨蟹"
+        style={INPUT_STYLE}
+      />
+    </div>
+  );
+}
+
 export default function LovePage() {
+  const [pair, setPair] = useState<Pair>(DEFAULT_PAIR);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState<Pair>(DEFAULT_PAIR);
   const [resp, setResp] = useState<RelationshipAnalyzeResp | null>(null);
 
+  // 挂载时恢复本地保存的两人信息
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(PAIR_KEY);
+      if (raw) setPair(JSON.parse(raw) as Pair);
+    } catch {
+      /* 数据损坏时保留默认 */
+    }
+  }, []);
+
+  // 两人信息变化（含首载）时请求分析；旧结果保留到新结果返回，避免闪烁
   useEffect(() => {
     let alive = true;
     api
-      .analyzeRelationship(
-        { name: SELF.name, sign: SELF.sign, birth: SELF.birth },
-        { name: PARTNER.name, sign: PARTNER.sign, birth: PARTNER.birth },
-      )
+      .analyzeRelationship(pair.self, pair.partner)
       .then((data) => {
         if (alive) setResp(data);
       })
@@ -35,7 +98,25 @@ export default function LovePage() {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [pair]);
+
+  const startEdit = () => {
+    setDraft({ self: { ...pair.self }, partner: { ...pair.partner } });
+    setEditing(true);
+  };
+  const saveEdit = () => {
+    const cleaned: Pair = {
+      self: { ...draft.self, name: draft.self.name.trim() || "你" },
+      partner: { ...draft.partner, name: draft.partner.name.trim() || "TA" },
+    };
+    setPair(cleaned);
+    try {
+      window.localStorage.setItem(PAIR_KEY, JSON.stringify(cleaned));
+    } catch {
+      /* 存储不可用时仅本次生效 */
+    }
+    setEditing(false);
+  };
 
   const hex = resp?.relationHexagram ?? HEXAGRAMS.xian;
   const analysis = resp
@@ -59,16 +140,30 @@ export default function LovePage() {
         <div className="flex flex-col gap-[18px]" style={{ flex: "1 1 300px", minWidth: 280, maxWidth: 380 }}>
           <Card style={{ borderRadius: 20, padding: 22 }}>
             <Label className="mb-4">两 个 人</Label>
-            {[
-              { dot: "#3C4A66", n: "你 · 双鱼", s: "1992 · 春分 · 月在巨蟹", b: true },
-              { dot: "#B08E54", n: "之珩 · 天蝎", s: "1990 · 立冬 · 月在白羊", b: false },
-            ].map((p, i) => (
-              <div key={i} className="flex items-center gap-[14px]" style={{ padding: "12px 0", borderBottom: p.b ? "1px solid rgba(43,42,40,0.06)" : "none" }}>
-                <span style={{ width: 10, height: 10, borderRadius: "50%", background: p.dot, flexShrink: 0 }} />
-                <div className="flex-1"><div className="font-serif" style={{ fontSize: 15, color: "#2B2A28" }}>{p.n}</div><div style={{ fontSize: 11, color: "#A39C8F", marginTop: 3 }}>{p.s}</div></div>
-              </div>
-            ))}
-            <button className="mt-[14px] w-full rounded-[11px]" style={{ padding: 11, border: "1px dashed rgba(60,74,102,0.25)", background: "transparent", color: "#3C4A66", fontSize: 12.5 }}>＋ 编辑两人信息</button>
+            {!editing ? (
+              <>
+                {[
+                  { dot: "#3C4A66", p: pair.self, b: true },
+                  { dot: "#B08E54", p: pair.partner, b: false },
+                ].map(({ dot, p, b }, i) => (
+                  <div key={i} className="flex items-center gap-[14px]" style={{ padding: "12px 0", borderBottom: b ? "1px solid rgba(43,42,40,0.06)" : "none" }}>
+                    <span style={{ width: 10, height: 10, borderRadius: "50%", background: dot, flexShrink: 0 }} />
+                    <div className="flex-1"><div className="font-serif" style={{ fontSize: 15, color: "#2B2A28" }}>{p.name} · {p.sign}</div><div style={{ fontSize: 11, color: "#A39C8F", marginTop: 3 }}>{p.birth}</div></div>
+                  </div>
+                ))}
+                <button onClick={startEdit} className="mt-[14px] w-full rounded-[11px]" style={{ padding: 11, border: "1px dashed rgba(60,74,102,0.25)", background: "transparent", color: "#3C4A66", fontSize: 12.5 }}>＋ 编辑两人信息</button>
+              </>
+            ) : (
+              <>
+                <PersonFields label="你" value={draft.self} onChange={(p) => setDraft((d) => ({ ...d, self: p }))} />
+                <div style={{ height: 1, background: "rgba(43,42,40,0.06)" }} />
+                <PersonFields label="T A" value={draft.partner} onChange={(p) => setDraft((d) => ({ ...d, partner: p }))} />
+                <div className="flex gap-[9px]" style={{ marginTop: 12 }}>
+                  <button onClick={saveEdit} className="rounded-[11px]" style={{ flex: 1, padding: 11, border: "none", background: "#3C4A66", color: "#F3EFE7", fontSize: 12.5, letterSpacing: 1 }}>保存并重新分析</button>
+                  <button onClick={() => setEditing(false)} className="rounded-[11px]" style={{ flex: 1, padding: 11, border: "1px solid rgba(43,42,40,0.13)", background: "transparent", color: "#928C81", fontSize: 12.5 }}>取消</button>
+                </div>
+              </>
+            )}
           </Card>
           <Card style={{ borderRadius: 20, padding: 24, display: "flex", alignItems: "center", gap: 20 }}>
             <HexLines lines={hex.lines} width={56} gap={7} />
@@ -100,8 +195,8 @@ export default function LovePage() {
             <circle cx="210" cy="150" r="2.5" fill="rgba(255,255,255,0.5)" />
           </svg>
           <div style={{ position: "relative", display: "flex", gap: 60, marginTop: 14 }}>
-            <div className="text-center"><div className="font-serif" style={{ fontSize: 14, color: "#EFEBE2" }}>你 · 双鱼</div><div style={{ fontSize: 10.5, color: "rgba(226,222,236,0.5)", marginTop: 4 }}>金星 · 巨蟹</div></div>
-            <div className="text-center"><div className="font-serif" style={{ fontSize: 14, color: "#EFEBE2" }}>之珩 · 天蝎</div><div style={{ fontSize: 10.5, color: "rgba(226,222,236,0.5)", marginTop: 4 }}>火星 · 狮子</div></div>
+            <div className="text-center"><div className="font-serif" style={{ fontSize: 14, color: "#EFEBE2" }}>{pair.self.name} · {pair.self.sign}</div><div style={{ fontSize: 10.5, color: "rgba(226,222,236,0.5)", marginTop: 4 }}>金星 · 巨蟹</div></div>
+            <div className="text-center"><div className="font-serif" style={{ fontSize: 14, color: "#EFEBE2" }}>{pair.partner.name} · {pair.partner.sign}</div><div style={{ fontSize: 10.5, color: "rgba(226,222,236,0.5)", marginTop: 4 }}>火星 · 狮子</div></div>
           </div>
         </div>
       </div>
