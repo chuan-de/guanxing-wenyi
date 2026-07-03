@@ -7,9 +7,19 @@ import { HexLines, XiaoyiOrb } from "@/components/primitives";
 import { IconMic, IconInfo, IconArrowRight } from "@/components/icons";
 import VoiceSheet from "@/components/VoiceSheet";
 import { useAppState } from "@/lib/store";
-import { api } from "@/lib/api";
+import { api, type CastResp } from "@/lib/api";
 import { HEXAGRAMS, JIAN_CHANGING } from "@/lib/hexagrams";
 import { loadDivinations, relativeLabel, type DivinationRecord } from "@/lib/storage";
+
+// 变爻标签：初九 / 六二 / 九三 / … / 上六
+function yaoLabel(cast: CastResp): string {
+  const n = cast.changingLines[0];
+  if (!n) return "静卦";
+  const yang = cast.hexagram.lines[6 - n];
+  const num = yang ? "九" : "六";
+  const name = n === 1 ? `初${num}` : n === 6 ? `上${num}` : `${num}${"二三四五"[n - 2]}`;
+  return `${name}变`;
+}
 
 interface ReadingState {
   xiang: string;
@@ -32,6 +42,7 @@ export default function AskPage() {
   const [recent, setRecent] = useState<DivinationRecord[]>([]);
   const [recentFromApi, setRecentFromApi] = useState(false);
   const [reading, setReading] = useState<ReadingState | null>(null);
+  const [castResp, setCastResp] = useState<CastResp | null>(null);
 
   const pressRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const drawTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -80,6 +91,7 @@ export default function AskPage() {
         refineMeta?.candidates ?? [],
       );
       divinationIdRef.current = cast.id;
+      setCastResp(cast);
       const interp = await api.interpret(cast.id);
       setReading({
         xiang: interp.reading.xiang,
@@ -90,6 +102,7 @@ export default function AskPage() {
       });
       refreshRecent();
     } catch {
+      // cast 可能已成功而 interpret 失败——castResp 保留，reading 回退本地文案
       divinationIdRef.current = null;
       setReading(null);
     }
@@ -123,6 +136,7 @@ export default function AskPage() {
     setDrawn(false);
     setSaved(false);
     setReading(null);
+    setCastResp(null);
     divinationIdRef.current = null;
   }, [stopPress]);
 
@@ -134,17 +148,21 @@ export default function AskPage() {
     if (saved) return;
     saveDivination({
       question: q,
-      hexName: HEXAGRAMS.jian.name,
-      hexPinyin: HEXAGRAMS.jian.pinyin,
-      changingTo: HEXAGRAMS.guan.name,
+      hexName: hex.name,
+      hexPinyin: hex.pinyin,
+      changingTo: changingTo?.name,
       reading: reading?.summary ?? READING_SUMMARY,
     });
     setRecent(loadDivinations());
     setSaved(true);
   };
 
-  const jian = HEXAGRAMS.jian;
-  const guan = HEXAGRAMS.guan;
+  // 起卦结果：接口成功用真实卦，失败回退本地写死的渐→观剧本
+  const hex = castResp?.hexagram ?? HEXAGRAMS.jian;
+  const changingTo = castResp ? castResp.changingTo : HEXAGRAMS.guan;
+  const changingIdx = castResp ? castResp.changingLines.map((n) => 6 - n) : JIAN_CHANGING;
+  const poem = castResp?.poem ?? "水落石出非一夕，山木成荫待几春。";
+  const changeLabel = castResp ? yaoLabel(castResp) : "九三变";
 
   return (
     <div className="animate-gxFade" style={{ maxWidth: 1340, margin: "0 auto" }}>
@@ -261,24 +279,28 @@ export default function AskPage() {
               <div style={{ fontSize: 10, letterSpacing: 5, color: "rgba(216,190,134,0.7)" }}>已 得 一 卦</div>
               <div className="flex items-center gap-[26px]" style={{ marginTop: 26 }}>
                 <div className="flex flex-col items-center gap-3">
-                  <HexLines lines={jian.lines} changing={JIAN_CHANGING} tone="light" width={54} />
-                  <div className="font-serif" style={{ fontSize: 15, color: "#EFEBE2", letterSpacing: 3 }}>{jian.name}</div>
+                  <HexLines lines={hex.lines} changing={changingIdx} tone="light" width={54} />
+                  <div className="font-serif" style={{ fontSize: 15, color: "#EFEBE2", letterSpacing: 3 }}>{hex.name}</div>
                 </div>
-                <div className="flex flex-col items-center gap-[5px]" style={{ color: "rgba(216,190,134,0.7)", marginBottom: 20 }}>
-                  <IconArrowRight style={{ width: 20, height: 20 }} />
-                  <span style={{ fontSize: 9, color: "rgba(231,227,240,0.45)" }}>九三变</span>
-                </div>
-                <div className="flex flex-col items-center gap-3">
-                  <HexLines lines={guan.lines} tone="light" width={54} />
-                  <div className="font-serif" style={{ fontSize: 15, color: "#EFEBE2", letterSpacing: 3 }}>{guan.name}</div>
-                </div>
+                {changingTo && (
+                  <>
+                    <div className="flex flex-col items-center gap-[5px]" style={{ color: "rgba(216,190,134,0.7)", marginBottom: 20 }}>
+                      <IconArrowRight style={{ width: 20, height: 20 }} />
+                      <span style={{ fontSize: 9, color: "rgba(231,227,240,0.45)" }}>{changeLabel}</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-3">
+                      <HexLines lines={changingTo.lines} tone="light" width={54} />
+                      <div className="font-serif" style={{ fontSize: 15, color: "#EFEBE2", letterSpacing: 3 }}>{changingTo.name}</div>
+                    </div>
+                  </>
+                )}
               </div>
-              <div className="font-serif text-center" style={{ fontSize: 16, lineHeight: 2, color: "rgba(239,235,226,0.85)", marginTop: 26 }}>水落石出非一夕，山木成荫待几春。</div>
+              <div className="font-serif text-center" style={{ fontSize: 16, lineHeight: 2, color: "rgba(239,235,226,0.85)", marginTop: 26 }}>{poem}</div>
               <div className="flex w-full flex-col gap-3" style={{ maxWidth: 420, marginTop: 26 }}>
                 {[
-                  { k: "象 · 这一卦在说什么", v: reading?.xiang ?? "渐，是循序渐进。它说的不是快或慢，而是按自己的次序来。" },
-                  { k: "译 · 此刻的你", v: reading?.yi ?? "你心里其实已有答案，只是它还需要时间。适合慢慢来，而不是用一个决定定它生死。" },
-                  { k: "行 · 今天的一件小事", v: reading?.xing ?? "先不急着下结论。只观察：和 TA 在一起时，你的肩膀是松的，还是紧的？" },
+                  { k: "象 · 这一卦在说什么", v: reading?.xiang ?? `这一卦是「${hex.name}」——${hex.meaning}。它照见的是此刻的位置，不是结局。` },
+                  { k: "译 · 此刻的你", v: reading?.yi ?? "你心里其实已有答案，只是它还需要一点时间长稳。不必急着用一个决定，定它的生死。" },
+                  { k: "行 · 今天的一件小事", v: reading?.xing ?? "先不急着下结论。今天只观察一件让你在意的小事，把它记下来就好。" },
                 ].map((b) => (
                   <div key={b.k} style={{ padding: "16px 18px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 14 }}>
                     <div style={{ fontSize: 10, letterSpacing: 3, color: "rgba(216,190,134,0.7)", marginBottom: 9 }}>{b.k}</div>
@@ -302,9 +324,9 @@ export default function AskPage() {
             <Label className="mb-4">卦 象 预 览</Label>
             <div className="flex flex-col items-center gap-[13px]" style={{ padding: "8px 0" }}>
               <div style={{ opacity: drawn ? 1 : 0.45 }}>
-                <HexLines lines={drawn ? jian.lines : HEXAGRAMS.tun.lines} changing={drawn ? JIAN_CHANGING : []} width={64} gap={8} />
+                <HexLines lines={drawn ? hex.lines : HEXAGRAMS.tun.lines} changing={drawn ? changingIdx : []} width={64} gap={8} />
               </div>
-              <div style={{ fontSize: 12, color: "#928C81" }}>{drawn ? `${jian.name} · ${jian.meaning}` : "起卦后，这里会显示卦象"}</div>
+              <div style={{ fontSize: 12, color: "#928C81" }}>{drawn ? `${hex.name} · ${hex.meaning}` : "起卦后，这里会显示卦象"}</div>
             </div>
           </Card>
 

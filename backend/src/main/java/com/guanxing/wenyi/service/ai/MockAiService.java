@@ -63,7 +63,8 @@ public class MockAiService implements AiService {
     }
 
     @Override
-    public ReadingResult interpret(String hexName, String changingToName) {
+    public ReadingResult interpret(String question, String hexName, String hexMeaning,
+                                   List<Integer> changingLines, String changingToName) {
         return new ReadingResult(
                 "渐，是循序渐进。它说的不是快或慢，而是按自己的次序来。",
                 "你心里其实已有答案，只是它还需要一点时间长稳。那种「想快点确定」的着急，是很正常的——你只是太想好好对待这件事。",

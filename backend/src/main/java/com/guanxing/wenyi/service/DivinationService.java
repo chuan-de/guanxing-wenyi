@@ -89,7 +89,9 @@ public class DivinationService {
         if (record == null) {
             throw new BizException(ErrorCode.NOT_FOUND, "起卦记录不存在");
         }
-        AiService.ReadingResult reading = aiService.interpret(record.getHexName(), record.getChangingToName());
+        AiService.ReadingResult reading = aiService.interpret(
+                record.getQuestion(), record.getHexName(), record.getHexMeaning(),
+                record.getChangingLines(), record.getChangingToName());
 
         record.setReadingXiang(reading.xiang());
         record.setReadingYi(reading.yi());

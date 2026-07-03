@@ -41,7 +41,7 @@ class MockAiServiceTest {
 
     @Test
     void interpret_hasThreeSections() {
-        AiService.ReadingResult reading = ai.interpret("风山渐", "风地观");
+        AiService.ReadingResult reading = ai.interpret("这段关系该怎么走", "风山渐", "循序渐进", List.of(3), "风地观");
         assertFalse(reading.xiang().isBlank());
         assertFalse(reading.yi().isBlank());
         assertFalse(reading.xing().isBlank());

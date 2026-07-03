@@ -20,8 +20,16 @@ public interface AiService {
     /** 起卦：本卦 + 变爻 + 之卦 + 一句签诗。 */
     CastResult cast(String question);
 
-    /** 卦象解读：象 / 译 / 行 + 留给你的问题 + 摘要。 */
-    ReadingResult interpret(String hexName, String changingToName);
+    /**
+     * 卦象解读：象 / 译 / 行 + 留给你的问题 + 摘要。
+     * @param question      用户所问
+     * @param hexName       本卦名
+     * @param hexMeaning    本卦象意
+     * @param changingLines 变爻（1-6，自下而上），可为空
+     * @param changingToName 之卦名，可为 null
+     */
+    ReadingResult interpret(String question, String hexName, String hexMeaning,
+                            List<Integer> changingLines, String changingToName);
 
     /**
      * 小易聊天回复。

@@ -164,6 +164,70 @@ class LlmAiServiceTest {
     }
 
     @Test
+    void castUsesLocalRandomHexagramAndModelPoem() {
+        RecordingLogService logService = new RecordingLogService();
+        StubClient client = new StubClient(null, "云开月见终有时，水到渠成不问期。", null);
+        LlmAiService service = new LlmAiService(client, logService);
+
+        AiService.CastResult r = service.cast("要不要换工作");
+
+        assertEquals("云开月见终有时，水到渠成不问期。", r.poem());
+        assertEquals(6, r.hexagram().lines().size());
+        assertEquals(1, r.changingLines().size());
+        // 之卦必须是本卦翻转变爻后的合法卦
+        int yao = r.changingLines().get(0);
+        assertEquals(com.guanxing.wenyi.service.HexagramTable.change(r.hexagram(), yao).name(),
+                r.changingTo().name());
+        assertEquals(1, logService.succeeded);
+    }
+
+    @Test
+    void castFallsBackToGenericPoemOnClientError() {
+        RecordingLogService logService = new RecordingLogService();
+        LlmAiService service = new LlmAiService(
+                new StubClient(null, null, new AiClientException("超时")), logService);
+
+        AiService.CastResult r = service.cast("要不要换工作");
+
+        // 卦本地随机不受影响，签诗回退通用句
+        assertEquals("水落石出非一夕，山木成荫待几春。", r.poem());
+        assertEquals(6, r.hexagram().lines().size());
+        assertEquals(1, logService.failed);
+    }
+
+    @Test
+    void interpretUsesModelJson() {
+        RecordingLogService logService = new RecordingLogService();
+        StubClient client = new StubClient(
+                "{\"xiang\":\"象\",\"yi\":\"译\",\"xing\":\"行\",\"reflectQuestion\":\"想守住什么？\",\"summary\":\"摘要\"}",
+                null, null);
+        LlmAiService service = new LlmAiService(client, logService);
+
+        AiService.ReadingResult r = service.interpret("该怎么走", "风山渐", "循序渐进", List.of(3), "风地观");
+
+        assertEquals("象", r.xiang());
+        assertEquals("想守住什么？", r.reflectQuestion());
+        assertEquals(1, logService.succeeded);
+        // 上下文应包含卦名与变爻信息
+        String userMsg = client.lastMessages.get(1).content();
+        assertTrue(userMsg.contains("风山渐") && userMsg.contains("第 3 爻") && userMsg.contains("风地观"));
+    }
+
+    @Test
+    void interpretFallsBackOnMissingField() {
+        RecordingLogService logService = new RecordingLogService();
+        // 缺 summary 字段 → 回退 mock
+        StubClient client = new StubClient(
+                "{\"xiang\":\"象\",\"yi\":\"译\",\"xing\":\"行\",\"reflectQuestion\":\"？\"}", null, null);
+        LlmAiService service = new LlmAiService(client, logService);
+
+        AiService.ReadingResult r = service.interpret("该怎么走", "风山渐", "循序渐进", List.of(3), "风地观");
+
+        assertEquals(new MockAiService().interpret("该怎么走", "风山渐", "循序渐进", List.of(3), "风地观"), r);
+        assertEquals(1, logService.failed);
+    }
+
+    @Test
     void blankQuestionSkipsModelCall() {
         RecordingLogService logService = new RecordingLogService();
         // 桩会在被调用时抛异常——若走到真实调用则 failed 会 +1
