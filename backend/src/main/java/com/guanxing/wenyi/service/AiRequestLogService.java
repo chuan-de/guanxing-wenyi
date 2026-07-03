@@ -24,6 +24,21 @@ public class AiRequestLogService {
 
     public void record(String requestType, String provider, String model,
                        Object requestPayload, Object responsePayload, long latencyMs) {
+        insert(requestType, provider, model, requestPayload, responsePayload, "succeeded", null, latencyMs);
+    }
+
+    /** 真实模型调用失败（已回退 mock）也落一条，便于观察失败率与原因。 */
+    public void recordFailure(String requestType, String provider, String model,
+                              Object requestPayload, String errorMessage, long latencyMs) {
+        insert(requestType, provider, model, requestPayload, null, "failed",
+                errorMessage != null && errorMessage.length() > 500
+                        ? errorMessage.substring(0, 500) : errorMessage,
+                latencyMs);
+    }
+
+    private void insert(String requestType, String provider, String model,
+                        Object requestPayload, Object responsePayload,
+                        String status, String errorMessage, long latencyMs) {
         try {
             AiRequestLog entry = new AiRequestLog();
             entry.setId(UUID.randomUUID().toString());
@@ -33,7 +48,8 @@ public class AiRequestLogService {
             entry.setModel(model);
             entry.setRequestPayload(requestPayload);
             entry.setResponsePayload(responsePayload);
-            entry.setStatus("succeeded");
+            entry.setStatus(status);
+            entry.setErrorMessage(errorMessage);
             entry.setLatencyMs((int) latencyMs);
             entry.setCreatedAt(OffsetDateTime.now());
             aiRequestLogMapper.insert(entry);
