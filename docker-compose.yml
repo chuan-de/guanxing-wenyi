@@ -1,0 +1,37 @@
+# 观星问易 · 本地依赖中间件（第一阶段只起 PostgreSQL + Redis，后端用 mvn 本地运行）
+# 用法：cp .env.example .env && docker compose up -d
+services:
+  postgres:
+    image: postgres:16
+    container_name: gxwy-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-guanxing_wenyi}
+      POSTGRES_USER: ${POSTGRES_USER:-gxwy}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gxwy_dev_pwd}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - gxwy_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-gxwy} -d ${POSTGRES_DB:-guanxing_wenyi}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    container_name: gxwy-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - gxwy_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  gxwy_pg_data:
+  gxwy_redis_data:
