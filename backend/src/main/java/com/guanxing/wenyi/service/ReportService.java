@@ -7,8 +7,10 @@ import com.guanxing.wenyi.common.UserContext;
 import com.guanxing.wenyi.dto.response.ReportResponse;
 import com.guanxing.wenyi.entity.DivinationRecord;
 import com.guanxing.wenyi.entity.MoodJournal;
+import com.guanxing.wenyi.entity.RelationshipProfile;
 import com.guanxing.wenyi.mapper.DivinationRecordMapper;
 import com.guanxing.wenyi.mapper.MoodJournalMapper;
+import com.guanxing.wenyi.mapper.RelationshipProfileMapper;
 import com.guanxing.wenyi.service.ai.AiService;
 import org.springframework.stereotype.Service;
 
@@ -30,14 +32,17 @@ public class ReportService {
     private final AiRequestLogService aiRequestLogService;
     private final DivinationRecordMapper divinationRecordMapper;
     private final MoodJournalMapper moodJournalMapper;
+    private final RelationshipProfileMapper relationshipProfileMapper;
 
     public ReportService(AiService aiService, AiRequestLogService aiRequestLogService,
                          DivinationRecordMapper divinationRecordMapper,
-                         MoodJournalMapper moodJournalMapper) {
+                         MoodJournalMapper moodJournalMapper,
+                         RelationshipProfileMapper relationshipProfileMapper) {
         this.aiService = aiService;
         this.aiRequestLogService = aiRequestLogService;
         this.divinationRecordMapper = divinationRecordMapper;
         this.moodJournalMapper = moodJournalMapper;
+        this.relationshipProfileMapper = relationshipProfileMapper;
     }
 
     /** id 约定：latest（当前月）或 YYYY-MM（指定月）。报告即时聚合，不落表。 */
@@ -62,14 +67,49 @@ public class ReportService {
                 .eq("user_id", userId)
                 .ge("created_at", from)
                 .lt("created_at", to));
-        long moodDays = moodJournalMapper.selectList(new QueryWrapper<MoodJournal>()
-                        .select("entry_date")
+        List<String> divinationBriefs = divinationRecordMapper.selectList(new QueryWrapper<DivinationRecord>()
                         .eq("user_id", userId)
-                        .ge("entry_date", period.atDay(1))
-                        .lt("entry_date", period.plusMonths(1).atDay(1)))
-                .stream().map(MoodJournal::getEntryDate).distinct().count();
+                        .ge("created_at", from)
+                        .lt("created_at", to)
+                        .orderByDesc("created_at")
+                        .last("limit 5"))
+                .stream()
+                .map(r -> {
+                    String hex = r.getHexName()
+                            + (r.getChangingToName() != null ? "→" + r.getChangingToName() : "");
+                    String question = r.getQuestion() == null ? "" : r.getQuestion();
+                    if (question.length() > 20) {
+                        question = question.substring(0, 20) + "…";
+                    }
+                    return hex + "（问：" + question + "）";
+                })
+                .toList();
 
-        AiService.ReportContent content = aiService.buildReport(periodId);
+        List<MoodJournal> journals = moodJournalMapper.selectList(new QueryWrapper<MoodJournal>()
+                .select("entry_date", "mood")
+                .eq("user_id", userId)
+                .ge("entry_date", period.atDay(1))
+                .lt("entry_date", period.plusMonths(1).atDay(1)));
+        long moodDays = journals.stream().map(MoodJournal::getEntryDate).distinct().count();
+        String dominantMood = journals.stream()
+                .collect(java.util.stream.Collectors.groupingBy(MoodJournal::getMood,
+                        java.util.stream.Collectors.counting()))
+                .entrySet().stream()
+                .max(java.util.Map.Entry.comparingByValue())
+                .map(java.util.Map.Entry::getKey)
+                .orElse(null);
+
+        RelationshipProfile relation = relationshipProfileMapper.selectList(new QueryWrapper<RelationshipProfile>()
+                        .eq("user_id", userId)
+                        .orderByDesc("created_at")
+                        .last("limit 1"))
+                .stream().findFirst().orElse(null);
+
+        AiService.ReportFacts facts = new AiService.ReportFacts(
+                divinationCount, moodDays, dominantMood, divinationBriefs,
+                relation == null ? null : relation.getRelationHexName(),
+                relation == null ? null : relation.getClosingLine());
+        AiService.ReportContent content = aiService.buildReport(periodId, facts);
         LocalDate today = LocalDate.now();
         String meta = "基于 " + divinationCount + " 次问卦 · " + moodDays + " 天心境 · 本命星盘　·　"
                 + today.getMonthValue() + " 月 " + today.getDayOfMonth() + " 日";

@@ -45,7 +45,13 @@ public interface AiService {
     TodayResult todayContent(LocalDate date);
 
     /** 深度报告正文（6 段，key 与前端目录一致：astro/gua/mood/relation/action/reflect）。 */
-    ReportContent buildReport(String periodId);
+    ReportContent buildReport(String periodId, ReportFacts facts);
+
+    /** 报告的事实输入（按月聚合；无数据的字段为 0/null/空列表）。 */
+    record ReportFacts(long divinationCount, long moodDays, String dominantMood,
+                       List<String> divinationBriefs,
+                       String relationHexName, String relationClosingLine) {
+    }
 
     record ChatTurn(String role, String content) {
     }

@@ -28,6 +28,9 @@ public interface AiClient {
      */
     JsonNode structuredJson(List<ChatMessage> messages);
 
+    /** 慢任务（长文生成，如月度报告）用：自定义读超时的结构化输出。 */
+    JsonNode structuredJson(List<ChatMessage> messages, int timeoutMs);
+
     record ChatMessage(String role, String content) {
         public static ChatMessage system(String content) {
             return new ChatMessage("system", content);

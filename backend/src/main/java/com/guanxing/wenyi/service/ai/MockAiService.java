@@ -107,7 +107,7 @@ public class MockAiService implements AiService {
     }
 
     @Override
-    public ReportContent buildReport(String periodId) {
+    public ReportContent buildReport(String periodId, ReportFacts facts) {
         return new ReportContent(
                 "在「慢」与「稳」之间，你正在学的事",
                 List.of(

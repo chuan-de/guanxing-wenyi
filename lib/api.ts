@@ -45,7 +45,7 @@ interface Envelope<T> {
   data: T;
 }
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
+async function request<T>(path: string, init?: RequestInit, timeoutMs = 8000): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
     ...init,
     headers: {
@@ -53,7 +53,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
       "X-User-Id": userId(),
       ...(init?.headers ?? {}),
     },
-    signal: AbortSignal.timeout(8000),
+    signal: AbortSignal.timeout(timeoutMs),
   });
   if (!res.ok) throw new ApiError(-1, `HTTP ${res.status}`, res.status);
   const json = (await res.json()) as Envelope<T>;
@@ -211,5 +211,6 @@ export const api = {
 
   getToday: () => request<TodayResp>("/today"),
 
-  getReport: (id = "latest") => request<ReportResp>(`/reports/${id}`),
+  // 报告是长文生成（真实模型 10-25s），超时单独放宽
+  getReport: (id = "latest") => request<ReportResp>(`/reports/${id}`, undefined, 30000),
 };

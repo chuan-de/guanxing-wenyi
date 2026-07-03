@@ -22,19 +22,25 @@ public abstract class OpenAiCompatClient implements AiClient {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private final RestClient http;
+    private final String baseUrl;
     private final String apiKey;
     private final String model;
 
     protected OpenAiCompatClient(String baseUrl, String apiKey, String model, int timeoutMs) {
+        this.baseUrl = baseUrl.replaceAll("/+$", "");
+        this.http = buildHttp(this.baseUrl, timeoutMs);
+        this.apiKey = apiKey;
+        this.model = model;
+    }
+
+    private static RestClient buildHttp(String baseUrl, int timeoutMs) {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         factory.setConnectTimeout(Duration.ofMillis(Math.min(timeoutMs, 3000)));
         factory.setReadTimeout(Duration.ofMillis(timeoutMs));
-        this.http = RestClient.builder()
-                .baseUrl(baseUrl.replaceAll("/+$", ""))
+        return RestClient.builder()
+                .baseUrl(baseUrl)
                 .requestFactory(factory)
                 .build();
-        this.apiKey = apiKey;
-        this.model = model;
     }
 
     @Override
@@ -44,12 +50,21 @@ public abstract class OpenAiCompatClient implements AiClient {
 
     @Override
     public String chat(List<ChatMessage> messages) {
-        return complete(messages, false);
+        return complete(http, messages, false);
     }
 
     @Override
     public JsonNode structuredJson(List<ChatMessage> messages) {
-        String content = complete(messages, true);
+        return parseJson(complete(http, messages, true));
+    }
+
+    @Override
+    public JsonNode structuredJson(List<ChatMessage> messages, int timeoutMs) {
+        // 慢任务用一次性 client（报告等低频调用，构建开销可忽略）
+        return parseJson(complete(buildHttp(baseUrl, timeoutMs), messages, true));
+    }
+
+    private JsonNode parseJson(String content) {
         try {
             return MAPPER.readTree(stripCodeFence(content));
         } catch (Exception e) {
@@ -57,7 +72,7 @@ public abstract class OpenAiCompatClient implements AiClient {
         }
     }
 
-    private String complete(List<ChatMessage> messages, boolean jsonMode) {
+    private String complete(RestClient http, List<ChatMessage> messages, boolean jsonMode) {
         if (apiKey == null || apiKey.isBlank()) {
             throw new AiClientException(vendor() + " API key 未配置（请设置对应环境变量）");
         }

@@ -75,7 +75,7 @@ export default function LovePage() {
             <div>
               <Label>关 系 卦</Label>
               <div className="font-serif" style={{ fontSize: 21, color: "#2B2A28", marginTop: 8, letterSpacing: 3 }}>{hex.name}</div>
-              <div style={{ fontSize: 12, color: "#7C766B", lineHeight: 1.7, marginTop: 8 }}>无心而感，自然相应。<br />你们之间，有一种不必勉强的呼应。</div>
+              <div style={{ fontSize: 12, color: "#7C766B", lineHeight: 1.7, marginTop: 8 }}>{hex.meaning}，自然相应。<br />你们之间，有一种不必勉强的呼应。</div>
             </div>
           </Card>
         </div>

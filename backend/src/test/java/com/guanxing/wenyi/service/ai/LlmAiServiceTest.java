@@ -70,6 +70,10 @@ class LlmAiServiceTest {
                 throw new RuntimeException(e);
             }
         }
+
+        @Override public JsonNode structuredJson(List<ChatMessage> messages, int timeoutMs) {
+            return structuredJson(messages);
+        }
     }
 
     private static AiClient stubClient(String json, RuntimeException error) {
@@ -224,6 +228,71 @@ class LlmAiServiceTest {
         AiService.ReadingResult r = service.interpret("该怎么走", "风山渐", "循序渐进", List.of(3), "风地观");
 
         assertEquals(new MockAiService().interpret("该怎么走", "风山渐", "循序渐进", List.of(3), "风地观"), r);
+        assertEquals(1, logService.failed);
+    }
+
+    @Test
+    void relationshipHexagramIsStablePerPairAndUsesModelText() {
+        RecordingLogService logService = new RecordingLogService();
+        String json = "{\"attraction\":\"吸引\",\"care\":\"照顾\",\"communication\":\"沟通\",\"closingLine\":\"你们这段关系的功课：慢一点。\"}";
+        LlmAiService service = new LlmAiService(new StubClient(json, null, null), logService);
+
+        AiService.RelationshipResult r1 = service.analyzeRelationship("双鱼", "天蝎");
+        AiService.RelationshipResult r2 = service.analyzeRelationship("双鱼", "天蝎");
+
+        assertEquals("吸引", r1.attraction());
+        assertEquals("你们这段关系的功课：慢一点。", r1.closingLine());
+        // 同一对组合 → 关系卦稳定，不随刷新变化
+        assertEquals(r1.relationHexagram().name(), r2.relationHexagram().name());
+        assertEquals(6, r1.relationHexagram().lines().size());
+        assertEquals(2, logService.succeeded);
+    }
+
+    @Test
+    void relationshipFallsBackOnClientError() {
+        RecordingLogService logService = new RecordingLogService();
+        LlmAiService service = new LlmAiService(
+                new StubClient(null, null, new AiClientException("超时")), logService);
+
+        AiService.RelationshipResult r = service.analyzeRelationship("双鱼", "天蝎");
+
+        assertEquals("泽山咸", r.relationHexagram().name()); // mock 固定卦
+        assertEquals(1, logService.failed);
+    }
+
+    @Test
+    void buildReportUsesModelJson() {
+        RecordingLogService logService = new RecordingLogService();
+        String json = "{\"title\":\"标题\",\"astro\":\"一\\n\\n二\",\"gua\":\"一\\n\\n二\",\"mood\":\"情绪\","
+                + "\"relation\":\"关系\",\"action\":[\"A\",\"B\",\"C\"],\"reflect\":\"想守住什么？\"}";
+        StubClient client = new StubClient(json, null, null);
+        LlmAiService service = new LlmAiService(client, logService);
+        AiService.ReportFacts facts = new AiService.ReportFacts(
+                2, 7, "平静", List.of("风山渐→风地观（问：这段关系…）"), "泽山咸", "功课：呼吸。");
+
+        AiService.ReportContent content = service.buildReport("2026-07", facts);
+
+        assertEquals("标题", content.title());
+        assertEquals(6, content.sections().size());
+        assertEquals(List.of("A", "B", "C"), content.sections().get(4).items());
+        assertEquals("reflect", content.sections().get(5).key());
+        // 事实应进入 user prompt
+        String userMsg = client.lastMessages.get(1).content();
+        assertTrue(userMsg.contains("问卦 2 次") && userMsg.contains("平静") && userMsg.contains("泽山咸"));
+        assertEquals(1, logService.succeeded);
+    }
+
+    @Test
+    void buildReportFallsBackOnMissingSection() {
+        RecordingLogService logService = new RecordingLogService();
+        String json = "{\"title\":\"标题\",\"astro\":\"一\",\"gua\":\"一\",\"mood\":\"情绪\","
+                + "\"relation\":\"关系\",\"action\":[\"A\",\"B\"]}"; // 缺 reflect
+        LlmAiService service = new LlmAiService(new StubClient(json, null, null), logService);
+        AiService.ReportFacts facts = new AiService.ReportFacts(0, 0, null, List.of(), null, null);
+
+        AiService.ReportContent content = service.buildReport("2026-07", facts);
+
+        assertEquals(new MockAiService().buildReport("2026-07", facts).title(), content.title());
         assertEquals(1, logService.failed);
     }
 

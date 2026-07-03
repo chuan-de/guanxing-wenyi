@@ -18,8 +18,9 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * 真实大模型实现（gxwy.ai.provider=llm 时生效）。
  * 只依赖 {@link AiClient} 抽象，不感知具体厂商；厂商由 gxwy.ai.client 选择。
- * 已接真实模型：refineQuestion、chatReply、cast(签诗)、interpret；其余能力仍委托 mock，逐个迁移。
- * 起卦的卦与变爻由本地随机（HexagramTable 六十四卦），不经模型。
+ * 已接真实模型：refineQuestion、chatReply、cast(签诗)、interpret、analyzeRelationship、buildReport；
+ * todayContent（今日历法）仍为固定文案，待真实占星计算。
+ * 起卦的卦与变爻由本地随机（HexagramTable 六十四卦），关系卦由双方星座稳定映射，均不经模型。
  * 任何真实调用失败都回退到 {@link MockAiService} 的结果，接口对外永不报错。
  */
 @Service
@@ -65,6 +66,30 @@ public class LlmAiService implements AiService {
             - 语气温和，不下判断、不预测结局、不制造恐惧、不给医疗建议；
             - 每个问题不超过 32 个字，以问号结尾；
             - 只输出 JSON，格式：{"questions": ["…", "…", "…"]}""";
+
+    private static final String RELATION_SYSTEM_PROMPT = """
+            你是「小易」，观星问易 App 里温和克制的关系陪伴者。根据两个人的星座与他们的关系卦，只输出 JSON：
+            {"attraction":"…","care":"…","communication":"…","closingLine":"…"}
+            - attraction：吸引点。1-2 句，从两人星座气质的共振或互补讲起，落在具体的相处感受上；
+            - care：需要照顾的地方。1-2 句，温和指出节奏或需求的差异，「这不是问题，只是不同」的口吻；
+            - communication：沟通建议。1-2 句，给一个具体可以说出口的句子示例；
+            - closingLine：一句结语，以「你们这段关系的功课：」开头。
+            铁律：不打分、不预测结局、不制造恐惧、不评判任何一方、不催促任何决定。""";
+
+    /** 报告是长文生成，用单独的慢任务超时。 */
+    private static final int REPORT_TIMEOUT_MS = 25_000;
+
+    private static final String REPORT_SYSTEM_PROMPT = """
+            你是「小易」。请为用户写一份本月的深度报告，只输出 JSON：
+            {"title":"…","astro":"第一段\\n\\n第二段","gua":"第一段\\n\\n第二段","mood":"…","relation":"…","action":["…","…","…"],"reflect":"…"}
+            - title：报告标题，不超过 18 字，有意象、不空洞，形如「在『慢』与『稳』之间，你正在学的事」；
+            - astro：星盘分析，两段（用 \\n\\n 分隔）。用户演示星盘：太阳双鱼、月亮巨蟹、上升天秤。第一段讲本月情绪节律，第二段给一点平衡的提醒；
+            - gua：卦象分析，两段。第一段基于本月问卦事实（若没有问卦，就温和地说说「还没问卦也没关系」并轻轻邀请）；第二段是一句可作引言的话（会被排成引言框）；
+            - mood：情绪主题，一段。基于本月心境记录事实（若无记录则温和引导）；
+            - relation：关系建议，一段。基于姻缘分析事实（若无则写一句关于「先照顾好自己」的通用陪伴）；
+            - action：今日行动，恰好 3 条，每条一件门槛极低的具体小事；
+            - reflect：一个开放式反思问题，可用 \\n 断行，以问号结尾。
+            铁律：只依据给到的事实，不编造具体事件细节；不预测吉凶与结局、不制造恐惧、不诱导依赖、不给医疗/法律/投资建议。语气温和留白。""";
 
     private final AiClient client;
     private final AiRequestLogService aiRequestLogService;
@@ -240,20 +265,102 @@ public class LlmAiService implements AiService {
         return v;
     }
 
-    /* ===== 以下能力尚未接真实模型，暂委托 mock，逐个迁移 ===== */
-
     @Override
     public RelationshipResult analyzeRelationship(String selfSign, String partnerSign) {
-        return fallback.analyzeRelationship(selfSign, partnerSign);
+        // 同一对组合稳定映射到同一卦——关系卦不该每次刷新都变
+        HexagramData hex = HexagramTable.all()
+                .get(Math.floorMod((selfSign + "×" + partnerSign).hashCode(), 64));
+        long t0 = System.currentTimeMillis();
+        try {
+            JsonNode json = client.structuredJson(List.of(
+                    AiClient.ChatMessage.system(RELATION_SYSTEM_PROMPT),
+                    AiClient.ChatMessage.user("你：" + selfSign + "；TA：" + partnerSign
+                            + "；关系卦：" + hex.name() + "（" + hex.meaning() + "）。")));
+            RelationshipResult result = new RelationshipResult(
+                    hex,
+                    requireText(json, "attraction"),
+                    requireText(json, "care"),
+                    requireText(json, "communication"),
+                    requireText(json, "closingLine"),
+                    Map.of("self", Map.of("sign", selfSign), "partner", Map.of("sign", partnerSign)));
+            aiRequestLogService.record("llm_relationship", client.vendor(), client.model(),
+                    Map.of("self", selfSign, "partner", partnerSign), result,
+                    System.currentTimeMillis() - t0);
+            return result;
+        } catch (Exception e) {
+            log.warn("analyzeRelationship 真实模型调用失败，回退 mock: {}", e.getMessage());
+            aiRequestLogService.recordFailure("llm_relationship", client.vendor(), client.model(),
+                    Map.of("self", selfSign, "partner", partnerSign), e.getMessage(),
+                    System.currentTimeMillis() - t0);
+            return fallback.analyzeRelationship(selfSign, partnerSign);
+        }
     }
+
+    @Override
+    public ReportContent buildReport(String periodId, ReportFacts facts) {
+        long t0 = System.currentTimeMillis();
+        try {
+            JsonNode json = client.structuredJson(List.of(
+                    AiClient.ChatMessage.system(REPORT_SYSTEM_PROMPT),
+                    AiClient.ChatMessage.user(reportFactsText(periodId, facts))), REPORT_TIMEOUT_MS);
+
+            List<String> action = new ArrayList<>();
+            for (JsonNode n : json.path("action")) {
+                String item = n.asText("").trim();
+                if (!item.isEmpty() && action.size() < 3) {
+                    action.add(item);
+                }
+            }
+            if (action.size() < 2) {
+                throw new IllegalStateException("模型输出 action 不足 2 条: " + json);
+            }
+            ReportContent content = new ReportContent(
+                    requireText(json, "title"),
+                    List.of(
+                            new ReportSection("astro", "01", "星盘分析", requireText(json, "astro"), null),
+                            new ReportSection("gua", "02", "卦象分析", requireText(json, "gua"), null),
+                            new ReportSection("mood", "03", "情绪主题", requireText(json, "mood"), null),
+                            new ReportSection("relation", "04", "关系建议", requireText(json, "relation"), null),
+                            new ReportSection("action", "05", "今日行动", null, action),
+                            new ReportSection("reflect", "06", "反思问题", requireText(json, "reflect"), null)));
+            aiRequestLogService.record("llm_report", client.vendor(), client.model(),
+                    periodId, content, System.currentTimeMillis() - t0);
+            return content;
+        } catch (Exception e) {
+            log.warn("buildReport 真实模型调用失败，回退 mock: {}", e.getMessage());
+            aiRequestLogService.recordFailure("llm_report", client.vendor(), client.model(),
+                    periodId, e.getMessage(), System.currentTimeMillis() - t0);
+            return fallback.buildReport(periodId, facts);
+        }
+    }
+
+    private static String reportFactsText(String periodId, ReportFacts facts) {
+        StringBuilder sb = new StringBuilder("报告月份：").append(periodId).append("。\n本月事实：\n");
+        sb.append("- 问卦 ").append(facts.divinationCount()).append(" 次");
+        if (facts.divinationBriefs() != null && !facts.divinationBriefs().isEmpty()) {
+            sb.append("，最近的几卦：").append(String.join("；", facts.divinationBriefs()));
+        }
+        sb.append("。\n- 心境记录 ").append(facts.moodDays()).append(" 天");
+        if (facts.dominantMood() != null) {
+            sb.append("，出现最多的情绪是「").append(facts.dominantMood()).append("」");
+        }
+        sb.append("。\n");
+        if (facts.relationHexName() != null) {
+            sb.append("- 姻缘分析：关系卦 ").append(facts.relationHexName());
+            if (facts.relationClosingLine() != null) {
+                sb.append("，上次的结语：").append(facts.relationClosingLine());
+            }
+            sb.append("。\n");
+        } else {
+            sb.append("- 本月没有做过姻缘分析。\n");
+        }
+        return sb.toString();
+    }
+
+    /* ===== 以下能力尚未接真实模型，暂委托 mock ===== */
 
     @Override
     public TodayResult todayContent(LocalDate date) {
         return fallback.todayContent(date);
-    }
-
-    @Override
-    public ReportContent buildReport(String periodId) {
-        return fallback.buildReport(periodId);
     }
 }
