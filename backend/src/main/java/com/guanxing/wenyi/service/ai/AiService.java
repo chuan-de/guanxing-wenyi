@@ -72,6 +72,7 @@ public interface AiService {
     }
 
     record TodayResult(String astroHeadline, String moonNote,
+                       String moonSign, String moonElement,
                        HexagramData hexagram, String hexagramNote) {
     }
 

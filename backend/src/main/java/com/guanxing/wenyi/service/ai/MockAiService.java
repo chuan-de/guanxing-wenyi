@@ -28,8 +28,6 @@ public class MockAiService implements AiService {
             "风地观", "Guān", "静观其变", List.of(true, true, false, false, false, false));
     private static final HexagramData XIAN = new HexagramData(
             "泽山咸", "Xián", "无心而感", List.of(false, true, true, true, false, false));
-    private static final HexagramData TUN = new HexagramData(
-            "水雷屯", "Tún", "起步维艰", List.of(false, true, false, false, false, true));
 
     @Override
     public String providerName() {
@@ -98,12 +96,8 @@ public class MockAiService implements AiService {
 
     @Override
     public TodayResult todayContent(LocalDate date) {
-        // 第一阶段固定文案，与前端今日页原静态内容一致
-        return new TodayResult(
-                "月在巨蟹，水象当令。情绪偏柔软，宜慢。",
-                "盈凸月，接近圆满。适合把心里的事，慢慢收束。",
-                TUN,
-                "起步总是最难的。今天不必急着突破——先扎下一点点根，就够了。");
+        // 真实天文计算（纯本地数学，离线可用）+ 模板文案
+        return TodayCalendar.compute(date);
     }
 
     @Override

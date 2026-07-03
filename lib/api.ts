@@ -149,6 +149,8 @@ export interface TodayResp {
   date: string;
   astroHeadline: string;
   moonNote: string;
+  moonSign: string;
+  moonElement: string;
   hexagram: HexagramDTO;
   hexagramNote: string;
   moodTrack: MoodTrackDay[];

@@ -357,10 +357,35 @@ public class LlmAiService implements AiService {
         return sb.toString();
     }
 
-    /* ===== 以下能力尚未接真实模型，暂委托 mock ===== */
+    private static final String TODAY_NOTE_PROMPT = """
+            你是「小易」。请为工作台的「今日一卦」卡片写一句 1-2 句、不超过 45 字的温和小注：
+            呼应这一卦的卦意与今天的月相氛围，落在「今天可以怎么对待自己」上；
+            不预测吉凶、不用命令句。只输出小注正文，不要引号或其他文字。""";
 
+    /** 星象/月相为真实天文计算，模型只润色「今日一卦」小注；失败保留模板小注。 */
     @Override
     public TodayResult todayContent(LocalDate date) {
-        return fallback.todayContent(date);
+        TodayResult base = TodayCalendar.compute(date);
+        long t0 = System.currentTimeMillis();
+        try {
+            String note = client.chat(List.of(
+                    AiClient.ChatMessage.system(TODAY_NOTE_PROMPT),
+                    AiClient.ChatMessage.user("今日一卦：" + base.hexagram().name()
+                            + "（" + base.hexagram().meaning() + "）；月相：" + base.moonNote()
+                            + "；月亮星座：" + base.moonSign() + "。")))
+                    .trim();
+            if (note.isEmpty() || note.length() > 60) {
+                throw new IllegalStateException("小注不合规: " + note);
+            }
+            aiRequestLogService.record("llm_today_note", client.vendor(), client.model(),
+                    date.toString(), note, System.currentTimeMillis() - t0);
+            return new TodayResult(base.astroHeadline(), base.moonNote(),
+                    base.moonSign(), base.moonElement(), base.hexagram(), note);
+        } catch (Exception e) {
+            log.warn("todayContent 小注真实模型调用失败，保留模板小注: {}", e.getMessage());
+            aiRequestLogService.recordFailure("llm_today_note", client.vendor(), client.model(),
+                    date.toString(), e.getMessage(), System.currentTimeMillis() - t0);
+            return base;
+        }
     }
 }

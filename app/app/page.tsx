@@ -62,7 +62,7 @@ export default function DashboardPage() {
       <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
         <div>
           <div className="font-serif" style={{ fontSize: "clamp(26px,3vw,34px)", color: "#2B2A28", fontWeight: 500 }}>晚上好，徐之</div>
-          <div style={{ fontSize: 13, color: "#928C81", marginTop: 9, letterSpacing: 0.5 }}>月在巨蟹，水象当令。今天宜慢，也宜先照顾自己。</div>
+          <div style={{ fontSize: 13, color: "#928C81", marginTop: 9, letterSpacing: 0.5 }}>月在{today?.moonSign ?? "巨蟹"}，{today?.moonElement ?? "水"}象当令。今天宜慢，也宜先照顾自己。</div>
         </div>
         <Link href="/app/journal" className="flex items-center gap-[9px]" style={{ border: "1px solid rgba(60,74,102,0.2)", background: "rgba(255,255,255,0.5)", padding: "11px 20px", borderRadius: 12, color: "#3C4A66", fontSize: 13.5 }}>记录此刻心境</Link>
       </div>

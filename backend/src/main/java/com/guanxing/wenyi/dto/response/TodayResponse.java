@@ -6,6 +6,8 @@ public record TodayResponse(
         String date,
         String astroHeadline,
         String moonNote,
+        String moonSign,
+        String moonElement,
         HexagramDTO hexagram,
         String hexagramNote,
         List<MoodTrackDayDTO> moodTrack,
