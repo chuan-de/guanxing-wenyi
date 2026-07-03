@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -70,16 +71,20 @@ public abstract class OpenAiCompatClient implements AiClient {
         if (jsonMode) {
             body.put("response_format", Map.of("type", "json_object"));
         }
+        customizeBody(body);
 
         String raw;
         try {
-            raw = http.post()
+            // 读 byte[] 再按 UTF-8 解码：部分代理/网关会把响应 content-type 改成
+            // application/octet-stream，直接取 String 会因找不到转换器而失败
+            byte[] bytes = http.post()
                     .uri("/chat/completions")
                     .header("Authorization", "Bearer " + apiKey)
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(body)
                     .retrieve()
-                    .body(String.class);
+                    .body(byte[].class);
+            raw = bytes == null ? "" : new String(bytes, StandardCharsets.UTF_8);
         } catch (Exception e) {
             throw new AiClientException(vendor() + " 调用失败: " + e.getMessage(), e);
         }
@@ -97,6 +102,10 @@ public abstract class OpenAiCompatClient implements AiClient {
         } catch (Exception e) {
             throw new AiClientException(vendor() + " 响应解析失败: " + brief(raw), e);
         }
+    }
+
+    /** 子类可追加厂商私有请求参数（厂商差异必须封闭在 client 包内）。 */
+    protected void customizeBody(Map<String, Object> body) {
     }
 
     /** 兼容模型偶尔把 JSON 包在 ```json ``` 代码围栏里的情况。 */

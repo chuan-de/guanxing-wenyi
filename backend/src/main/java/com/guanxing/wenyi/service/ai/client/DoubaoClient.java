@@ -25,4 +25,15 @@ public class DoubaoClient extends OpenAiCompatClient {
     public String vendor() {
         return "doubao";
     }
+
+    /**
+     * seed-1.6 系列是思考模型，默认开启 thinking 会带来数秒延迟；
+     * 短任务（问题改写等）关掉思考，延迟从 ~6s+ 降到 <1s。
+     */
+    @Override
+    protected void customizeBody(java.util.Map<String, Object> body) {
+        if (String.valueOf(body.get("model")).contains("seed")) {
+            body.put("thinking", java.util.Map.of("type", "disabled"));
+        }
+    }
 }
