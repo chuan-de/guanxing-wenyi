@@ -2,13 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { XiaoyiOrb } from "@/components/primitives";
+import { api } from "@/lib/api";
 
 const ACCENT = "#3C4A66";
 
 type Phase = "recording" | "transcribing" | "review";
 export type VoiceContext = "ask" | "chat" | "journal";
 
-// 第一阶段：不接真实语音识别，转写结果为 mock 文本。
+// 转写走后端 mock 接口；后端不可用时回退这份本地 mock 文本（内容与后端一致）。
 const MOCK_TRANSCRIPT: Record<VoiceContext, string> = {
   ask: "最近这段关系让我有点累，常常不知道该继续往前，还是先停一停，先照顾一下自己。",
   chat: "今天有点提不起劲，说不上为什么，就是觉得心里有点空。",
@@ -64,15 +65,27 @@ export default function VoiceSheet({
     }
   }, [phase, open]);
 
-  // 转写中 → 转写结果
+  // 转写中 → 转写结果：调后端 mock 转写接口，失败回退本地文本；
+  // 至少停留 900ms，让「转写中」状态不至于一闪而过。
   useEffect(() => {
     if (phase === "transcribing") {
-      transTimer.current = setTimeout(() => {
-        setText(MOCK_TRANSCRIPT[context]);
+      let alive = true;
+      const delay = new Promise((r) => { transTimer.current = setTimeout(r, 900); });
+      Promise.all([
+        api.transcribeVoice(context, seconds).then((d) => d.text).catch(() => MOCK_TRANSCRIPT[context]),
+        delay,
+      ]).then(([t]) => {
+        if (!alive) return;
+        setText(t);
         setPhase("review");
-      }, 1300);
-      return () => { if (transTimer.current) clearTimeout(transTimer.current); };
+      });
+      return () => {
+        alive = false;
+        if (transTimer.current) clearTimeout(transTimer.current);
+      };
     }
+    // seconds 只在进入转写时读取一次，不作为依赖
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, context]);
 
   if (!open) return null;

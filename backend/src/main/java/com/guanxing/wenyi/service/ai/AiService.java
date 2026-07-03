@@ -1,5 +1,6 @@
 package com.guanxing.wenyi.service.ai;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,12 @@ public interface AiService {
     /** 姻缘分析。 */
     RelationshipResult analyzeRelationship(String selfSign, String partnerSign);
 
+    /** 今日历法：星象一句 + 月相注脚 + 今日一卦与小注。 */
+    TodayResult todayContent(LocalDate date);
+
+    /** 深度报告正文（6 段，key 与前端目录一致：astro/gua/mood/relation/action/reflect）。 */
+    ReportContent buildReport(String periodId);
+
     record HexagramData(String name, String pinyin, String meaning, List<Boolean> lines) {
     }
 
@@ -41,5 +48,16 @@ public interface AiService {
 
     record RelationshipResult(HexagramData relationHexagram, String attraction, String care,
                               String communication, String closingLine, Map<String, Object> chart) {
+    }
+
+    record TodayResult(String astroHeadline, String moonNote,
+                       HexagramData hexagram, String hexagramNote) {
+    }
+
+    /** 报告段落：正文段落用 \n\n 分隔；action 段用 items，其余段用 body。 */
+    record ReportSection(String key, String index, String title, String body, List<String> items) {
+    }
+
+    record ReportContent(String title, List<ReportSection> sections) {
     }
 }

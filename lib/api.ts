@@ -132,6 +132,43 @@ export interface RelationshipAnalyzeResp {
   chart: Record<string, unknown>;
   createdAt: number;
 }
+export interface VoiceTranscriptionResp {
+  id: string;
+  context: string;
+  text: string;
+  provider: string;
+  createdAt: number;
+}
+export interface MoodTrackDay {
+  date: string;
+  label: string;
+  mood: string | null;
+  stress: number | null;
+}
+export interface TodayResp {
+  date: string;
+  astroHeadline: string;
+  moonNote: string;
+  hexagram: HexagramDTO;
+  hexagramNote: string;
+  moodTrack: MoodTrackDay[];
+  moodSummary: string;
+}
+export interface ReportSectionDTO {
+  key: string;
+  index: string;
+  title: string;
+  body: string | null;
+  items: string[] | null;
+}
+export interface ReportResp {
+  id: string;
+  title: string;
+  meta: string;
+  readMinutes: number;
+  sections: ReportSectionDTO[];
+  disclaimer: string;
+}
 
 /* ===== 接口 ===== */
 export const api = {
@@ -168,4 +205,11 @@ export const api = {
 
   analyzeRelationship: (self: RelationshipPerson, partner: RelationshipPerson) =>
     post<RelationshipAnalyzeResp>("/relationship/analyze", { self, partner }),
+
+  transcribeVoice: (context: "ask" | "chat" | "journal", durationSec: number) =>
+    post<VoiceTranscriptionResp>("/voice/transcriptions/mock", { context, durationSec }),
+
+  getToday: () => request<TodayResp>("/today"),
+
+  getReport: (id = "latest") => request<ReportResp>(`/reports/${id}`),
 };

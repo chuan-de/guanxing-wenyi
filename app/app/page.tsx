@@ -1,10 +1,15 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Card, Label, ACCENT } from "@/components/ui";
 import { HexLines, Moon, XiaoyiOrb } from "@/components/primitives";
 import RecentDivinations from "@/components/RecentDivinations";
 import { HEXAGRAMS } from "@/lib/hexagrams";
+import { api, type TodayResp } from "@/lib/api";
 
-const MOOD_TRACK = [
+// 后端不可用时的静态回退（与 GET /api/today 的 mock 内容一致）
+const FALLBACK_MOOD_TRACK = [
   { d: "一", h: 34, c: "#9FAAB4" },
   { d: "二", h: 54, c: "#C2A878" },
   { d: "三", h: 44, c: "#9FAAB4" },
@@ -14,7 +19,43 @@ const MOOD_TRACK = [
   { d: "日", h: 32, c: "#9FAAB4" },
 ];
 
+const MOOD_COLORS: Record<string, string> = {
+  平静: "#9FAAB4",
+  疲惫: "#C29B86",
+  烦躁: "#BF8A6B",
+  低落: "#8E99A8",
+  期待: "#C2A878",
+  紧绷: "#A98F63",
+};
+
 export default function DashboardPage() {
+  const [today, setToday] = useState<TodayResp | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    api
+      .getToday()
+      .then((d) => { if (alive) setToday(d); })
+      .catch(() => { /* 后端不可用：保留静态内容 */ });
+    return () => { alive = false; };
+  }, []);
+
+  const hex = today?.hexagram ?? HEXAGRAMS.tun;
+  const hexNote = today?.hexagramNote ?? "起步总是最难的。今天不必急着突破——先扎下一点点根，就够了。";
+  const astroHeadline = today?.astroHeadline ?? "月在巨蟹，水象当令。情绪偏柔软，宜慢。";
+  const moonNote = today?.moonNote ?? "盈凸月，接近圆满。适合把心里的事，慢慢收束。";
+  const moodSummary = today?.moodSummary ?? "过去七天，你大多是「平静」的。偶尔的疲惫，也都好好走过来了。";
+
+  // 有真实记录时按 stress(0-10) 画柱高、按情绪配色；没有任何记录则退回静态示意
+  const hasTrack = today?.moodTrack?.some((d) => d.mood != null) ?? false;
+  const moodTrack = hasTrack
+    ? today!.moodTrack.map((d) => ({
+        d: d.label,
+        h: d.mood ? Math.round(24 + (d.stress ?? 0) * 5.6) : 12,
+        c: d.mood ? MOOD_COLORS[d.mood] ?? "#9FAAB4" : "rgba(43,42,40,0.10)",
+      }))
+    : FALLBACK_MOOD_TRACK;
+
   return (
     <div className="animate-gxFade" style={{ maxWidth: 1240, margin: "0 auto" }}>
       {/* 页头 */}
@@ -41,9 +82,9 @@ export default function DashboardPage() {
                   <div style={{ fontSize: 10, letterSpacing: 4, color: "rgba(221,224,238,0.5)" }}>今 日 星 象</div>
                   <Moon size={34} />
                 </div>
-                <div className="font-serif" style={{ fontSize: 18, lineHeight: 1.85, color: "#EFEBE2", marginTop: 18 }}>月在巨蟹，水象当令。情绪偏柔软，宜慢。</div>
+                <div className="font-serif" style={{ fontSize: 18, lineHeight: 1.85, color: "#EFEBE2", marginTop: 18 }}>{astroHeadline}</div>
               </div>
-              <div style={{ position: "relative", fontSize: 11.5, color: "rgba(226,222,236,0.55)", lineHeight: 1.7, marginTop: 18 }}>盈凸月，接近圆满。适合把心里的事，慢慢收束。</div>
+              <div style={{ position: "relative", fontSize: 11.5, color: "rgba(226,222,236,0.55)", lineHeight: 1.7, marginTop: 18 }}>{moonNote}</div>
             </div>
 
             {/* 今日一卦 */}
@@ -51,12 +92,12 @@ export default function DashboardPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <div style={{ fontSize: 10, letterSpacing: 4, color: "#A39C8F" }}>今 日 一 卦</div>
-                  <div className="font-serif" style={{ fontSize: 28, color: "#2B2A28", fontWeight: 500, marginTop: 12, letterSpacing: 4 }}>{HEXAGRAMS.tun.name}</div>
-                  <div className="font-spectral" style={{ fontStyle: "italic", fontSize: 12.5, color: "#938D82", marginTop: 5 }}>{HEXAGRAMS.tun.pinyin} · {HEXAGRAMS.tun.meaning}</div>
+                  <div className="font-serif" style={{ fontSize: 28, color: "#2B2A28", fontWeight: 500, marginTop: 12, letterSpacing: 4 }}>{hex.name}</div>
+                  <div className="font-spectral" style={{ fontStyle: "italic", fontSize: 12.5, color: "#938D82", marginTop: 5 }}>{hex.pinyin} · {hex.meaning}</div>
                 </div>
-                <HexLines lines={HEXAGRAMS.tun.lines} width={60} />
+                <HexLines lines={hex.lines} width={60} />
               </div>
-              <div style={{ fontSize: 13.5, lineHeight: 1.95, color: "#46433C", marginTop: 18 }}>起步总是最难的。今天不必急着突破——先扎下一点点根，就够了。</div>
+              <div style={{ fontSize: 13.5, lineHeight: 1.95, color: "#46433C", marginTop: 18 }}>{hexNote}</div>
             </Card>
           </div>
 
@@ -70,14 +111,14 @@ export default function DashboardPage() {
               <Link href="/app/journal" style={{ fontSize: 12, color: "#3C4A66" }}>心境 ›</Link>
             </div>
             <div className="flex items-end justify-between" style={{ height: 84 }}>
-              {MOOD_TRACK.map((b) => (
-                <div key={b.d} className="flex flex-1 flex-col items-center gap-[9px]">
+              {moodTrack.map((b, i) => (
+                <div key={`${b.d}-${i}`} className="flex flex-1 flex-col items-center gap-[9px]">
                   <div style={{ width: 10, height: b.h, borderRadius: 6, background: b.c }} />
                   <span style={{ fontSize: 10, color: "#A39C8F" }}>{b.d}</span>
                 </div>
               ))}
             </div>
-            <div style={{ fontSize: 12.5, color: "#7C766B", lineHeight: 1.8, marginTop: 18 }}>过去七天，你大多是「平静」的。偶尔的疲惫，也都好好走过来了。</div>
+            <div style={{ fontSize: 12.5, color: "#7C766B", lineHeight: 1.8, marginTop: 18 }}>{moodSummary}</div>
           </Card>
         </div>
 

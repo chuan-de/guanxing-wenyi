@@ -3,6 +3,7 @@ package com.guanxing.wenyi.service.ai;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,8 @@ public class MockAiService implements AiService {
             "风地观", "Guān", "静观其变", List.of(true, true, false, false, false, false));
     private static final HexagramData XIAN = new HexagramData(
             "泽山咸", "Xián", "无心而感", List.of(false, true, true, true, false, false));
+    private static final HexagramData TUN = new HexagramData(
+            "水雷屯", "Tún", "起步维艰", List.of(false, true, false, false, false, true));
 
     @Override
     public String providerName() {
@@ -87,5 +90,43 @@ public class MockAiService implements AiService {
                 "当你想靠近、而 TA 想喘口气时，试着说出来，而不是猜。一句「我现在有点需要你」，胜过十次默默的等待。",
                 "你们这段关系的功课：在亲密与独立之间，各自找到呼吸的位置。",
                 chart);
+    }
+
+    @Override
+    public TodayResult todayContent(LocalDate date) {
+        // 第一阶段固定文案，与前端今日页原静态内容一致
+        return new TodayResult(
+                "月在巨蟹，水象当令。情绪偏柔软，宜慢。",
+                "盈凸月，接近圆满。适合把心里的事，慢慢收束。",
+                TUN,
+                "起步总是最难的。今天不必急着突破——先扎下一点点根，就够了。");
+    }
+
+    @Override
+    public ReportContent buildReport(String periodId) {
+        return new ReportContent(
+                "在「慢」与「稳」之间，你正在学的事",
+                List.of(
+                        new ReportSection("astro", "01", "星盘分析",
+                                "这段时间，月亮多次行经你的巨蟹宫——情绪会比平时更需要被照顾。你可能会发现，自己更容易被一些细小的事触动，也更想退回到熟悉、安全的地方。这不是脆弱，而是你天然的节律。\n\n"
+                                        + "与此同时，你的上升天秤提醒你：在照顾别人和照顾自己之间，可以慢慢找回一点平衡。先把自己的感受，放回桌面上来。",
+                                null),
+                        new ReportSection("gua", "02", "卦象分析",
+                                "两次问卦，都落在「渐」的主题上：循序渐进。鸿雁依次而飞，山上的树慢慢生长。它一再提醒的，不是「快或慢」，而是「按自己的次序来」。九三爻动，变为「观」——是时候先观察，而不是用力推进。\n\n"
+                                        + "这一卦不是替你决定，而是帮你看见当下的重心：现在适合扎根，不必急着开花。",
+                                null),
+                        new ReportSection("mood", "03", "情绪主题",
+                                "过去七天，你大多是「平静」的，偶尔疲惫。紧绷的峰值出现在周五——那天的会议和未被照顾的午餐，是身体先替你说出了累。整体看，你比自己以为的，走得更稳。这一周的情绪关键词，是「想被理解」。",
+                                null),
+                        new ReportSection("relation", "04", "关系建议",
+                                "你与之珩之间，有一种不必勉强的呼应；需要照顾的，是两种不同的呼吸节奏。当你想靠近、而对方想喘口气时，试着把需要说出来，而不是猜。这不是谁对谁错，只是练习：在亲密与独立之间，各自找到位置。",
+                                null),
+                        new ReportSection("action", "05", "今日行动", null, List.of(
+                                "今晚给自己十分钟，什么都不做，只是坐着。",
+                                "和之珩说一句「我现在有点需要你」。",
+                                "把那条拖了三天的消息，写下第一句话就好。")),
+                        new ReportSection("reflect", "06", "反思问题",
+                                "如果不必现在就给出答案，\n你最想先为自己守住的，是什么？",
+                                null)));
     }
 }
