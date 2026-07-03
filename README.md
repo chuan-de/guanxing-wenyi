@@ -47,6 +47,17 @@ lib/                 数据(卦象/导航)与共享状态(store)
 design/             原始设计稿(.dc.html / support.js)，仅作参考，不参与构建
 ```
 
+## 文档
+
+| 文档 | 内容 |
+|---|---|
+| [docs/product.md](docs/product.md) | 产品定位、安全边界、功能模块、路线图 |
+| [docs/ui-handoff.md](docs/ui-handoff.md) | 设计 token、组件、响应式规则、文案基调 |
+| [docs/frontend-plan.md](docs/frontend-plan.md) | 前端架构、数据流、「真实接口 + 静态回退」模式 |
+| [docs/api-draft.md](docs/api-draft.md) | 11 个接口的契约与示例 |
+| [docs/backend-plan.md](docs/backend-plan.md) | 后端整体设计（选型/表结构/mock 抽象） |
+| [CLAUDE.md](CLAUDE.md) | 常用命令、约束与坑（给 AI 协作者的项目说明） |
+
 ## 说明
 
 本产品是情绪陪伴工具，不提供命运预测或医疗诊断。卦象与星象是象征的语言，是镜子，不是答案。
